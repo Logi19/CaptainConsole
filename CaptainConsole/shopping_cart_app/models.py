@@ -1,19 +1,23 @@
 from django.db import models
 
 
-# Create your models here
 class ShoppingCart(models.Model):
-	items = models.ManyToManyField(through=ShoppingCartItem)
+    """
+	Django model for a shopping cart. Can either be connected to an account or temporary.
+	"""
 
-	def __str__(self):
-		return self.items
+    items = models.ManyToManyField("store_app.Product", through=ShoppingCartItem)
+
+    def __str__(self):
+        # TODO: implement detail view functionality
+        return self.items
 
 
 class ShoppingCartItem(models.Model):
-	quantity = models.SmallIntegerField()
-	shoppingcart = models.ForeignKey("ShoppingCart", on_delete=models.CASCADE)
+    """
+	Django model for items in a shopping cart
+	"""
 
-	def __str__(self):
-		return self.quantity
-
-
+    shoppingCart = models.ForeignKey("ShoppingCart", on_delete=models.CASCADE)
+    item = models.ForeignKey("store_app.Product", on_delete=models.CASCADE)
+    quantity = models.SmallIntegerField()
