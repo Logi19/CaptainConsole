@@ -12,5 +12,6 @@ class ProfileCreate(CreateView):
     model = Profile
 
     def operation(self):
+        # TODO: implement function
         pass
 
