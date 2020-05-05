@@ -1,17 +1,6 @@
 from django.db import models
 
 
-class SearchHistory(models.Model):
-    """
-    Django model for profile search history.
-    """
-
-    profile = models.ForeignKey("Profile", on_delete=models.CASCADE)
-    product = models.ForeignKey("store_app.Product", on_delete=models.CASCADE)
-    # Automatically use current date/time when adding to table
-    time = models.DateTimeField(auto_now_add=True)
-
-
 class Profile(models.Model):
     """
     Django model for user profiles.
@@ -25,7 +14,7 @@ class Profile(models.Model):
     shoppingCart = models.ForeignKey(
         "shopping_cart_app.ShoppingCart", on_delete=models.CASCADE
     )
-    searches = models.ManyToManyField("SearchHistory", through=SearchHistory)
+    searches = models.ManyToManyField("store_app.Product", through="SearchHistory")
 
     def get_addresses(self):
         """ Returns all addresses associated with the profile. """
@@ -58,3 +47,14 @@ class Address(models.Model):
 
     def get_postal_info(self):
         return Postal.objects.get(id=self.postal)
+
+
+class SearchHistory(models.Model):
+    """
+    Django model for profile search history.
+    """
+
+    searchProfile = models.ForeignKey("Profile", on_delete=models.CASCADE)
+    searchProduct = models.ForeignKey("store_app.Product", on_delete=models.CASCADE)
+    # Automatically use current date/time when adding to table
+    time = models.DateTimeField(auto_now_add=True)

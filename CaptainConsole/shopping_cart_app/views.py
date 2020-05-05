@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
-from .models import Order, Profile, ShoppingCart
-
+from .models import ShoppingCart
+from store_app.models import Order
+from profile_app.models import Profile
 
 # Create your views here.
 

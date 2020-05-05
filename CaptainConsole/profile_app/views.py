@@ -1,11 +1,15 @@
 from django.shortcuts import render
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import UpdateView
+from django.views.generic.edit import CreateView
 
-# Create your views here.
+from .models import Profile
 
-class ProfileUpdate(UpdateView):
-    model = Profile
 
 class ProfileDetail(DetailView):
+    model = Profile
+
+class ProfileUpdate(UpdateView):
     model = Profile
 
 class ProfileCreate(CreateView):

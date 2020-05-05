@@ -6,7 +6,7 @@ class ShoppingCart(models.Model):
 	Django model for a shopping cart. Can either be connected to an account or temporary.
 	"""
 
-    items = models.ManyToManyField("store_app.Product", through=ShoppingCartItem)
+    items = models.ManyToManyField("store_app.Product", through="ShoppingCartItem")
 
     def __str__(self):
         # TODO: implement detail view functionality
