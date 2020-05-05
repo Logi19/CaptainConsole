@@ -18,10 +18,13 @@ class ProfileUpdate(UpdateView):
 class ProfileCreate(CreateView):
     model = Profile
     form_class = ProfileForm
+    template_name = "profile_app/create_profile.html"
 
-    # hvað gerir þetta fall?
-    def register_profile_page(self, request):
-        form = UserCreationForm
-        return render(request=request,
-                      template_name= "profile_app/create_profile.html, ", context={"form":form})
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            # <process form cleaned data>
+            return HttpResponseRedirect('/success/')
+
+        return render(request, self.template_name, {'form': form})
 
