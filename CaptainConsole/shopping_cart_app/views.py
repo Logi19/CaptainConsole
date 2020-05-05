@@ -8,12 +8,13 @@ from .forms import OrderForm
 from store_app.models import Order
 from profile_app.models import Profile
 
+
 class ShoppingCartDetail(DetailView):
     model = ShoppingCart
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['shopping_cart_list'] = ShoppingCart.objects.all()
+        context["shopping_cart_list"] = ShoppingCart.objects.all()
         return context
 
 
@@ -23,6 +24,9 @@ class ReceiptView(DetailView):
 
 class OrderDetail(DetailView):
     model = Order
+
+    def get(self, request, *args, **kwargs):
+        return render(request, "shopping_cart_app/order_detail.html", {"pk": self.kwargs['pk']})
 
 
 class OrderCreate(UpdateView):
