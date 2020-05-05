@@ -4,6 +4,9 @@ from django.views.generic.edit import UpdateView
 from django.views.generic.edit import CreateView
 
 from .models import Profile
+from django.shortcuts import render
+from django.http import HttpResponse
+from django.contrib.auth.forms import UserCreationForm
 
 
 class ProfileDetail(DetailView):
@@ -15,7 +18,8 @@ class ProfileUpdate(UpdateView):
 class ProfileCreate(CreateView):
     model = Profile
 
-    def operation(self):
-        # TODO: implement function
-        pass
+    def register_profile_page(self, request):
+        form = UserCreationForm
+        return render(request=request,
+                      template_name= "profile_app/create_profile.html, ", context={"form":form})
 
