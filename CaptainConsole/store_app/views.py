@@ -6,6 +6,7 @@ from django.views.generic.list import ListView
 
 from .models import Product
 
+
 class FrontPageView(TemplateView):
     template_name = 'front_page.html'
 

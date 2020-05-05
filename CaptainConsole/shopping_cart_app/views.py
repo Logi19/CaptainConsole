@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
+
 from .models import ShoppingCart
+from .forms import OrderForm
+
 from store_app.models import Order
 from profile_app.models import Profile
-
-# Create your views here.
 
 class ShoppingCartDetail(DetailView):
     model = ShoppingCart
@@ -26,3 +27,4 @@ class OrderDetail(DetailView):
 
 class OrderCreate(UpdateView):
     model = Profile
+    form_class = OrderForm
