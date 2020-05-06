@@ -18,6 +18,7 @@ class FrontPageView(TemplateView):
 
 class ProductList(ListView):
     model = Product
+    template_name = "store_app/productslist.html"
 
 
 class ProductDetail(DetailView):
