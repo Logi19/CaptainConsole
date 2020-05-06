@@ -8,7 +8,7 @@ from .models import Product
 
 
 class FrontPageView(TemplateView):
-    template_name = 'front_page.html'
+    template_name = 'store_app/frontpage.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
