@@ -1,16 +1,15 @@
-<!--{% extends "templates/base.html" %}-->
-<!DOCTYPE html>
-<html lang="en">
-<!--   {% block head %}-->
-    <head>
-        <meta charset="UTF-8">
-<!--        {% block title %}-->
-        <title>CaptainConsole</title>
-<!--        {% endblock %}-->
-         <link rel="stylesheet" href="header-footer.css">
-    </head>
-<!--   {% endblock %}-->
-    <body>
+{% extends "base.html" %}
+
+
+{% block title %}
+CaptainConsole
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="header-footer.css">
+
+{% endblock %}
+{% block body %}
         <header>
             <div class="header">
                 <div class="logo">
@@ -169,5 +168,4 @@
                 </div>
             </div>
         </footer>
-    </body>
-</html>
+{% endblock %}
