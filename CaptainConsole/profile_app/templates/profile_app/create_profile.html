@@ -1,11 +1,17 @@
-{% extends "templates/base.html" %}
+{% extends "base.html" %}
+{% load static %}
 
-<head>
-    <h1>Hello</h1>
-</head>
+  {% block head %}
+      <link rel="stylesheet" type="text/css" href="{{% static "profile_app/signup.css" %}}">
+  {% endblock %}
 
-{% block content %}
-    <form method="post">
-
-    </form>
-{% endblock %}
+<div class="signup_body">
+    {% block content %}
+        <h1 id="signup_header">Sign Up</h1>
+        <form class="sign_up_form" action="/profile/create/" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button id="signup_button" type="submit">Sign Up</button>
+        </form>
+    {% endblock %}
+</div>

@@ -6,7 +6,8 @@ class Profile(models.Model):
     Django model for user profiles.
     """
 
-    profileName = models.CharField(max_length=256)
+    profileFirstName = models.CharField(max_length=256)
+    profileLastName = models.CharField(max_length=256)
     profileEmail = models.EmailField()
     profileImage = models.ImageField(
         upload_to="profile_img", height_field=None, width_field=None, max_length=None
