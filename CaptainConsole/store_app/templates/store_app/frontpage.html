@@ -1,14 +1,14 @@
 {% extends "base.html" %}
-
+{% load static %}
 
 {% block title %}
 CaptainConsole
 {% endblock %}
 
 {% block head %}
-<link rel="stylesheet" href="header-footer.css">
-
+    <link rel="stylesheet" type="text/css" href={% static 'store_app/header-footer.css' %}>
 {% endblock %}
+
 {% block body %}
         <header>
             <div class="header">
