@@ -1,15 +1,16 @@
-{% extends "base.html" %}
-{% load static %}
-
-{% block title %}
-CaptainConsole
-{% endblock %}
-
-{% block head %}
-    <link rel="stylesheet" type="text/css" href={% static 'store_app/header-footer.css' %}>
-{% endblock %}
-
-{% block body %}
+<!--{% extends "templates/base.html" %}-->
+<!DOCTYPE html>
+<html lang="en">
+<!--   {% block head %}-->
+    <head>
+        <meta charset="UTF-8">
+<!--        {% block title %}-->
+        <title>CaptainConsole</title>
+<!--        {% endblock %}-->
+         <link rel="stylesheet" href="header-footer.css">
+    </head>
+<!--   {% endblock %}-->
+    <body>
         <header>
             <div class="header">
                 <div class="logo">
@@ -168,4 +169,5 @@ CaptainConsole
                 </div>
             </div>
         </footer>
-{% endblock %}
+    </body>
+</html>

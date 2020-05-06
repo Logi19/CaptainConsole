@@ -14,18 +14,23 @@ class Product(models.Model):
         (MISC, 'Misc.'),
     ]
 
-    productName = models.CharField(max_length=256)
-    productType = models.CharField(max_length=50, choices=PRODUCT_TYPE_CHOICES)
-    productManufacturer = models.CharField(max_length=256)
-    productYear = models.CharField(max_length=4)
-    productPrice = models.IntegerField()
-    productDescription = models.TextField(blank=True)
+    name = models.CharField(max_length=256)
+    type = models.CharField(max_length=50, choices=PRODUCT_TYPE_CHOICES)
+    manufacturer = models.CharField(max_length=256)
+    year = models.CharField(max_length=4)
+    price = models.DecimalField(decimal_places=2, max_digits=100, default=29.99)
+    description = models.TextField(blank=True)
+    timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
+    active = models.BooleanField(default=True)
+
+    def __unicode__(self):
+        return self.name
 
     def get_images(self):
         return ProductImage.objects.filter(product=self)
 
     def __str__(self):
-        return str(self.productName)
+        return str(self.name)
 
 
 class ProductImage(models.Model):
