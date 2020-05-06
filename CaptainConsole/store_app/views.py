@@ -25,6 +25,6 @@ class ProductDetail(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # TODO: add images from ProductImages (in correct order)
+        # TODO: add images from ProductImage (in correct displayOrder)
         context["images"] = None
         return context

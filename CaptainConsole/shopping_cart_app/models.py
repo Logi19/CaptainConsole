@@ -10,7 +10,7 @@ class ShoppingCart(models.Model):
 
     def __str__(self):
         # TODO: implement detail view functionality
-        return self.items
+        return str(self.id)
 
 
 class ShoppingCartItem(models.Model):
@@ -21,3 +21,6 @@ class ShoppingCartItem(models.Model):
     shoppingCart = models.ForeignKey("ShoppingCart", on_delete=models.CASCADE)
     item = models.ForeignKey("store_app.Product", on_delete=models.CASCADE)
     quantity = models.SmallIntegerField()
+
+    def __str__(self):
+        return f"{str(self.shoppingCart)} - {str(self.item)}, {self.quantity}"

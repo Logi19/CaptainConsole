@@ -37,10 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'profile_app',
+    'profile_app.apps.ProfileAppConfig',
     'shopping_cart_app',
     'store_app'
 ]
+
+AUTH_USER_MODEL = 'profile_app.Profile'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -81,9 +83,9 @@ WSGI_APPLICATION = 'CaptainConsole.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'yyvjyudf',
-        'USER': 'yyvjyudf',
-        'PASSWORD': 'bhGYYXFqtXFM6YqzqLuljm9KuFOIeQb6',
+        'NAME': 'nbecnlko',
+        'USER': 'nbecnlko',
+        'PASSWORD': '56tyX0tamCmNPKS3fvI9ZTxQaT5qucRW',
         'HOST': 'balarama.db.elephantsql.com',
         'PORT': '5432'
     }
@@ -128,7 +130,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-MEDIA_URL = '/media/'
+#MEDIA_URL = '/media/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),

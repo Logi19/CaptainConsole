@@ -1,20 +1,42 @@
 from django.db import models
+from django.contrib.auth.models import User
+
+from django.contrib.auth.models import PermissionsMixin
+from django.contrib.auth.base_user import AbstractBaseUser
+
+from .managers import ProfileManager
 
 
-class Profile(models.Model):
+
+class Profile(AbstractBaseUser, PermissionsMixin):
     """
-    Django model for user profiles.
+    Model for the site's profiles.
+    Overrides Django's default 'User' model, changing the username field to use email instead
+    and adds other attributes.
     """
-
-    profileName = models.CharField(max_length=256)
-    profileEmail = models.EmailField()
-    profileImage = models.ImageField(
-        upload_to="profile_img", height_field=None, width_field=None, max_length=None
-    )
-    shoppingCart = models.ForeignKey(
-        "shopping_cart_app.ShoppingCart", on_delete=models.CASCADE
-    )
+    email = models.EmailField(unique=True)
+    first_name = models.CharField(max_length=30, blank=True)
+    last_name = models.CharField(max_length=30, blank=True)
+    date_joined = models.DateTimeField(auto_now_add=True)
+    profileImage = models.ImageField(upload_to='media/profile_img/', null=True, blank=True)
+    shoppingCart = models.OneToOneField("shopping_cart_app.ShoppingCart", on_delete=models.CASCADE)
     searches = models.ManyToManyField("store_app.Product", through="SearchHistory")
+
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
+
+    objects = ProfileManager()
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+
+    def get_full_name(self):
+        """ Returns the first_name plus the last_name, with a space in between. """
+        return f"{self.first_name} {self.last_name}"
+
+    def get_short_name(self):
+        """ Returns the short name for the user. """
+        return str(self.first_name)
 
     def get_addresses(self):
         """ Returns all addresses associated with the profile. """
@@ -23,6 +45,9 @@ class Profile(models.Model):
     def get_shopping_cart(self):
         """ Returns the profile's shopping cart. """
         return ShoppingCart.objects.get(id=self.shoppingCart)
+
+    def __str__(self):
+        return self.get_full_name()
 
 
 class Postal(models.Model):
@@ -33,6 +58,9 @@ class Postal(models.Model):
     postalCode = models.CharField(max_length=10)
     city = models.CharField(max_length=256)
     country = models.CharField(max_length=256)
+
+    def __str__(self):
+        return f"{self.postalCode} {self.city}, {self.country}"
 
 
 class Address(models.Model):
@@ -48,6 +76,8 @@ class Address(models.Model):
     def get_postal_info(self):
         return Postal.objects.get(id=self.postal)
 
+    def __str__(self):
+        return f"{self.street} {self.house_num}"
 
 class SearchHistory(models.Model):
     """
@@ -58,3 +88,6 @@ class SearchHistory(models.Model):
     searchProduct = models.ForeignKey("store_app.Product", on_delete=models.CASCADE)
     # Automatically use current date/time when adding to table
     time = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{str(self.searchProfile)} - {str(self.searchProduct)} at {self.time}"
