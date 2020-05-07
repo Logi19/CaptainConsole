@@ -60,6 +60,10 @@ class Order(models.Model):
     deliveryLastName = models.CharField(max_length=30)
     deliveryCompany = models.CharField(max_length=50, blank=True, null=True)
 
+    deliveryMethod = models.CharField(max_length=50)
+    deliveryPrice = models.DecimalField(max_digits=7, decimal_places=2)
+    tax = models.DecimalField(max_digits=5, decimal_places=2)
+
     deliveryStreet = models.CharField(max_length=256)
     deliveryStreetNum = models.CharField(max_length=20)
     deliveryCity = models.CharField(max_length=256)
@@ -88,6 +92,10 @@ class Order(models.Model):
             )
             total += item.quantity * item_price
         total = total - (total * (self.orderDiscount / 100))
+        # Add tax
+        total += total * self.tax
+        # Add the cost of shipping
+        total += self.deliveryPrice
         return total
 
     def __str__(self):
