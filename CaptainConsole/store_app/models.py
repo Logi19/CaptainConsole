@@ -18,13 +18,16 @@ class Product(models.Model):
     type = models.CharField(max_length=50, choices=PRODUCT_TYPE_CHOICES)
     manufacturer = models.CharField(max_length=256)
     year = models.CharField(max_length=4)
-    price = models.DecimalField(decimal_places=2, max_digits=100, null=False, blank=False)
+    price = models.DecimalField(decimal_places=2, max_digits=19, null=False, blank=False)
     description = models.TextField(blank=True)
     timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
     active = models.BooleanField(default=True)
 
     def get_images(self):
-        return ProductImage.objects.filter(product=self)
+        return ProductImage.objects.filter(product=self.id)
+
+    def get_thumbnail(self):
+        return ProductImage.objects.get(product=self.id, thumbnail=True)
 
     def __str__(self):
         return str(self.name)
@@ -36,15 +39,15 @@ class ProductImage(models.Model):
     """
     product = models.ForeignKey("Product", on_delete=models.CASCADE)
     image = models.ImageField(
-        upload_to="media/product_img/", height_field=None, width_field=None, max_length=None
+        upload_to="static/media/product_img/", height_field=None, width_field=None, max_length=None
     )
-    main = models.BooleanField(default=False)
     thumbnail = models.BooleanField(default=False)
     active = models.BooleanField(default=True)
-    """displayOrder = models.SmallIntegerField()"""
+    displayOrder = models.SmallIntegerField()
 
     def __str__(self):
         return f"{str(self.product.name)} - image{self.id}"
+
 
 class Order(models.Model):
     """

@@ -18,7 +18,7 @@ class Profile(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(max_length=30, blank=True)
     last_name = models.CharField(max_length=30, blank=True)
     date_joined = models.DateTimeField(auto_now_add=True)
-    profileImage = models.ImageField(upload_to='media/profile_img/', null=True, blank=True)
+    profileImage = models.ImageField(upload_to='static/media/profile_img/', null=True, blank=True)
     shoppingCart = models.OneToOneField("shopping_cart_app.ShoppingCart", on_delete=models.CASCADE)
     searches = models.ManyToManyField("store_app.Product", through="SearchHistory")
 
@@ -55,7 +55,7 @@ class Postal(models.Model):
     Django model for address postal information.
     """
 
-    postalCode = models.CharField(max_length=10)
+    postalCode = models.CharField(max_length=12)
     city = models.CharField(max_length=256)
     country = models.CharField(max_length=256)
 

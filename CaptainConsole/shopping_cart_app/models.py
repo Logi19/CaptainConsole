@@ -9,7 +9,6 @@ class ShoppingCart(models.Model):
     items = models.ManyToManyField("store_app.Product", through="ShoppingCartItem")
 
     def __str__(self):
-        # TODO: implement detail view functionality
         return str(self.id)
 
 

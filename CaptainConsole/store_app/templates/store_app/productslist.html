@@ -21,7 +21,7 @@
                 <div class="col-sm-6 col-md-3">
                     <div class="thumbnail">
                         {% for item in product.productimage_set.all %}
-                            <img class="img-responsive" src="{{MEDIA_URL}}{{ item.image }}">
+                            <img class="img-responsive" src="../../{{ item.image }}">
                         {% endfor %}
                             <div class="caption">
                                 <a href="/store/products/{{ product.id }}"><h3>{{ product.name }}</h3><a/>
