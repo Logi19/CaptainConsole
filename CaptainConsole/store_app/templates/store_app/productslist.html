@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-
+{% static "" as baseUrl %}
 
     {% block head %}
         <link rel="stylesheet" type="text/css" href={% static 'store_app/productslist.css' %}>
@@ -17,12 +17,11 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
         <h1 id="header" >HELLO HEADER products list page here</h1>
         <div class="row">
-            {% for product in products %}
+            {% for product in product_list %}
                 <div class="col-sm-6 col-md-3">
                     <div class="thumbnail">
-                        {% for item in product.productimage_set.all %}
-                            <img class="img-responsive" src="../../{{ item.image }}">
-                        {% endfor %}
+
+                            <img class="img-responsive" src="/{{ product.get_thumbnail }}">
                             <div class="caption">
                                 <a href="/store/products/{{ product.id }}"><h3>{{ product.name }}</h3><a/>
                                 <p>{{ product.description|truncatewords:15}}</p>

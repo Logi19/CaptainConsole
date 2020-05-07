@@ -10,7 +10,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('', FrontPageView.as_view(), name="frontpage"),
-    path('products/', all_products, name="all_products"),
+    path('products/', ProductList.as_view(), name="all_products"),
     path('products/<int:id>/', single_product, name="product_detail"),
 ]
 

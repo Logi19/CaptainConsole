@@ -27,7 +27,7 @@ class Product(models.Model):
         return ProductImage.objects.filter(product=self.id)
 
     def get_thumbnail(self):
-        return ProductImage.objects.get(product=self.id, thumbnail=True)
+        return ProductImage.objects.get(product=self.id, thumbnail=True).image.name
 
     def __str__(self):
         return str(self.name)
