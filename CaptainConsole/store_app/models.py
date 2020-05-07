@@ -36,7 +36,7 @@ class ProductImage(models.Model):
     """
     product = models.ForeignKey("Product", on_delete=models.CASCADE)
     image = models.ImageField(
-        upload_to="media/product_img/", height_field=None, width_field=None, max_length=None
+        upload_to="static/media/product_img/", height_field=None, width_field=None, max_length=None
     )
     main = models.BooleanField(default=False)
     thumbnail = models.BooleanField(default=False)
