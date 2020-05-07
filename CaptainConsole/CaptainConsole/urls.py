@@ -19,7 +19,7 @@ from django.urls import include, path
 from django.views.generic import RedirectView
 
 urlpatterns = [
-    path('', RedirectView.as_view(url="sdmodel/", permanent=True), name='front_page_redirect'),
+    path('', RedirectView.as_view(url="store/", permanent=True), name='front_page_redirect'),
     path('admin/', admin.site.urls),
     path('cart/', include('shopping_cart_app.urls')),
     path('profile/', include('profile_app.urls')),
