@@ -1,4 +1,56 @@
 {% extends 'base.html' %}
-{% block content %}
-    <h2>Order #{{ pk }} Detail Page</h2>
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'shopping_cart_app/order_review.css' %}">
+{% endblock %}
+{% block body %}
+    <div class="delivery-details">
+        <strong>Delivery Details</strong>
+        <!-- Delivery details -->
+        <p>Gummi</p>
+        <p>Reykjavík</p>
+        <p>Menntavegur 1</p>
+        <button type="button">Edit Delivery</button>
+    </div>
+    <div class="delivery-method">
+        <strong>Delivery Method</strong>
+        <p>Standard Delivery Within 5 Working Days Free</p>
+        <!-- Delivery Method information -->
+
+    </div>
+    <div class="payment">
+        <strong>Payment</strong>
+        <div class="payment-type">
+            <input type="checkbox" name="Credit/Debit Card" id="Card" value="Testing" checked>
+            <label for="Card">Credit/Debit Card</label>
+        </div>
+        <div class="payment-info">
+            <!-- Card Information  -->
+
+        </div>
+    </div>
+    <div class="items">
+        {% if order_obj.items %}
+            <strong>Shopping Cart ({{ order_obj.items|length }} Items)</strong>
+        {% else %}
+            <strong>No Orders</strong>
+        {% endif %}
+        {% for item in order_obj.items %}
+            <strong>&dollar;{{item.product.productPrice}}</strong>
+            <h5>{{item.product.productName}}</h5>
+            <h5>{{item.product.productType}}</h5>
+        {% endfor %}
+    </div>
+    <div class="subtotal">
+        <strong>Subtotal</strong>
+        <hr/>
+        <strong>Cart Total</strong>
+        <span><strong>&dollar;{{ order_obj.get_total_price }}</strong></span>
+        <br/>
+        <strong>Delivery Charge</strong>
+        <span><strong>Free</strong></span>
+        <!-- Delivery Cost  -->
+        <hr/>
+    </div>
+    <button type="button">Place Order</button>
 {% endblock %}
