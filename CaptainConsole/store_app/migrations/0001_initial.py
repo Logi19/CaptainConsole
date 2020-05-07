@@ -26,12 +26,12 @@ class Migration(migrations.Migration):
             name='Product',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('productName', models.CharField(max_length=256)),
-                ('productType', models.CharField(choices=[('Game', 'Video game'), ('Console', 'Console'), ('Misc', 'Misc.')], max_length=50)),
-                ('productManufacturer', models.CharField(max_length=256)),
-                ('productYear', models.CharField(max_length=4)),
-                ('productPrice', models.IntegerField()),
-                ('productDescription', models.TextField(blank=True)),
+                ('name', models.CharField(max_length=256)),
+                ('type', models.CharField(choices=[('Game', 'Video game'), ('Console', 'Console'), ('Misc', 'Misc.')], max_length=50)),
+                ('manufacturer', models.CharField(max_length=256)),
+                ('year', models.CharField(max_length=4)),
+                ('price', models.IntegerField()),
+                ('description', models.TextField(blank=True)),
             ],
         ),
         migrations.CreateModel(

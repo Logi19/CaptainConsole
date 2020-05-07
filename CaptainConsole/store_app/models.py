@@ -55,6 +55,30 @@ class Order(models.Model):
     orderDiscount = models.DecimalField(max_digits=3, decimal_places=2)
     items = models.ManyToManyField("Product", through="OrderItem")
 
+    email = models.EmailField(max_length=256)
+    deliveryFirstName = models.CharField(max_length=30)
+    deliveryLastName = models.CharField(max_length=30)
+    deliveryCompany = models.CharField(max_length=50, blank=True, null=True)
+
+    deliveryStreet = models.CharField(max_length=256)
+    deliveryStreetNum = models.CharField(max_length=20)
+    deliveryCity = models.CharField(max_length=256)
+    deliveryPostal = models.CharField(max_length=10)
+    deliveryCountry = models.CharField(max_length=256)
+    deliveryPhone = models.CharField(max_length=20, blank=True, null=True)
+
+    billingFirstName = models.CharField(max_length=30)
+    billingLastName = models.CharField(max_length=30)
+    billingCompany = models.CharField(max_length=50, blank=True, null=True)
+
+    billingStreet = models.CharField(max_length=256)
+    billingStreetNum = models.CharField(max_length=20)
+    billingCity = models.CharField(max_length=256)
+    billingPostal = models.CharField(max_length=10)
+    billingCountry = models.CharField(max_length=256)
+    billingPhone = models.CharField(max_length=20, blank=True, null=True)
+
+
     def get_total_price(self):
         """ Calculate and return total price of order, taking discounts into account. """
         total = 0
