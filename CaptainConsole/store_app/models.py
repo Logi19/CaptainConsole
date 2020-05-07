@@ -18,13 +18,10 @@ class Product(models.Model):
     type = models.CharField(max_length=50, choices=PRODUCT_TYPE_CHOICES)
     manufacturer = models.CharField(max_length=256)
     year = models.CharField(max_length=4)
-    price = models.DecimalField(decimal_places=2, max_digits=100, default=29.99)
+    price = models.DecimalField(decimal_places=2, max_digits=100, null=False, blank=False)
     description = models.TextField(blank=True)
     timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
     active = models.BooleanField(default=True)
-
-    def __unicode__(self):
-        return self.name
 
     def get_images(self):
         return ProductImage.objects.filter(product=self)
@@ -41,10 +38,13 @@ class ProductImage(models.Model):
     image = models.ImageField(
         upload_to="media/product_img/", height_field=None, width_field=None, max_length=None
     )
-    displayOrder = models.SmallIntegerField()
+    main = models.BooleanField(default=False)
+    thumbnail = models.BooleanField(default=False)
+    active = models.BooleanField(default=True)
+    """displayOrder = models.SmallIntegerField()"""
 
     def __str__(self):
-        return f"{str(self.product)} - image{self.id}"
+        return f"{str(self.product.name)} - image{self.id}"
 
 class Order(models.Model):
     """

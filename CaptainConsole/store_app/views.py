@@ -1,10 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, Http404
 
 from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 
-from .models import Product
+from .models import Product, ProductImage
 
 
 class FrontPageView(TemplateView):
@@ -19,6 +19,26 @@ class FrontPageView(TemplateView):
 class ProductList(ListView):
     model = Product
     template_name = "store_app/productslist.html"
+
+
+def all_products(request):
+    products = Product.objects.all()
+    context = {'products': products}
+    template_name = "store_app/productslist.html"
+    return render(request,template_name, context)
+
+
+def single_product(request,id):
+    try:
+        products = Product.objects.get(id=id)
+        images = products.productimage_set.all()
+        context = {'products': products, 'images': images}
+        template_name = "store_app/productDetail.html"
+        return render(request,template_name,context)
+    except:
+        raise Http404
+
+
 
 
 class ProductDetail(DetailView):
