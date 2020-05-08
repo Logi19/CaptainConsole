@@ -17,18 +17,19 @@
         <h1 id="header" >HELLO HEADER products list page here</h1>
         <div class="row">
             {% for product in product_list %}
-                <div class="col-sm-6 col-md-3">
+                <div class="col-sm-3">
                     <div class="thumbnail">
-
-                            <img class="img-responsive" src="/{{ product.get_thumbnail }}">
+                        <div style="width: 160px;height: 160px;background-image: url('/{{ product.get_thumbnail }}');margin: 0 auto;background-repeat: no-repeat;background-size: cover;background-position: center"></div>
+                            <!--<img class="img-responsive" src="/{{ product.get_thumbnail }}">-->
                             <div class="caption">
                                 <a href="/store/products/{{ product.id }}"><h3>{{ product.name }}</h3><a/>
-                                <p>{{ product.description|truncatewords:15}}</p>
+                                    <p>{{ product.price}}$</p>
+                                    <p>{{ product.description|truncatewords:10}}</p>
                                 <p><a href="/store/products/{{ product.id }}" class="btn btn-primary" role="button">View</a> <a href="#" class="btn btn-default" role="button">Add to cart</a></p>
                             </div>
                     </div>
                 </div>
-                {% cycle "" "" "" "</div><br/><hr/><div class='row'>" %}
+                {% cycle "" "" "" "" "</div><br/><hr/><div class='row'>" %}
             {% endfor %}
         </div>
 

@@ -1,5 +1,5 @@
-#header{
-    color: black;
+.header{
+    color: red;
     text-align: center;
 }
 
@@ -8,6 +8,15 @@
     text-align: center;
 }
 
+#product_img{
+    width: 160px;
+    height: 1610px;
+    background-image: url('/{{ product.get_thumbnail }}');
+    margin: 0 auto;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
 .button{
     #signup_button{
     background-color: midnightblue;

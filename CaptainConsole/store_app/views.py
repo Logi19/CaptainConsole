@@ -52,5 +52,5 @@ class ProductDetail(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         # TODO: add images from ProductImage (in correct displayOrder)
-        context["images"] = None
+        context["images"] = self.model.get_images()
         return context
