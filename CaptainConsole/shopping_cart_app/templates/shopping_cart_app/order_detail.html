@@ -3,45 +3,47 @@
 {% block head %}
     <link rel="stylesheet" type="text/css" href="{% static 'shopping_cart_app/order_review.css' %}">
 {% endblock %}
-{% block body %}
-    <div class="delivery-details">
+{% block content %}
+<div class="container">
+    <div class="grid-item delivery-details">
         <strong>Delivery Details</strong>
         <!-- Delivery details -->
         <p>Gummi</p>
         <p>Reykjavík</p>
         <p>Menntavegur 1</p>
-        <button type="button">Edit Delivery</button>
+        <button type="button" id="edit-info">Edit Delivery</button>
     </div>
-    <div class="delivery-method">
+    <div class="grid-item delivery-method">
         <strong>Delivery Method</strong>
         <p>Standard Delivery Within 5 Working Days Free</p>
         <!-- Delivery Method information -->
-
     </div>
-    <div class="payment">
+    <div class="grid-item title">
         <strong>Payment</strong>
-        <div class="payment-type">
-            <input type="checkbox" name="Credit/Debit Card" id="Card" value="Testing" checked>
-            <label for="Card">Credit/Debit Card</label>
-        </div>
-        <div class="payment-info">
-            <!-- Card Information  -->
-
-        </div>
     </div>
-    <div class="items">
+    <div class="grid-item payment-type">
+        <label id="payment-type">Credit/Debit Card</label>
+    </div>
+    <div class="grid-item payment-detail">
+        <!-- Card Information  -->
+
+    </div>
+
+    <div class="grid-item items">
         {% if order_obj.items %}
             <strong>Shopping Cart ({{ order_obj.items|length }} Items)</strong>
         {% else %}
             <strong>No Orders</strong>
         {% endif %}
+        <hr/>
         {% for item in order_obj.items %}
             <strong>&dollar;{{item.product.productPrice}}</strong>
             <h5>{{item.product.productName}}</h5>
             <h5>{{item.product.productType}}</h5>
         {% endfor %}
+        <hr/>
     </div>
-    <div class="subtotal">
+    <div class="grid-item subtotal">
         <strong>Subtotal</strong>
         <hr/>
         <strong>Cart Total</strong>
@@ -51,6 +53,11 @@
         <span><strong>Free</strong></span>
         <!-- Delivery Cost  -->
         <hr/>
+        <strong>Total: &dollar;</strong>
     </div>
-    <button type="button">Place Order</button>
+    <div class="grid-item buttons">
+        <button type="button" id="go-back">Go Back</button>
+        <button type="button" id="place-order">Place Order</button>
+    </div>
+</div>
 {% endblock %}
