@@ -20,6 +20,11 @@ class ProductList(ListView):
     model = Product
     template_name = "store_app/productslist.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+
 
 def all_products(request):
     products = Product.objects.all()
@@ -47,5 +52,5 @@ class ProductDetail(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         # TODO: add images from ProductImage (in correct displayOrder)
-        context["images"] = None
+        context["images"] = self.model.get_images()
         return context
