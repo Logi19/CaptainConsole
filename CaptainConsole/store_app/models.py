@@ -24,10 +24,10 @@ class Product(models.Model):
     active = models.BooleanField(default=True)
 
     def get_images(self):
-        return ProductImage.objects.filter(product=self.id)
+        return ProductImage.objects.filter(product=self.id, active=True)
 
     def get_thumbnail(self):
-        return ProductImage.objects.get(product=self.id, thumbnail=True)
+        return ProductImage.objects.get(product=self.id, thumbnail=True, active=True).image.name
 
     def __str__(self):
         return str(self.name)
