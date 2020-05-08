@@ -8,7 +8,8 @@
     {% block content %}
         <h1>{{ products.name }}</h1>
         <h1>Price: {{ products.price }}</h1>
-        {% for img in images %}
-            <img class="img-responsive" src="{{MEDIA_URL}}{{ img.image }}">
+        {% for images in images %}
+            <img src="/{{ images }}">
         {% endfor %}
+
     {% endblock %}
