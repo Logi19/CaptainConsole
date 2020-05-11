@@ -25,7 +25,7 @@ class ProductList(ListView):
         return context
 
 
-
+"""
 def all_products(request):
     products = Product.objects.all()
     context = {'products': products}
@@ -42,15 +42,20 @@ def single_product(request,id):
         return render(request,template_name,context)
     except:
         raise Http404
+"""
 
 
 
 
 class ProductDetail(DetailView):
     model = Product
+    template_name = "store_app/productDetail.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # TODO: add images from ProductImage (in correct displayOrder)
-        context["images"] = [x.image.name for x in self.model.get_images()]
+
+        image_objects = list(self.object.get_images())
+        image_objects.sort()
+        images = [img.image.name for img in image_objects]
+        context["images"] = images
         return context
