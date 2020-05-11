@@ -45,6 +45,9 @@ class ProductImage(models.Model):
     active = models.BooleanField(default=True)
     displayOrder = models.SmallIntegerField()
 
+    def __lt__(self, other):
+        return self.displayOrder < other.displayOrder
+
     def __str__(self):
         return f"{str(self.product.name)} - image{self.id}"
 
