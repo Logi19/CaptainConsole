@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'profile_app.apps.ProfileAppConfig',
     'shopping_cart_app',
-    'store_app'
+    'store_app',
+    'django_countries',
 ]
 
 AUTH_USER_MODEL = 'profile_app.Profile'

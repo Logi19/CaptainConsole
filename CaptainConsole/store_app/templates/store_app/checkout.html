@@ -1,10 +1,183 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends "base.html" %}
+{% load static %}
+{% static "" as baseUrl %}
+
+    {% block head %}
+        <link rel="stylesheet" type="text/css" href={% static 'store_app/checkout.css' %}>
+        {% block javascript %}
+            <script src=" {% static 'store_app/checkout.js' %}"></script>
+
+        {% endblock %}
+    {% endblock %}
+
+    {% block content %}
+        <section class="info">
+             <form>
+                <label>First name</label>
+                    <input type="text" id="fname" placeholder="John" aria-required="true">
+                <br>
+                <label>Last name</label>
+                    <input type="text" id="lname" placeholder="Doe" aria-required="true">
+                <br>
+                <label>Email Address</label>
+                    <input type="email" id="emailbill" placeholder="johndoe@john.com" aria-required="true">
+                <br>
+             </form>
+        </section>
+        <br>
+<!--        <section class="delivery">-->
+<!--            <form>-->
+<!--                <label>Delivery Method</label>-->
+<!--                    <button onclick="ableDelivery()" value="Delivery">Delivery</button>-->
+<!--                    <button onclick="disableDelivery()" value="Delivery">Pick Up</button>-->
+<!--                <br>-->
+<!--                <label>First name</label>-->
+<!--                    <input type="text" id="fnamedel" placeholder="John" required aria-required="true">-->
+<!--                <br>-->
+<!--                <label>Last name</label>-->
+<!--                    <input type="text" id="lnamedel" placeholder="Doe" required aria-required="true">-->
+<!--                <br>-->
+<!--                <label>Zipcode</label>-->
+<!--                    <input type="text" id="zipcodedel" placeholder="113" aria-required="true">-->
+<!--                <br>-->
+<!--                <label>Street name</label>-->
+<!--                    <input type="text" id="streetnamedel" placeholder="Menntavegur" aria-required="true">-->
+<!--                <br>-->
+<!--                <label>Street Number</label>-->
+<!--                    <input type="text" id="street" placeholder="4" aria-required="true">-->
+<!--                <br>-->
+<!--                <label>City</label>-->
+<!--                    <input type="text" id="citydel" placeholder="Reykjavik" aria-required="true">-->
+<!--                <br>-->
+<!--                <label>Country</label>-->
+<!--                    <select id="countrydel" aria-required="true">-->
+<!--                        <option value="placeholder">Please select a country</option>-->
+<!--                        <option value="GW">Guinea-Bissau</option>-->
+<!--                        <option value="GY">Guyana</option>-->
+<!--                        <option value="HT">Haiti</option>-->
+<!--                        <option value="HM">Heard Island and McDonald Islands</option>-->
+<!--                        <option value="VA">Holy See (Vatican City State)</option>-->
+<!--                        <option value="HN">Honduras</option>-->
+<!--                        <option value="HK">Hong Kong</option>-->
+<!--                        <option value="HU">Hungary</option>-->
+<!--                        <option value="IS">Iceland</option>-->
+<!--                        <option value="IN">India</option>-->
+<!--                        <option value="ID">Indonesia</option>-->
+<!--                        <option value="IR">Iran, Islamic Republic of</option>-->
+<!--                        <option value="IQ">Iraq</option>-->
+<!--                        <option value="IE">Ireland</option>-->
+<!--                        <option value="IM">Isle of Man</option>-->
+<!--                        <option value="IL">Israel</option>-->
+<!--                        <option value="IT">Italy</option>-->
+<!--                        <option value="JM">Jamaica</option>-->
+<!--                        <option value="JP">Japan</option>-->
+<!--                        <option value="JE">Jersey</option>-->
+<!--                        <option value="JO">Jordan</option>-->
+<!--                    </select>-->
+<!--                </form>-->
+<!--            <br>-->
+        <section class="cardinfo">
+            <form>
+                <label>Card Number</label>
+                    <input type="text" id="ccnumber" placeholder="9999-9999-9999-9999" aria-required="true">
+                <br>
+                <label>Card Holder Name</label>
+                    <input type="text" id="chname" placeholder="John Doe" aria-required="true">
+                <br>
+                <label>Month of expiry</label>
+                    <input type="text" id="monthnumber" placeholder="05" aria-required="true">
+                <br>
+                <label>Year of expiry</label>
+                    <input type="text" id="yearnumber" placeholder="2020" aria-required="true">
+                <br>
+                <label>CVC</label>
+                    <input type="text" id="cvc" placeholder="243" aria-required="true">
+            </form>
+        </section>
+            <br>
+        <section class="billing">
+<!--                <button onclick="autoFill()">Billing Address is the same as the Delivery address</button>-->
+                <br>
+                <label>First name</label>
+                    <input type="text" id="fnamebill" placeholder="John" aria-required="true">
+                <br>
+                <label>Last name</label>
+                    <input type="text" id="lnamebill" placeholder="Doe" aria-required="true">
+                <br>
+                <label>Street name</label>
+                    <input type="text" id="streetnamebill" placeholder="Menntavegur" aria-required="true">
+                <br>
+                <label>Street Number</label>
+                    <input type="text" id="streetnumberbill" placeholder="4" aria-required="true">
+                <br>
+                <label>Zipcode</label>
+                    <input type="text" id="zipcodebill" placeholder="113" aria-required="true">
+                <br>
+                <label>City</label>
+                    <input type="text" id="citybill" placeholder="Reykjavik" aria-required="true">
+                <br>
+                <label>Country</label>
+                    <select id="countrybill" aria-required="true">
+                        <option value="placeholder">Please select a country</option>
+                        <option value="GW">Guinea-Bissau</option>
+                        <option value="GY">Guyana</option>
+                        <option value="HT">Haiti</option>
+                        <option value="HM">Heard Island and McDonald Islands</option>
+                        <option value="VA">Holy See (Vatican City State)</option>
+                        <option value="HN">Honduras</option>
+                        <option value="HK">Hong Kong</option>
+                        <option value="HU">Hungary</option>
+                        <option value="IS">Iceland</option>
+                        <option value="IN">India</option>
+                        <option value="ID">Indonesia</option>
+                        <option value="IR">Iran, Islamic Republic of</option>
+                        <option value="IQ">Iraq</option>
+                        <option value="IE">Ireland</option>
+                        <option value="IM">Isle of Man</option>
+                        <option value="IL">Israel</option>
+                        <option value="IT">Italy</option>
+                        <option value="JM">Jamaica</option>
+                        <option value="JP">Japan</option>
+                        <option value="JE">Jersey</option>
+                        <option value="JO">Jordan</option>
+                </select>
+            <br>
+            <br>
+                <input type="checkbox" id="Billing">
+                    <label for="Billing">Billing information is the same as delivery address</label>
+            </form>
+        <script>
+            // function disableDelivery() {
+            //     document.getElementById("lnamedel").disabled = true;
+            //     document.getElementById("fnamedel").disabled = true;
+            //     document.getElementById("zipcodedel").disabled = true;
+            //     document.getElementById("streetnamedel").disabled = true;
+            //     document.getElementById("street").disabeld = true;
+            //     document.getElementById("citydel").disabled = true;
+            //     document.getElementById("countrydel").disabled = true;
+            // }
+            // function ableDelivery() {
+            //     document.getElementById("lnamedel").disabled = false;
+            //     document.getElementById("fnamedel").disabled = false;
+            //     document.getElementById("zipcodedel").disabled = false;
+            //     document.getElementById("streetnamedel").disabled = false;
+            //     document.getElementById("street").disabeld = false;
+            //     document.getElementById("citydel").disabled = false;
+            //     document.getElementById("countrydel").disabled = false;
+            // }
+            // function autoFill() {
+            //     let fname = document.getElementById("fnamedel").value;
+            //     let lname = document.getElementById("lnamedel").value;
+            //     let zipcode = document.getElementById("zipcodedel").value;
+            //     let streetname = document.getElementById("streetnamedel").value;
+            //     let streetnumber = document.getElementById("street").value;
+            //     let city = document.getElementById("citydel").value;
+            //     document.getElementById("fnamebill").value = fname;
+            //     document.getElementById("lnamebill").value = lname;
+            //     document.getElementById("zipcodebill").value = zipcode;
+            //     document.getElementById("streetnamebill").value = streetname;
+            //     document.getElementById("streetnumberbill").value = streetnumber;
+            //     document.getElementById("citybill").value = city;
+            // }
+        </script>
+    {% endblock %}

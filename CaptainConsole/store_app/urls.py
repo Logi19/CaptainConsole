@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import FrontPageView
+from .views import FrontPageView, CheckOut
 from .views import ProductList
 from .views import ProductDetail
 from django.conf import settings
@@ -11,5 +11,6 @@ urlpatterns = [
     path('', FrontPageView.as_view(), name="frontpage"),
     path('products/', ProductList.as_view(), name="all_products"),
     path('products/<pk>/', ProductDetail.as_view(), name="product_detail"),
+    path('checkout/', CheckOut.as_view(), name="checkout"),
 ]
 

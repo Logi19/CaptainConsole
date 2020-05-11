@@ -1,10 +1,11 @@
-from django.shortcuts import render, Http404
+from django.shortcuts import render, Http404, redirect
 
-from django.views.generic.base import TemplateView
+from django.views.generic.base import TemplateView, View
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 
 from .models import Product, ProductImage
+from .forms import CheckOutForm
 
 
 class FrontPageView(TemplateView):
@@ -37,3 +38,18 @@ class ProductDetail(DetailView):
         images = [img.image.name for img in image_objects]
         context["images"] = images
         return context
+
+
+class CheckOut(View):
+    def get(self, *args, **kwargs):
+        form = CheckOutForm()
+        context = {
+            'form': form,
+        }
+        return render(self.request, "order_form.html", context)
+
+    def post(self, *args, **kwargs):
+        form = CheckoutForm(self.request.POST or None)
+        if form.is_valid():
+            print("this works")
+            return redirect("/")
