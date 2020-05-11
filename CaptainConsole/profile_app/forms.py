@@ -13,8 +13,8 @@ class ProfileForm(forms.ModelForm):
 
 class SignUpForm(UserCreationForm):
     email = forms.EmailField(max_length=254, label='Email', help_text='Required.')
-    first_name = forms.CharField(max_length=30, label='First name', required=False, help_text='Optional.')
-    last_name = forms.CharField(max_length=30, label='Last name', required=False, help_text='Optional.')
+    first_name = forms.CharField(max_length=30, label='First name', required=True, help_text='Required.')
+    last_name = forms.CharField(max_length=30, label='Last name', required=True, help_text='Required.')
     profileImage = forms.ImageField(required=False, label='Profile image', help_text='Optional.')
 
     class Meta:

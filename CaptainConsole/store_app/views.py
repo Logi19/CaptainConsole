@@ -25,28 +25,6 @@ class ProductList(ListView):
         return context
 
 
-"""
-def all_products(request):
-    products = Product.objects.all()
-    context = {'products': products}
-    template_name = "store_app/productslist.html"
-    return render(request,template_name, context)
-
-
-def single_product(request,id):
-    try:
-        products = Product.objects.get(id=id)
-        images = products.productimage_set.all()
-        context = {'products': products, 'images': images}
-        template_name = "store_app/productDetail.html"
-        return render(request,template_name,context)
-    except:
-        raise Http404
-"""
-
-
-
-
 class ProductDetail(DetailView):
     model = Product
     template_name = "store_app/productDetail.html"

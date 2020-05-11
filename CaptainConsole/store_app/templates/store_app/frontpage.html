@@ -1,164 +1,47 @@
-{% extends "base.html" %}
-{% load static %}
+{% extends "base.html" %} {% load static %} {% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'store_app/frontpage.css' %}" />
+{% endblock %} {% block content %} {% include 'header.html' %}
 
-{% block head %}
-    <link rel="stylesheet" type="text/css" href="{% static 'store_app/header-footer.css' %}">
-{% endblock %}
+<div id="pageheader">
+    <img id="banner_img" src="{% static 'media/product_img/Hachiko.jpg' %}" alt="Banner image">
+    <div class="center_text"><h1>Everything retro in one place!</h1></div>
+</div>
 
-{% block content %}
-    <div class="header">
-        <div class="logo">
-            <img src="console-logo.png">
-            <h1>Captain console</h1>
-        </div>
-        <div id="search">
-            <form action="" method="POST">
-                <input type="text" name="search" id="searchproduct" placeholder="Search Product..">
-                <input type="submit" value="google.png" id="searchbutton">
-        </div>
-        <div id="sign">
-            <p><a href="frontpage.html" class="header">Sign In</a></p>
-            <br>
-            <p><a href="frontpage.html" class="header">Sign Up</a></p>
-        </div>
-        <div>
-            <img src="shopping-cart.png">
-        </div>
-    </div>
-    <div class="bg"></div>
-    <div id="blabla">
-        <div id="everyheader">
-            <nav>
-                <div class="dropdown">
-                    <button class="buttons">Sega</button>
-                    <div class="dropdown-content">
-                        <a href="#">Link 1</a>
-                        <a href="#">Link 2</a>
-                        <a href="#">Link 3</a>
-                    </div>
-                </div>
-                <div class="dropdown">
-                    <button class="buttons">Playstation</button>
-                    <div class="dropdown-content">
-                        <a href="frontpage.html">Link 1</a>
-                        <a href="frontpage.html">Link 2</a>
-                        <a href="frontpage.html">Link 3</a>
-                    </div>
-                </div>
-                <div class="dropdown">
-                    <button class="buttons">Atari</button>
-                    <div class="dropdown-content">
-                        <a href="#">Atari 1</a>
-                        <a href="#">Atari 2</a>
-                        <a href="#">Atari 3</a>
-                    </div>
-                </div>
-                <div class="dropdown">
-                    <button class="buttons">Nintendo</button>
-                    <div class="dropdown-content">
-                        <a href="#">Gameboy</a>
-                        <a href="#">Wii</a>
-                        <a href="#">SNES</a>
-                    </div>
-                </div>
-                <div class="dropdown">
-                    <button class="buttons">Xbox</button>
-                    <div class="dropdown-content">
-                        <a href="#">Xbox</a>
-                        <a href="#">Xbox 360</a>
-                        <a href="#">Xbox One</a>
-                    </div>
-                </div>
-                <div class="dropdown">
-                    <button class="buttons">Commodore</button>
-                    <div class="dropdown-content">
-                        <a href="#">Commodore 1</a>
-                        <a href="#">Commodore 2</a>
-                        <a href="#">Commodore 3</a>
-                    </div>
-                </div>
-                <button onclick="" class="allproducts">All Products</button>
-        </div>
-        </nav>
-    </div>
-    </div>
-    </section>
-    <br>
-    <div>
-        <div class="pageheader">
-            <h1>Everything retro in one place</h1>
-        </div>
-        <div class="page">
-        </div>
-        <div class="pagecontent">
-            <div class="featured1">
-                <div class="color"><p>Top Sellers</p></div>
-                <div class="hello">
-                    <div class="prinfo" id="ts1">
-                        <img src="google.png">
-                        <p>Product X</p>
-                    </div>
-                    <div class="prinfo" id="ts2">
-                        <img src="google.png">
-                        <p>Product X</p>
-                    </div>
-                    <div class="prinfo" id="ts3">
-                        <img src="google.png">
-                        <p>Product X</p>
-                    </div>
-                </div>
+<div class="pagecontent row">
+    <div class="col s4 offset-s1">
+        <h2>Top Sellers</h2>
+        <div id="top_sellers" class="row">
+            <div class="col s4">
+                <img src="{% static 'product_img/coron.jpg' %}" />
+                <p>Product X</p>
             </div>
-            <div class="featured2">
-                <div class="color"><p>Today's Deals</p></div>
-                <div class="bye">
-                    <div class="prinfo" id="td1">
-                        <img src="google.png">
-                        <p>Product X</p>
-                    </div>
-                    <div class="prinfo" id="td2">
-                        <img src="google.png">
-                        <p>Product X</p>
-                    </div>
-                    <div class="prinfo" id="td3">
-                        <img src="google.png">
-                        <p>Product X</p>
-                    </div>
-                </div>
+            <div class="col s4">
+                <img src="{% static 'product_img/coron.jpg' %}" />
+                <p>Product X</p>
+            </div>
+            <div class="col s4">
+                <img src="{% static 'product_img/coron.jpg' %}" />
+                <p>Product X</p>
             </div>
         </div>
     </div>
-    </div>
-    <footer>
-        <div class="footer">
-            <div id="aboutus">
-                <h4>
-                    <a href="frontpage.html" class="links">
-                        About Us
-                    </a>
-                </h4>
+    <div class="col s4 offset-s2">
+        <h2>Today's Deals</h2>
+        <div id="todays_deals" class="row">
+            <div class="col s4">
+                <img src="{% static 'product_img/coron.jpg' %}" />
+                <p>Product X</p>
             </div>
-            <div id="location">
-                </h4>Locations</h4>
-                <ul>
-                    <li>
-                        Location 1
-                    </li>
-                    <li>
-                        Location 2
-                    </li>
-                </ul>
+            <div class="col s4">
+                <img src="{% static 'product_img/coron.jpg' %}" />
+                <p>Product X</p>
             </div>
-            <div id="contactus">
-                <p id="contact">Contact Us</p>
-                <a href="frontpage.html" class="links">captain@Captainconsole.com</a>
-            </div>
-            <div id="social">
-                <p id="socialm">Social Media</p>
-                <a href="frontpage.html"><img src="google.png"></a>
-                <a href="frontpage.html"><img src="google.png"></a>
-                <a href="frontpage.html"><img src="google.png"></a>
-                <a href="frontpage.html"><img src="google.png"></a>
+            <div class="col s4">
+                <img src="{% static 'product_img/coron.jpg' %}" />
+                <p>Product X</p>
             </div>
         </div>
-    </footer>
-{% endblock %}
+    </div>
+</div>
+
+{% include 'footer.html' %} {% endblock %}
