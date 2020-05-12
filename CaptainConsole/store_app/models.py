@@ -118,3 +118,15 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return f"{str(self.order)} - {str(self.product)}"
+
+
+class TopSeller(models.Model):
+    """
+    Django model which maps to a postgres view which ranks products by copies sold.
+    """
+    product_id = models.IntegerField(primary_key=True)
+    copies_sold = models.IntegerField()
+
+    # Make django not create a table for the model
+    class Meta:
+        managed = False

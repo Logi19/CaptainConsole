@@ -1,6 +1,16 @@
-{% extends "base.html" %} {% load static %} {% block head %}
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Captain Console - Store
+{% endblock %}
+
+{% block head %}
 <link rel="stylesheet" type="text/css" href="{% static 'store_app/frontpage.css' %}" />
-{% endblock %} {% block content %} {% include 'header.html' %}
+{% endblock %}
+
+{% block content %}
+{% include 'header.html' %}
 
 <div id="pageheader">
     <img id="banner_img" src="{% static 'media/product_img/Hachiko.jpg' %}" alt="Banner image">
@@ -11,18 +21,24 @@
     <div class="col s4 offset-s1">
         <h2>Top Sellers</h2>
         <div id="top_sellers" class="row">
+            {% for item in top_3 %}
             <div class="col s4">
-                <img src="{% static 'product_img/coron.jpg' %}" />
-                <p>Product X</p>
+                <div class="thumbnail">
+                    <div
+                        style="width: 160px;height: 160px;background-image: url('/{{ item.get_thumbnail }}');margin: 0 auto;background-repeat: no-repeat;background-size: cover;background-position: center">
+                    </div>
+                    <div class="caption">
+                        <a href="/store/products/{{ product.id }}">
+                            <h6>{{ item.name }}</h6>
+                        </a>
+                        <p>${{ item.price}}</p>
+                        <p>{{ item.description|truncatechars:60}}</p>
+                        <a href="/store/products/{{ item.id }}" class="btn btn-small" role="button">View</a>
+                        <a href="#" class="btn btn-small" role="button"><i class="material-icons">add_shopping_cart</i></a>
+                    </div>
+                </div>
             </div>
-            <div class="col s4">
-                <img src="{% static 'product_img/coron.jpg' %}" />
-                <p>Product X</p>
-            </div>
-            <div class="col s4">
-                <img src="{% static 'product_img/coron.jpg' %}" />
-                <p>Product X</p>
-            </div>
+            {% endfor %}
         </div>
     </div>
     <div class="col s4 offset-s2">

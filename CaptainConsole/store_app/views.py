@@ -4,7 +4,7 @@ from django.views.generic.base import TemplateView, View
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 
-from .models import Product, ProductImage, Order
+from .models import Product, ProductImage, Order, TopSeller
 from .forms import CheckOutForm
 
 
@@ -13,7 +13,8 @@ class FrontPageView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # TODO: add front page info, such as top sellers and sales
+        top_sellers = TopSeller.objects.all()[:3]
+        context['top_3'] = [Product.objects.get(id=item.product_id) for item in top_sellers]
         return context
 
 
