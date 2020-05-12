@@ -10,19 +10,23 @@
         <div class="grid-item title">
             <h4>My Cart</h4>
         </div>
-        <p>what {{ shopping_cart_list }}</p>
-        {% for item in object %}
+        {% for item in shopping_cart_items %}
         <div class="grid-item cart-item item-{{ forloop.counter0 }}">
+            <div class="thumbnail">
+                <img src="{% static 'media/product_img/coron.jpg' %}" alt={{ item.name }}>
+            </div>
             <div class="details">
                 <h5>&dollar;{{ item.price }}</h5>
                 <h5>{{ item.name }} - {{ item.developer }}</h5>
             </div>
-            <h5 class="delete-cross">&#x2715;</h5>
+            <h5 class="delete-cross">
+                <a href='{% url "remove_from_cart" product_id=item.id cart_id=cart_key %}'>&#x2715;</a>
+            </h5>
         </div>
         {% endfor %}
         <div class="grid-item subtotal">
             <h4 id="text">Subtotal: </h4>
-            <h4 id="price">&dollar;64.97</h4>
+            <h4 id="price">&dollar;{{ subtotal }}</h4>
             <!-- price of cart-->
         </div>
     </div>
@@ -32,4 +36,4 @@
     </div>
 </div>
 <script src="{% static 'shopping_cart_app/js/shopping_cart_detail.js' %}"></script>
-{% endblock %}
+{% endblock content %}

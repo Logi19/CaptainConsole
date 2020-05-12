@@ -1,26 +1,60 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-size: 25px;
     font-family: Roboto;
 }
 
-.container {
-    margin: 2em;
-    margin-bottom: 1em;
-    padding: 1.5em;
-    padding-bottom: 0;
+.cart-container {
+    margin: 4em;
+}
+
+a {
+    color: inherit;
+}
+
+.cart-content {
+    margin: 2em 2em 1em;
+    padding: 1.5em 1.5em 0;
     border: 2px solid #C4C4C4;
     display: grid;
-    grid-template-rows: 1.5fr;
-    grid-auto-rows: 3fr;
+    grid-template-rows: 0.5fr;
+    grid-template-columns: 1fr;
+    grid-auto-columns: 1fr 1fr 1fr;
+    grid-auto-rows: 1fr;
 }
 
 .cart-item {
     border-bottom: 2px solid #C4C4C4;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
+    display: grid;
+    grid-template:
+        "image details delete" auto
+        "image details nothing" 1fr
+        / 0.2fr 1fr auto;
+}
+
+.subtotal {
+    display:grid;
+    grid-template:
+        "stuff stuff subtotal price" 1fr
+        / 1fr 1fr 0.2fr 0.1fr;
+    justify-items: center;
+    align-items: center;
+}
+
+.subtotal #text {
+    grid-area: subtotal;
+}
+
+.subtotal #price {
+    grid-area: price;
+    float: left;
+}
+
+.cart-item .details {
+    border: 2px solid black;
+    grid-area: details;
 }
 
 .title {
@@ -33,33 +67,33 @@
     color: #C4C4C4;
     opacity: 0.3;
     cursor: pointer;
+    margin: 0;
+    border: 2px solid black;
+    grid-area: delete;
 }
 
 .delete-cross:hover {
     opacity: 1;
 }
 
-
-
 button {
-  background-color: #3370CB;
-  border: none;
-  color: white;
-  padding: 1em 2em;
-  text-align: center;
-  font-size: 1em;
-  opacity: 0.7;
-  margin-top: 0.2em;
-  transition: 0.3s;
-  display: inline-block;
-  text-decoration: none;
-  cursor: pointer;
+    background-color: #3370CB;
+    border: none;
+    color: white;
+    padding: 1em 2em;
+    text-align: center;
+    font-size: 1.3em;
+    opacity: 0.7;
+    margin-top: 0.2em;
+    transition: 0.3s;
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 .buttons {
     margin: 2em;
     padding: 0;
-
 }
 
 #continue-shopping {
@@ -68,5 +102,16 @@ button {
 
 #place-order {
     float:right
+}
+
+.thumbnail {
+    grid-area: image;
+    text-align: center;
+}
+
+img {
+    height: 80px;
+    width: auto;
+
 }
 
