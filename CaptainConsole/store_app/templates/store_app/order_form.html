@@ -49,53 +49,54 @@
 <!--            <button type="submit" class="btn btn-primary">Proceed</button>-->
 <!--        </form>-->
         <div class="container-items">
-<!--            <div class="row">-->
-                <form method="post">
+            <div class="row">
+                <form method="POST">
                 {% csrf_token %}
                     <div class="grid-item1">
     <!--                    Billing Information-->
+                        <h3><strong>Billing</strong></h3>
                         <div class="row">
-                            <div class="input-field col s6">
+                            <div class="input-field col s5">
                                 {{form.billingFirstName}}
                                 <label>First Name</label>
                             </div>
-                            <div class="input-field col s6">
+                            <div class="input-field col s5">
                                 {{form.billingLastName}}
                                 <label>Last Name</label>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="input-field col s12">
+                            <div class="input-field col s10">
                                 {{form.email}}
                                 <label>Email</label>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="input-field col s6">
+                            <div class="input-field col s5">
                                 {{form.billingStreet}}
                                 <label>Street Name</label>
                             </div>
-                            <div class="input-field col s6">
+                            <div class="input-field col s5">
                                 {{form.billingStreetNum}}
                                 <label>Street Number</label>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="input-field col s6">
+                            <div class="input-field col s5">
                                 {{form.billingCity}}
                                 <label>City</label>
                             </div>
-                            <div class="input-field col s6">
+                            <div class="input-field col s5">
                                 {{form.billingPostal}}
                                 <label>Zip Code</label>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="input-field col s6">
+                            <div class="input-field col s5">
                                 {{form.billingCompany}}
                                 <label>Company</label>
                             </div>
-                            <div class="input-field col s6">
+                            <div class="input-field col s5">
                                 {{form.billingPhone}}
                                 <label>Phone Number</label>
                             </div>
@@ -103,6 +104,7 @@
                     </div>
                     <div class="grid-item2">
     <!--                    Delivery Information-->
+                        <h3><strong>Delivery</strong></h3>
                         <div class="row">
                             <div class="input-field col s6">
                                 {{form.deliveryFirstName}}
@@ -144,7 +146,9 @@
                             </div>
                         </div>
                     </div>
+                    <button type="submit" onclick="insertJSON()" class="btn btn-primary">Proceed</button>
                 </form>
-<!--            </div>-->
+                <button class="btn btn-primary">Go Back</button>
+            </div>
         </div>
     {% endblock %}

@@ -1,7 +1,12 @@
 .container-items{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 200px 200px;
-    grid-gap: 20px;
+    /*display: grid;*/
+    /*grid-template-columns: 1fr 1fr;*/
+    /*grid-template-rows: 200px 200px;*/
+    /*grid-gap: 20px;*/
     border: solid black;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+
 }
+

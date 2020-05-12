@@ -55,12 +55,13 @@ class ProductDetail(DetailView):
 #             print("this works")
 #             return redirect("/")
 
+
 def check_out(request):
     if request.method == "POST":
         form = CheckOutForm(request.POST)
         if form.is_valid():
-            # post = form.save(commit=False)
-            form.save()
+            post = form.cleaned_data
+            post.save()
             return redirect('/')
     else:
         form = CheckOutForm()
