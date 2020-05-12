@@ -63,4 +63,5 @@ def check_out(request):
             return redirect('/')
     else:
         form = CheckOutForm()
+
     return render(request, 'store_app/order_form.html', {'form': form})
