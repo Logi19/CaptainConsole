@@ -2,17 +2,95 @@
 {% load static %}
 
   {% block head %}
-      <link rel="stylesheet" type="text/css" href="{% static "store_app/checkout.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "store_app/checkout.css" %}">
+<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">-->
   {% endblock %}
 
 
     {% block content %}
-        <div class="signup_body">
-        <h1 id="signup_header">Sign Up</h1>
-        <form class="hello" action="/store/checkout" method="post">
+
+        <h1>Check Out</h1>
+<!--        <form>-->
+        <form method="POST">
             {% csrf_token %}
-            {{ form.as_p }}
-            <button id="signup_button" type="submit">Sign Up</button>
+            {{form}}
+<!--            {{ form }}-->
+<!--            <div class="grid-container">-->
+<!--                <div class="grid-item1">-->
+<!--&lt;!&ndash;                    Billing Information&ndash;&gt;-->
+<!--                    <label>First Name</label>-->
+<!--                    {{form.billingFirstName}}-->
+
+<!--                    <label>Last Name</label>-->
+<!--                    {{form.billingLastName}}-->
+
+<!--                    <label>Email Address</label>-->
+<!--                    {{form.billingFirstName}}-->
+
+<!--                    <label>Street Name</label>-->
+<!--                    {{form.billingStreet}}-->
+
+<!--                    <label>Street Number</label>-->
+<!--                    {{form.billingStreetNum}}-->
+
+<!--                    <label>Postal</label>-->
+<!--                    {{form.billingPostal}}-->
+
+<!--                    <label>City</label>-->
+<!--                    {{form.billingCity}}-->
+
+<!--&lt;!&ndash;                    <legend>Country</legend>&ndash;&gt;-->
+<!--&lt;!&ndash;                    {{form.billingStreetNum}}&ndash;&gt;-->
+<!--                    <label>Phone Number</label>-->
+<!--                    {{form.billingPhone}}-->
+<!--                </div>-->
+<!--                <div class="grid-item2">-->
+<!--&lt;!&ndash;                    Card Information&ndash;&gt;-->
+<!--                    <label>Card Number</label>-->
+<!--                    <input type="text">-->
+<!--                    <label>Cardholder Name</label>-->
+<!--                    <input type="text">-->
+<!--                    <label>CVC</label>-->
+<!--                    <input type="text">-->
+<!--                    <label>Expiry Date</label>-->
+<!--                    <input type="text">-->
+
+<!--                </div>-->
+<!--                <div class="grid-item3">-->
+<!--&lt;!&ndash;                    Delivery Information&ndash;&gt;-->
+<!--                    <label>First Name</label>-->
+<!--                    {{form.deliveryFirstName}}-->
+
+<!--                    <label>Last Name</label>-->
+<!--                    {{form.deliveryLastName}}-->
+
+<!--                    <label>Email Address</label>-->
+<!--                    {{form.deliveryFirstName}}-->
+
+<!--                    <label>Street Name</label>-->
+<!--                    {{form.deliveryStreet}}-->
+
+<!--                    <label>Street Number</label>-->
+<!--                    {{form.deliveryStreetNum}}-->
+
+<!--                    <label>Postal</label>-->
+<!--                    {{form.deliveryPostal}}-->
+
+<!--                    <label>City</label>-->
+<!--                    {{form.deliveryCity}}-->
+
+<!--&lt;!&ndash;                    <legend>Country</legend>&ndash;&gt;-->
+<!--&lt;!&ndash;                    {{form.billingStreetNum}}&ndash;&gt;-->
+<!--                    <label>Phone Number</label>-->
+<!--                    {{form.deliveryPhone}}-->
+<!--                </div>-->
+<!--                <div class="grid-item4">-->
+<!--&lt;!&ndash;                    Cart information&ndash;&gt;-->
+<!--                    <p>Products</p>-->
+<!--                    <p>Animal Crossing</p>-->
+<!--                    <p>Bla Bla</p>-->
+<!--                </div>-->
+<!--            </div>-->
+            <button type="submit" class="btn btn-primary">Proceed</button>
         </form>
-        </div>
     {% endblock %}
