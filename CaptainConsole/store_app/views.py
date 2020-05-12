@@ -61,8 +61,8 @@ def check_out(request):
     if request.method == "POST":
         form = CheckOutForm(request.POST)
         if form.is_valid():
-            post = form.cleaned_data
-            post.save()
+            form.save()
+            # post.save()
             return redirect('/')
     else:
         form = CheckOutForm()
