@@ -4,7 +4,7 @@ from django.views.generic.base import TemplateView, View
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 
-from .models import Product, ProductImage, TopSeller
+from .models import Product, ProductImage, Order, TopSeller
 from .forms import CheckOutForm
 
 
@@ -20,7 +20,7 @@ class FrontPageView(TemplateView):
 
 class ProductList(ListView):
     model = Product
-    template_name = "store_app/productslist.html"
+    template_name = "store_app/all_productsView.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -40,17 +40,28 @@ class ProductDetail(DetailView):
         context["images"] = images
         return context
 
+#
+# class CheckOut(View):
+#     def get(self, *args, **kwargs):
+#         form = CheckOutForm()
+#         context = {
+#             'form': form,
+#         }
+#         return render(self.request, "order_form.html", context)
+#
+#     def post(self, *args, **kwargs):
+#         form = CheckoutForm(self.request.POST or None)
+#         if form.is_valid():
+#             print("this works")
+#             return redirect("/")
 
-class CheckOut(View):
-    def get(self, *args, **kwargs):
-        form = CheckOutForm()
-        context = {
-            'form': form,
-        }
-        return render(self.request, "order_form.html", context)
-
-    def post(self, *args, **kwargs):
-        form = CheckoutForm(self.request.POST or None)
+def check_out(request):
+    if request.method == "POST":
+        form = CheckOutForm(request.POST)
         if form.is_valid():
-            print("this works")
-            return redirect("/")
+            # post = form.save(commit=False)
+            form.save()
+            return redirect('/')
+    else:
+        form = CheckOutForm()
+    return render(request, 'store_app/order_form.html', {'form': form})

@@ -1,15 +1,21 @@
-{% extends "base.html" %}
-{% load static %}
-
-    {% block head %}
-        <link rel="stylesheet" type="text/css" href={% static 'store_app/productslist.css' %}>
-    {% endblock %}
-
-    {% block content %}
-        <h1>{{ products.name }}</h1>
-        <h1>Price: {{ products.price }}</h1>
+{% extends "base.html" %} {% load static %} {% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'store_app/product-detail.css'%}" />
+{% endblock %} {% block content %} {% include 'header.html' %}
+    <div class="grid-container">
+    <div class="grid-item title">
+        <h4>{{ object.name }}</h4>
+    </div>
+    <div class="grid-item images">
         {% for image in images %}
-            <img src="/{{ image }}">
-        {% endfor %}
-
-    {% endblock %}
+                <div>
+                <div style="width: 200px;height: 240px;background-image: url('/{{ image }}');margin: 0 auto;background-repeat: no-repeat;background-size: cover;background-position: center"></div>
+                </div>
+            {% endfor %}
+    </div>
+    <div class="grid-item other">
+        <h4>Price: ${{ object.price }}</h4>
+        <h5>{{ object.description }}</h5>
+        <p><a href="#" class="btn btn-default" role="button">Add to cart</a></p>
+    </div>
+    </div>
+{% include 'footer.html' %} {% endblock %}

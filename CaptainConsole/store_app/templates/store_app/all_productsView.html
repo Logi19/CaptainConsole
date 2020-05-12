@@ -1,0 +1,63 @@
+{% extends "base.html" %} {% load static %} {% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'store_app/productslist.css' %}" />
+{% endblock %} {% block content %} {% include 'header.html' %}
+        <div class="grid-container">
+        <div class="grid-item des">
+            <h4 id="desc">Sega - Genesis</h4>
+        </div>
+        <div class="grid-item sort-by">
+            <h5>Sort-by: Name</h5>
+        </div>
+        <div class="grid-item search-history">
+            <h6>Search-History</h6>
+        </div>
+        <div class="grid-item nav">
+            <h5>Type:</h5>
+            <label class="container">Video Game<input type="checkbox" checked="checked">
+                <span class="checkmark"></span>
+            </label>
+            <label class="container">Consoldjdde<input type="checkbox"><span class="checkmark"></span>
+            </label>
+            <label class="container">Otxsdasfher<input type="checkbox">
+                <span class="checkmark"></span>
+            </label>
+            <h5>Platform:</h5>
+            <label class="container">Consoldjdde<input type="checkbox"><span class="checkmark"></span>
+            </label>
+            <label class="container">Otxsdasfher<input type="checkbox">
+                <span class="checkmark"></span>
+        </div>
+        <div class="grid-item pro">
+            <div class="row">
+                {% for product in product_list %}
+                    <div class="col s4 m3">
+                        <div class="card">
+                            <div class="card-image">
+                                <div style="width: 150px;height: 170px;background-image: url('/{{ product.get_thumbnail }}');margin: 0 auto;background-repeat: no-repeat;background-size: cover;background-position: center"></div>
+                            </div>
+                            <div class="card-content">
+                                <span class="card-title">{{ product.name }}</span>
+                                <p>${{ product.price}}</p>
+                            </div>
+                            <div class="card-action">
+                                <p><a href="/store/products/{{ product.id }}" class="btn btn-primary" role="button">View</a> <a href="#" class="btn btn-default" role="button">Add to cart</a></p>
+                            </div>
+                        </div>
+                    </div>
+                {% cycle "" "" "" "" "</div><br/><hr/><div class='row'>" %}
+            {% endfor %}
+            </div>
+        </div>
+        <div class="grid-item pages">
+            <ul class="pagination">
+    <!--<li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>--!>
+    <li class="active"><a href="#!">1</a></li>
+    <li class="waves-effect"><a href="#!">2</a></li>
+    <li class="waves-effect"><a href="#!">3</a></li>
+    <li class="waves-effect"><a href="#!">4</a></li>
+    <li class="waves-effect"><a href="#!">5</a></li>
+    <!--<li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>--!>
+  </ul>
+        </div>
+        </div>
+{% include 'footer.html' %} {% endblock %}
