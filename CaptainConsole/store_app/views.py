@@ -15,6 +15,7 @@ class FrontPageView(TemplateView):
         context = super().get_context_data(**kwargs)
         top_sellers = TopSeller.objects.all()[:3]
         context['top_3'] = [Product.objects.get(id=item.product_id) for item in top_sellers]
+        context['todays_deals'] = Product.objects.all()[:3]
         return context
 
 
@@ -56,13 +57,15 @@ class ProductDetail(DetailView):
 #             print("this works")
 #             return redirect("/")
 
+
 def check_out(request):
     if request.method == "POST":
         form = CheckOutForm(request.POST)
         if form.is_valid():
-            # post = form.save(commit=False)
             form.save()
+            # post.save()
             return redirect('/')
     else:
         form = CheckOutForm()
+
     return render(request, 'store_app/order_form.html', {'form': form})
