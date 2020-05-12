@@ -20,6 +20,7 @@ class FrontPageView(TemplateView):
 
 
 class ProductList(ListView):
+    paginate_by = 3
     model = Product
     template_name = "store_app/all_productsView.html"
 
@@ -56,13 +57,15 @@ class ProductDetail(DetailView):
 #             print("this works")
 #             return redirect("/")
 
+
 def check_out(request):
     if request.method == "POST":
         form = CheckOutForm(request.POST)
         if form.is_valid():
-            # post = form.save(commit=False)
-            form.save()
+            post = form.cleaned_data
+            post.save()
             return redirect('/')
     else:
         form = CheckOutForm()
+
     return render(request, 'store_app/order_form.html', {'form': form})
