@@ -8,7 +8,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
+from store_app.models import Order
 from .models import Profile
 from .forms import ProfileForm
 from .forms import SignUpForm
@@ -26,7 +28,7 @@ def login_view(request, *args, **kwargs):
             else:
                 return HttpResponse("Your account is inactive.")
         else:
-            print(f"Failed login attempt with email: {email} and password: {password}")
+            print(f"Failed login attempt with email: {email}")
             return HttpResponse("Invalid login details given")
     else:
         return render(request, 'registration/login.html')
@@ -38,13 +40,17 @@ def logout_view(request, *args, **kwargs):
     return HttpResponseRedirect('/store/')
 
 
+@login_required
+def my_profile_view(request, *args, **kwargs):
+    context = {'user': request.user}
+    orders = list(Order.objects.filter(profile_id=request.user.id))
+    orders.sort(key=lambda x: x.date, reverse=True)
+    context['order_history'] = orders
+    return render(request, 'profile_app/view_profile.html', context)
 
-class ProfileDetail(DetailView):
-    model = Profile
-
-
-class ProfileUpdate(UpdateView):
-    model = Profile
+@login_required
+def my_profile_update(request, *args, **kwargs):
+    pass
 
 
 def sign_up_view(request, *args, **kwargs):

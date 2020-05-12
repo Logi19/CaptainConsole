@@ -58,6 +58,7 @@ class Order(models.Model):
     """
     profile = models.ForeignKey("profile_app.Profile", blank=True, null=True, on_delete=models.CASCADE)
     processed = models.BooleanField(default=False)
+    date = models.DateTimeField(auto_now_add=True)
     orderDiscount = models.DecimalField(max_digits=3, decimal_places=2)
     items = models.ManyToManyField("Product", through="OrderItem")
 
