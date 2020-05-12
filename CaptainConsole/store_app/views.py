@@ -15,6 +15,7 @@ class FrontPageView(TemplateView):
         context = super().get_context_data(**kwargs)
         top_sellers = TopSeller.objects.all()[:3]
         context['top_3'] = [Product.objects.get(id=item.product_id) for item in top_sellers]
+        context['todays_deals'] = Product.objects.all()[:3]
         return context
 
 

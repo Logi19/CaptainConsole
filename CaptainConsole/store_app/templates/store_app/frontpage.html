@@ -1,9 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}
-Captain Console - Store
-{% endblock %}
+{% block title %} Captain Console - Store {% endblock %}
 
 {% block head %}
 <link rel="stylesheet" type="text/css" href="{% static 'store_app/frontpage.css' %}" />
@@ -12,50 +10,49 @@ Captain Console - Store
 {% block content %}
 {% include 'header.html' %}
 
-<div id="pageheader">
-    <img id="banner_img" class="responsive-img" src="{% static 'media/product_img/Hachiko.jpg' %}" alt="Banner image">
+<div id="page_header">
+    <img
+        id="banner_img"
+        class="responsive-img"
+        src="{% static 'media/product_img/Hachiko.jpg' %}"
+        alt="Banner image"
+    />
     <div class="center_text"><h1>Everything retro in one place!</h1></div>
 </div>
 
-<div class="pagecontent row">
-    <div class="col s5 offset-s1">
+<div id="page_content">
+    <div class="content_block">
         <h2>Top Sellers</h2>
-        <div id="top_sellers" class="row">
+        <div id="top_sellers">
             {% for item in top_3 %}
-            <div class="col s4">
-                <div class="product_info card">
-                    <div class="thumbnail card-image">
-                        <img class="responsive-img" src="/{{ item.get_thumbnail }}" alt="{{ item.name }}">
-                    </div>
-                    <div class="caption card-content">
-                        <a href="/store/products/{{ product.id }}">
-                            <h6>{{ item.name }}</h6>
-                        </a>
-                        <p>${{ item.price}}</p>
+            <div class="card">
+                <a href="/store/products/{{ item.id }}" class="waves-effect">
+                    <div style="width: 160px;height: 160px;background-image: url('/{{ item.get_thumbnail }}');margin: 0 auto;background-repeat: no-repeat;background-size: cover;background-position: center"></div>
+                    <div class="card-content black-text">
+                        <h5>{{ item.name|truncatechars:18 }}</h5>
+                        <p>${{ item.price }}</p>
                         <p>{{ item.description|truncatechars:55 }}</p>
-                        <a href="/store/products/{{ item.id }}" class="btn btn-small" role="button">View</a>
-                        <a href="#" class="btn btn-small" role="button"><i class="material-icons">add_shopping_cart</i></a>
                     </div>
-                </div>
+                </a>
             </div>
             {% endfor %}
         </div>
     </div>
-    <div class="col s5 offset-s1">
+    <div class="content_block">
         <h2>Today's Deals</h2>
-        <div id="todays_deals" class="row">
-            <div class="col s4">
-                <img src="{% static 'product_img/coron.jpg' %}" />
-                <p>Product X</p>
+        <div id="todays_deals">
+            {% for item in todays_deals %}
+            <div class="card">
+                <a href="/store/products/{{ item.id }}" class="waves-effect">
+                    <div style="width: 160px;height: 160px;background-image: url('/{{ item.get_thumbnail }}');margin: 0 auto;background-repeat: no-repeat;background-size: cover;background-position: center"></div>
+                    <div class="card-content black-text">
+                        <h5>{{ item.name|truncatechars:18 }}</h5>
+                        <p>${{ item.price }}</p>
+                        <p>{{ item.description|truncatechars:55 }}</p>
+                    </div>
+                </a>
             </div>
-            <div class="col s4">
-                <img src="{% static 'product_img/coron.jpg' %}" />
-                <p>Product X</p>
-            </div>
-            <div class="col s4">
-                <img src="{% static 'product_img/coron.jpg' %}" />
-                <p>Product X</p>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </div>
