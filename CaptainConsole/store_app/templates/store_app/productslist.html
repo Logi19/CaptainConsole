@@ -22,7 +22,7 @@
                         <div style="width: 160px;height: 160px;background-image: url('/{{ product.get_thumbnail }}');margin: 0 auto;background-repeat: no-repeat;background-size: cover;background-position: center"></div>
                             <!--<img class="img-responsive" src="/{{ product.get_thumbnail }}">-->
                             <div class="caption">
-                                <a href="/store/products/{{ product.id }}"><h3>{{ product.name }}</h3><a/>
+                                <a href="/store/products/{{ product.id }}"><h3>{{ product.name }}</h3></a>
                                     <p>${{ product.price}}</p>
                                     <p>{{ product.description|truncatewords:10}}</p>
                                 <p><a href="/store/products/{{ product.id }}" class="btn btn-primary" role="button">View</a> <a href="#" class="btn btn-default" role="button">Add to cart</a></p>
