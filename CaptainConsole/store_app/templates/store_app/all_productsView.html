@@ -2,75 +2,70 @@
 <link rel="stylesheet" type="text/css" href="{% static 'store_app/productslist.css' %}" />
 {% endblock %} {% block content %} {% include 'header.html' %}
         <div class="grid-container">
-        <div class="grid-item product-list-description">
-            <h5 id="desc">Sega - Genesis</h5>
-        </div>
-        <div class="grid-item sort-by">
-            <h5>Sort-by: Name</h5>
-        </div>
-        <div class="grid-item search-history">
-              <nav>
-                  <div class="nav-wrapper">
-                      <form>
-                          <div class="input-field">
-                              <input id="search" type="search" required>
-                              <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                              <i class="material-icons">close</i>
-                          </div>
-                      </form>
-                  </div>
-              </nav>
-        </div>
-        <div class="grid-item nav">
-            <h5>Type:</h5>
-            <label class="container">Video Game<input type="checkbox" checked="checked">
-                <span class="checkmark"></span>
-            </label>
-            <label class="container">Consoldjdde<input type="checkbox"><span class="checkmark"></span>
-            </label>
-            <label class="container">Otxsdasfher<input type="checkbox">
-                <span class="checkmark"></span>
-            </label>
-            <h5>Platform:</h5>
-            <label class="container">Consoldjdde<input type="checkbox"><span class="checkmark"></span>
-            </label>
-            <label class="container">Otxsdasfher<input type="checkbox">
-                <span class="checkmark"></span>
-        </div>
-        <div class="grid-item products">
-            <div class="row">
-                {% for product in product_list %}
-                    <div class="col s12 m4">
-                        <div class="card">
-                            <div class="card-image">
-                                <div style="width: 150px;height: 170px;background-image: url('/{{ product.get_thumbnail }}');margin: 0 auto;background-repeat: no-repeat;background-size: cover;background-position: center"></div>
+            <div class="grid-item product-list-description">
+                <h5 id="desc">Sega - Genesis</h5>
+            </div>
+            <div class="grid-item sort-by">
+                <h5>Sort-by: Name</h5>
+            </div>
+            <div class="grid-item search-history">
+                <nav>
+                    <div class="nav-wrapper">
+                        <form>
+                            <div class="input-field">
+                                <input id="search" type="search" required>
+                                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                                <i class="material-icons">close</i>
                             </div>
-                            <div class="card-content">
-                                <span class="card-title">{{ product.name }}</span>
-                                <p>${{ product.price}}</p>
-                            </div>
-                            <div class="card-action">
-                                <p><a href="/store/products/{{ product.id }}" class="btn btn-primary" role="button">View</a> <a href="#" class="btn btn-default" role="button">Add to cart</a></p>
+                        </form>
+                    </div>
+                </nav>
+            </div>
+            <div class="grid-item nav">
+                <h5>Type:</h5>
+                <label class="container">Video Game<input type="checkbox" checked="checked">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container">Consoldjdde<input type="checkbox"><span class="checkmark"></span>
+                </label>
+                <label class="container">Otxsdasfher<input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+                <h5>Platform:</h5>
+                <label class="container">Consoldjdde<input type="checkbox"><span class="checkmark"></span>
+                </label>
+                <label class="container">Otxsdasfher<input type="checkbox">
+                    <span class="checkmark"></span>
+            </div>
+            <div class="grid-item products">
+                <div class="row">
+                    {% for product in product_list %}
+                        <div class="col s12 m4">
+                            <div class="card">
+                                <a href="/store/products/{{ product.id }}" class="waves-effect">
+                                    <div style="width: 150px;height: 170px;background-image: url('/{{ product.get_thumbnail }}');margin: 0 auto;background-repeat: no-repeat;background-size: cover;background-position: center"></div>
+                                    <div class="card-content">
+                                        <span class="card-title">{{ product.name }}</span>
+                                        <p>${{ product.price}}</p>
+                                    </div>
+                                </a>
                             </div>
                         </div>
-                    </div>
-                {% cycle "" "" "" "</div><br/><hr/><div class='row'>" %}
-            {% endfor %}
+                        {% cycle "" "" "" "</div><br/><hr/><div class='row'>" %}
+                    {% endfor %}
+                </div>
             </div>
-        </div>
             <div class="grid-item pagination">
                 <div class="pagination">
                     <span class="step-links">
                         {% if page_obj.has_previous %}
-                            <a href="?page=1">&laquo; first</a>
-                            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                            <li class="waves-affect"><a href="?page={{ page_obj.previous_page_number }}"><i class="material-icons">chevron_left</i></a></li>
                         {% endif %}
-                        <span class="current">
+                        <span class="waves-affect">
                             Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
                         </span>
                         {% if page_obj.has_next %}
-                            <a href="?page={{ page_obj.next_page_number }}">next</a>
-                            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                            <li class="waves-effect"><a href="?page={{ page_obj.next_page_number }}"><i class="material-icons">chevron_right</i></a></li>
                         {% endif %}
                     </span>
                 </div>

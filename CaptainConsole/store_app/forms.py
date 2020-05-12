@@ -10,6 +10,7 @@ DELIVERY_METHODS = (
 
 
 class CheckOutForm(forms.ModelForm):
+
 	class Meta:
 		model = Order
 		exclude = ['items', 'profile', 'processed', 'orderDiscount', 'tax', 'deliveryPrice']
