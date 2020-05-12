@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'shopping_cart_app/shopping_cart_detail.css' %}">
+{% endblock %}
+{% block content %}
+{% include 'header.html' %}
+<div class="cart-container">
+    <div class="cart-content">
+        <div class="grid-item title">
+            <h4>My Cart</h4>
+        </div>
+        <p>what {{ shopping_cart_list }}</p>
+        {% for item in object %}
+        <div class="grid-item cart-item item-{{ forloop.counter0 }}">
+            <div class="details">
+                <h5>&dollar;{{ item.price }}</h5>
+                <h5>{{ item.name }} - {{ item.developer }}</h5>
+            </div>
+            <h5 class="delete-cross">&#x2715;</h5>
+        </div>
+        {% endfor %}
+        <div class="grid-item subtotal">
+            <h4 id="text">Subtotal: </h4>
+            <h4 id="price">&dollar;64.97</h4>
+            <!-- price of cart-->
+        </div>
+    </div>
+    <div class="buttons">
+        <button type="button" id="continue-shopping">Continue Shopping</button>
+        <button type="button" id="place-order">Checkout Now</button>
+    </div>
+</div>
+<script src="{% static 'shopping_cart_app/js/shopping_cart_detail.js' %}"></script>
+{% endblock %}
