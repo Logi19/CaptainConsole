@@ -19,6 +19,7 @@ class FrontPageView(TemplateView):
 
 
 class ProductList(ListView):
+    paginate_by = 3
     model = Product
     template_name = "store_app/all_productsView.html"
 

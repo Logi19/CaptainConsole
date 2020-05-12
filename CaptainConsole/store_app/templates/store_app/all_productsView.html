@@ -2,14 +2,24 @@
 <link rel="stylesheet" type="text/css" href="{% static 'store_app/productslist.css' %}" />
 {% endblock %} {% block content %} {% include 'header.html' %}
         <div class="grid-container">
-        <div class="grid-item des">
-            <h4 id="desc">Sega - Genesis</h4>
+        <div class="grid-item product-list-description">
+            <h5 id="desc">Sega - Genesis</h5>
         </div>
         <div class="grid-item sort-by">
             <h5>Sort-by: Name</h5>
         </div>
         <div class="grid-item search-history">
-            <h6>Search-History</h6>
+              <nav>
+                  <div class="nav-wrapper">
+                      <form>
+                          <div class="input-field">
+                              <input id="search" type="search" required>
+                              <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                              <i class="material-icons">close</i>
+                          </div>
+                      </form>
+                  </div>
+              </nav>
         </div>
         <div class="grid-item nav">
             <h5>Type:</h5>
@@ -27,10 +37,10 @@
             <label class="container">Otxsdasfher<input type="checkbox">
                 <span class="checkmark"></span>
         </div>
-        <div class="grid-item pro">
+        <div class="grid-item products">
             <div class="row">
                 {% for product in product_list %}
-                    <div class="col s4 m3">
+                    <div class="col s12 m4">
                         <div class="card">
                             <div class="card-image">
                                 <div style="width: 150px;height: 170px;background-image: url('/{{ product.get_thumbnail }}');margin: 0 auto;background-repeat: no-repeat;background-size: cover;background-position: center"></div>
@@ -44,20 +54,26 @@
                             </div>
                         </div>
                     </div>
-                {% cycle "" "" "" "" "</div><br/><hr/><div class='row'>" %}
+                {% cycle "" "" "" "</div><br/><hr/><div class='row'>" %}
             {% endfor %}
             </div>
         </div>
-        <div class="grid-item pages">
-            <ul class="pagination">
-    <!--<li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>--!>
-    <li class="active"><a href="#!">1</a></li>
-    <li class="waves-effect"><a href="#!">2</a></li>
-    <li class="waves-effect"><a href="#!">3</a></li>
-    <li class="waves-effect"><a href="#!">4</a></li>
-    <li class="waves-effect"><a href="#!">5</a></li>
-    <!--<li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>--!>
-  </ul>
-        </div>
+            <div class="grid-item pagination">
+                <div class="pagination">
+                    <span class="step-links">
+                        {% if page_obj.has_previous %}
+                            <a href="?page=1">&laquo; first</a>
+                            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                        {% endif %}
+                        <span class="current">
+                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                        </span>
+                        {% if page_obj.has_next %}
+                            <a href="?page={{ page_obj.next_page_number }}">next</a>
+                            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
         </div>
 {% include 'footer.html' %} {% endblock %}
