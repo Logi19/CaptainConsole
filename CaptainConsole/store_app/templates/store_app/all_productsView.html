@@ -17,7 +17,7 @@
             </div>
             <div class="grid-item search-history">
                         <form class="form-inline my-2 my-lg-1">
-                            <input name="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                            <input name="search" class="form-control mr-sm-2" type="text" placeholder="Search" value='{{ request.GET.search }}'>
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                         </form>
             </div>
@@ -77,4 +77,4 @@
 {% include 'footer.html' %}
 {% endblock %}
 
-<!--'lalalalla'-!>
+<!--lalalalla'--!>

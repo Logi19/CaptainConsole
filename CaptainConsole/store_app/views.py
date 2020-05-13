@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, Http404, redirect
+from django.http import JsonResponse
 
 from django.views.generic.base import TemplateView, View
 from django.views.generic.detail import DetailView
@@ -31,6 +32,14 @@ class ProductList(ListView):
         context = super().get_context_data(**kwargs)
         return context
 
+    def get_queryset(self):
+        query = self.request.GET.get('search')
+        if query:
+            object_list = self.model.objects.filter(name__icontains=query)
+        else:
+            object_list = self.model.objects.all()
+        return object_list
+
 
 class ProductDetail(DetailView):
     model = Product
@@ -44,6 +53,8 @@ class ProductDetail(DetailView):
         images = [img.image.name for img in image_objects]
         context["images"] = images
         return context
+
+
 
 
 # class CheckOut(View):
