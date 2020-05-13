@@ -9,6 +9,7 @@ from django.views.generic.edit import UpdateView
 
 from .models import ShoppingCart
 from .forms import OrderForm
+from .models import ShoppingCartItem
 
 from store_app.models import Order
 from profile_app.models import Profile
@@ -28,28 +29,10 @@ class ShoppingCartDetail(DetailView):
 
 
 def remove_from_cart(request, product_id, cart_id):
-    items = ShoppingCart.objects.get(pk=cart_id).items.all()
-    current_item = items.get(id=product_id)
-    print(current_item)
+    current_cart = ShoppingCartItem.objects.filter(shoppingCart=cart_id)
+    current_item = current_cart.filter(item_id=product_id)
     current_item.delete()
     return HttpResponseRedirect(reverse("shoppingcart_detail", kwargs={'pk': cart_id}))
-
-    # def get_context_data(self, **kwargs):
-    #    context = super().get_context_data(**kwargs)
-    #    #context["shopping_cart_list"] = ShoppingCart.objects.all()
-    #    context["shopping_cart_list"] = ShoppingCart.objects.get(pk=self.kwargs['pk']).items.all()
-    #    print("Context: {}".format(ShoppingCart.objects.get(pk=1).items.all()))
-    #    return context
-
-    # def get(self, request, *args, **kwargs):
-    #    #for item in ShoppingCart.objects.get(pk=1).items.all():
-    #    #    print(item.get_thumbnail())
-    #    context = dict(items=[dict(name="Mario", developer="Genesis Game", price=12.99),
-    #                          dict(name="Sonic The HedgeHog", developer="Genesis Game", price=20.99),
-    #                          dict(name="Nintendo Entertainment System Console", developer="NES", price=30.99)])
-
-    #    return render(request, "shopping_cart_app/shopping_cart_detail.html", context=context)
-
 
 class ReceiptView(DetailView):
     model = Order

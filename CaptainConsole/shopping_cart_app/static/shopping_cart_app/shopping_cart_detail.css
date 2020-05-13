@@ -4,8 +4,17 @@
     font-family: Roboto;
 }
 
+html, body {
+    height: 100%;
+    overflow: auto;
+}
+
 .cart-container {
+    overflow: auto;
+    text-align: center;
     margin: 4em;
+    margin-left: 6em;
+    margin-right: 6em;
 }
 
 a {
@@ -23,6 +32,12 @@ a {
     grid-auto-rows: 1fr;
 }
 
+.cart-empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .cart-item {
     border-bottom: 2px solid #C4C4C4;
     padding-top: 0.5em;
@@ -32,6 +47,34 @@ a {
         "image details delete" auto
         "image details nothing" 1fr
         / 0.2fr 1fr auto;
+}
+
+.empty-cart{
+    display: grid;
+    grid-template:
+        "image text" auto
+        "button button" auto
+        / 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+}
+.line-01 {
+    border: 2px solid black;
+}
+
+.line-01 #shopping_cart {
+    border: 2px solid black;
+    grid-area: image;
+}
+
+.line-02 {
+    border: 2px solid black;
+    grid-area: button;
+}
+
+.line-01 h3 {
+    border: 2px solid black;
+    grid-area: text;
 }
 
 .subtotal {
@@ -52,15 +95,25 @@ a {
     float: left;
 }
 
-.cart-item .details {
+.details {
     border: 2px solid black;
     grid-area: details;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
 }
 
 .title {
     margin: 0;
     padding: 0;
     border-bottom: 2px solid #C4C4C4;
+    text-align: center;
+
+}
+
+.title h4 {
+    float: left;
+    margin-left: 1em;
 }
 
 .delete-cross {
