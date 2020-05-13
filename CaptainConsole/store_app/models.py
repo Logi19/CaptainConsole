@@ -1,5 +1,7 @@
 from django.db import models
 
+import django_countries
+from django_countries.fields import CountryField
 
 class Product(models.Model):
     """
@@ -75,7 +77,7 @@ class Order(models.Model):
     deliveryStreetNum = models.CharField(max_length=20)
     deliveryCity = models.CharField(max_length=256)
     deliveryPostal = models.CharField(max_length=10)
-    deliveryCountry = models.CharField(max_length=256)
+    deliveryCountry = models.CharField(max_length=10, blank=True, null=True)
     deliveryPhone = models.CharField(max_length=20, blank=True, null=True)
 
     billingFirstName = models.CharField(max_length=30)

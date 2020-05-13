@@ -46,120 +46,136 @@
 <!--                </div>-->
 <!--            </div>-->
 
-<!--            <button type="submit" class="btn btn-primary">Proceed</button>-->
+<!--&lt;!&ndash;            <button type="submit" class="btn btn-primary">Proceed</button>&ndash;&gt;-->
 <!--        </form>-->
-<!--        <div class="container-items">-->
-<!--            <div class="row">-->
-<!--                <form method="POST" action="">-->
-<!--                {% csrf_token %}-->
-<!--                    <div class="grid-item1">-->
-<!--    &lt;!&ndash;                    Billing Information&ndash;&gt;-->
-<!--                        <h3><strong>Billing</strong></h3>-->
-<!--                        <div class="row">-->
-<!--                            <div class="input-field col s5">-->
-<!--                                {{form.billingFirstName}}-->
-<!--                                <label>First Name</label>-->
-<!--                            </div>-->
-<!--                            <div class="input-field col s5">-->
-<!--                                {{form.billingLastName}}-->
-<!--                                <label>Last Name</label>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="row">-->
-<!--                            <div class="input-field col s10">-->
-<!--                                {{form.email}}-->
-<!--                                <label>Email</label>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="row">-->
-<!--                            <div class="input-field col s5">-->
-<!--                                {{form.billingStreet}}-->
-<!--                                <label>Street Name</label>-->
-<!--                            </div>-->
-<!--                            <div class="input-field col s5">-->
-<!--                                {{form.billingStreetNum}}-->
-<!--                                <label>Street Number</label>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="row">-->
-<!--                            <div class="input-field col s5">-->
-<!--                                {{form.billingCity}}-->
-<!--                                <label>City</label>-->
-<!--                            </div>-->
-<!--                            <div class="input-field col s5">-->
-<!--                                {{form.billingPostal}}-->
-<!--                                <label>Zip Code</label>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="row">-->
-<!--                            <div class="input-field col s5">-->
-<!--                                {{form.billingCompany}}-->
-<!--                                <label>Company</label>-->
-<!--                            </div>-->
-<!--                            <div class="input-field col s5">-->
-<!--                                {{form.billingPhone}}-->
-<!--                                <label>Phone Number</label>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="grid-item2">-->
-<!--    &lt;!&ndash;                    Delivery Information&ndash;&gt;-->
-<!--                        <h3><strong>Delivery</strong></h3>-->
-<!--                        <div class="row">-->
-<!--                            <div class=""></div>-->
-<!--                            <div class="input-field col s6">-->
-<!--                                {{form.deliveryFirstName}}-->
-<!--                                <label>First Name</label>-->
-<!--                            </div>-->
-<!--                            <div class="input-field col s6">-->
-<!--                                {{form.deliveryLastName}}-->
-<!--                                <label>Last Name</label>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="row">-->
-<!--                            <div class="input-field col s6">-->
-<!--                                {{form.deliveryStreet}}-->
-<!--                                <label>Street Name</label>-->
-<!--                            </div>-->
-<!--                            <div class="input-field col s6">-->
-<!--                                {{form.deliveryStreetNum}}-->
-<!--                                <label>Street Number</label>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="row">-->
-<!--                            <div class="input-field col s6">-->
-<!--                                {{form.deliveryCity}}-->
-<!--                                <label>City</label>-->
-<!--                            </div>-->
-<!--                            <div class="input-field col s6">-->
-<!--                                {{form.deliveryPostal}}-->
-<!--                                <label>Zip Code</label>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="row">-->
-<!--                            <div class="input-field col s6">-->
-<!--                                {{form.deliveryCompany}}-->
-<!--                                <label>Company</label>-->
-<!--                            </div>-->
-<!--                            <div class="input-field col s6">-->
-<!--                                {{form.deliveryPhone}}-->
-<!--                                <label>Phone Number</label>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <button type="submit" onclick="insertJSON()" class="btn btn-primary">Proceed</button>-->
-<!--                </form>-->
-<!--                <button class="btn btn-primary">Go Back</button>-->
-<!--            </div>-->
-<!--        </div>-->
-        <form method="post" action="">
-            {% csrf_token %}
-            <div class="container">
-                {% for fields in form %}
-                {{fields.label}}
-                {{fields}}
-                {% endfor %}
+        <div class="container-items">
+            <div class="row">
+                <form method="POST" action="">
+                {% csrf_token %}
+                    <div class="grid-item1">
+    <!--                    Billing Information-->
+                        <h3><strong>Billing</strong></h3>
+                            <div class="input-field col s5">
+                                {{form.billingFirstName}}
+                                <label>First Name</label>
+                            </div>
+                            <div class="input-field col s5">
+                                {{form.billingLastName}}
+                                <label>Last Name</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s10">
+                                {{form.email}}
+                                <label>Email</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s5">
+                                {{form.billingStreet}}
+                                <label>Street Name</label>
+                            </div>
+                            <div class="input-field col s5">
+                                {{form.billingStreetNum}}
+                                <label>Street Number</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s5">
+                                {{form.billingCity}}
+                                <label>City</label>
+                            </div>
+                            <div class="input-field col s5">
+                                {{form.billingPostal}}
+                                <label>Zip Code</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s5">
+                                {{form.billingCompany}}
+                                <label>Company</label>
+                            </div>
+                            <div class="input-field col s5">
+                                {{form.billingPhone}}
+                                <label>Phone Number</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="sel col s10">
+                            {{form.billingCountry}}
+                            <label>Country</label>
+                        </div>
+                    </div>
+                    <div class="grid-item2">
+    <!--                    Delivery Information-->
+                        <h3><strong>Delivery</strong></h3>
+                        <div class="row">
+                            <div class=""></div>
+                            <div class="input-field col s6">
+                                {{form.deliveryFirstName}}
+                                <label>First Name</label>
+                            </div>
+                            <div class="input-field col s6">
+                                {{form.deliveryLastName}}
+                                <label>Last Name</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                {{form.deliveryStreet}}
+                                <label>Street Name</label>
+                            </div>
+                            <div class="input-field col s6">
+                                {{form.deliveryStreetNum}}
+                                <label>Street Number</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                {{form.deliveryCity}}
+                                <label>City</label>
+                            </div>
+                            <div class="input-field col s6">
+                                {{form.deliveryPostal}}
+                                <label>Zip Code</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                {{form.deliveryCompany}}
+                                <label>Company</label>
+                            </div>
+                            <div class="input-field col s6">
+                                {{form.deliveryPhone}}
+                                <label>Phone Number</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s10">
+                                {{form.deliveryCountry}}
+                                <label>Country</label>
+                            <div class="input-field col s10">
+                                {{form.deliveryMethod}}
+                                <label>Method</label>
+                        </div>
+                    </div>
+                    <button type="submit" onclick="insertJSON()" class="btn btn-primary">Proceed</button>
+                </form>
+                <button class="btn btn-primary">Go Back</button>
             </div>
-            <button type="submit">Proceed</button>
-        </form>
-    {% endblock %}
+        </div>
+<!--        <form method="post" action="">-->
+<!--            {% csrf_token %}-->
+<!--            <div class="container">-->
+<!--                {% for fields in form %}-->
+<!--                {{fields.label}}-->
+<!--                {{fields}}-->
+<!--                {% endfor %}-->
+<!--                {% for error in field.error %}-->
+<!--                <p class="error">{{error}}</p>-->
+<!--                {% endfor %}-->
+<!--            </div>-->
+<!--            <button type="submit">Proceed</button>-->
+<!--        </form>-->
+<!--    {% endblock %}-->

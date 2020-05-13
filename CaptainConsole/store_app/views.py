@@ -1,8 +1,11 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, Http404, redirect
 
 from django.views.generic.base import TemplateView, View
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
+
+import datetime
 
 from .models import Product, ProductImage, Order, TopSeller
 from .forms import CheckOutForm
@@ -69,22 +72,26 @@ class ProductDetail(DetailView):
 #             return redirect("/")
 #         return redirect("/cart")
 
-
+@login_required
 def check_out(request):
     print("je")
     if request.method == "POST":
         form = CheckOutForm(request.POST)
-        print("ble")
+        print(request.POST)
         if form.is_valid():
             print("ble")
             post = form.save(commit=False)
             # post.save()
-            post.orderDiscount = 1.20
+            post.deliveryCountry = 'Iceland'
+            post.processed = True
+            post.profile = request.user
+            post.orderDiscount = 0
             post.tax = 12
-            post.deliveryPrice = 12
+            post.deliveryPrice = 10
+            post.date = datetime.datetime.now()
             post.save()
             return redirect('/')
     else:
         form = CheckOutForm()
 
-    return render(request, 'store_app/order_form.html', {'form': form})
+    return render(request, 'store_app/checkouts.html', {'form': form})

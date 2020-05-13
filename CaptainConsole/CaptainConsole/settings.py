@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'profile_app.apps.ProfileAppConfig',
     'shopping_cart_app',
     'store_app',
-    'django_countries',
 ]
 
 AUTH_USER_MODEL = 'profile_app.Profile'
