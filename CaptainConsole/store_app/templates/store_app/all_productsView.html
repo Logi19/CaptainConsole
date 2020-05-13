@@ -1,5 +1,6 @@
 {% extends "base.html" %} {% load static %} {% block head %}
 <link rel="stylesheet" type="text/css" href="{% static 'store_app/productslist.css' %}" />
+    <script src="{% static 'store_app/all-products.js' %}"></script>
 {% endblock %}
 
 {% block header %}
@@ -9,23 +10,16 @@
 {% block content %}
         <div class="grid-container">
             <div class="grid-item product-list-description">
-                <h5 id="desc">Sega - Genesis</h5>
+                <h4 id="desc">All Products</h4>
             </div>
             <div class="grid-item sort-by">
-                <h5>Sort-by: Name</h5>
+                <h5 id="sort-by">Sort-by: None</h5>
             </div>
             <div class="grid-item search-history">
-                <nav>
-                    <div class="nav-wrapper">
-                        <form>
-                            <div class="input-field">
-                                <input id="search" type="search" required>
-                                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                                <i class="material-icons">close</i>
-                            </div>
+                        <form class="form-inline my-2 my-lg-1">
+                            <input name="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                         </form>
-                    </div>
-                </nav>
             </div>
             <div class="grid-item nav">
                 <h5>Type:</h5>

@@ -42,6 +42,23 @@ class ProductDetail(DetailView):
         context["images"] = images
         return context
 
+
+
+class ProfileSearchView(ListView):
+    template_name = 'store_app/all_productsView.html'
+    model = Product
+
+    def get_queryset(self):
+        try:
+            name = self.kwargs['name']
+        except:
+            name = ''
+        if (name != ''):
+            object_list = self.model.objects.filter(name__icontains = name)
+        else:
+            object_list = self.model.objects.all()
+        return object_list
+
 #
 # class CheckOut(View):
 #     def get(self, *args, **kwargs):
@@ -69,3 +86,6 @@ def check_out(request):
         form = CheckOutForm()
 
     return render(request, 'store_app/order_form.html', {'form': form})
+
+
+
