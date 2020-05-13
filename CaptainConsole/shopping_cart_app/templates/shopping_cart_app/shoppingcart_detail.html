@@ -4,8 +4,13 @@
     <link rel="stylesheet" type="text/css" href="{% static 'shopping_cart_app/shopping_cart_detail.css' %}">
 {% endblock %}
 {% block content %}
+{% block header %}
 {% include 'header.html' %}
+{% endblock %}
 <div class="cart-container">
+    <div class="cover">
+
+    </div>
     <div class="cart-content">
         <div class="grid-item title">
             <h4>My Cart</h4>
@@ -17,10 +22,10 @@
             </div>
             <div class="details">
                 <h5>&dollar;{{ item.price }}</h5>
-                <h5>{{ item.name }} - {{ item.developer }}</h5>
+                <h5>{{ item.name }} - {{ item.manufacturer }}</h5>
             </div>
             <h5 class="delete-cross">
-                <a href='{% url "remove_from_cart" product_id=item.id cart_id=cart_key %}'>&#x2715;</a>
+                <a href="{% url 'remove_from_cart' product_id=item.id cart_id=cart_key %}">&#x2715;</a>
             </h5>
         </div>
         {% endfor %}
@@ -31,8 +36,8 @@
         </div>
     </div>
     <div class="buttons">
-        <button type="button" id="continue-shopping">Continue Shopping</button>
-        <button type="button" id="place-order">Checkout Now</button>
+        <a href="{% url 'front_page_redirect' %}"><button type="button" id="continue-shopping">Continue Shopping</button></a>
+        <a href="#"><button type="button" id="place-order">Checkout Now</button></a>
     </div>
 </div>
 <script src="{% static 'shopping_cart_app/js/shopping_cart_detail.js' %}"></script>
