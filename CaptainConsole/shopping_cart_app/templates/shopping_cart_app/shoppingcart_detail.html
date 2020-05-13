@@ -1,16 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block head %}
+{% block header %} {% include 'header.html' %}
     <link rel="stylesheet" type="text/css" href="{% static 'shopping_cart_app/shopping_cart_detail.css' %}">
 {% endblock %}
 {% block content %}
-{% block header %}
-{% include 'header.html' %}
-{% endblock %}
-<div class="cart-container">
-    <div class="cover">
 
-    </div>
+<div class="cart-container">
+    {% if shopping_cart_items %}
     <div class="cart-content">
         <div class="grid-item title">
             <h4>My Cart</h4>
@@ -39,6 +35,12 @@
         <a href="{% url 'front_page_redirect' %}"><button type="button" id="continue-shopping">Continue Shopping</button></a>
         <a href="#"><button type="button" id="place-order">Checkout Now</button></a>
     </div>
+    {% else %}
+    <h3>YOUR SHOPPING CART IS <strong>EMPTY</strong></h3>
+    <a href="{% url 'front_page_redirect' %}"><button type="button">Continue Shopping</button></a>
+    {% endif %}
 </div>
 <script src="{% static 'shopping_cart_app/js/shopping_cart_detail.js' %}"></script>
+{% block footer %} {% include 'footer.html' %}
+{% endblock footer %}
 {% endblock content %}

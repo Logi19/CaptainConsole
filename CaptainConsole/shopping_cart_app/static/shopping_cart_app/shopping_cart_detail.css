@@ -6,6 +6,7 @@
 
 .cart-container {
     margin: 4em;
+    overflow: auto;
 }
 
 a {
@@ -21,6 +22,18 @@ a {
     grid-template-columns: 1fr;
     grid-auto-columns: 1fr 1fr 1fr;
     grid-auto-rows: 1fr;
+}
+
+.cart-empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttonsss {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .cart-item {
