@@ -1,5 +1,6 @@
 {% extends "base.html" %} {% load static %} {% block head %}
 <link rel="stylesheet" type="text/css" href="{% static 'store_app/product-detail.css'%}" />
+    <script src="{% static 'store_app/product_detail.js' %}"></script>
 {% endblock %}
 
 {% block header %}
@@ -9,7 +10,7 @@
 {% block content %}
     <div class="grid-container">
     <div class="grid-item title">
-        <h4>{{ object.name }}</h4>
+        <h3>{{ object.name }}</h3>
     </div>
     <div class="grid-item images">
         {% for image in images %}
@@ -19,9 +20,14 @@
             {% endfor %}
     </div>
     <div class="grid-item other">
-        <h4>Price: ${{ object.price }}</h4>
-        <h5>{{ object.description }}</h5>
-        <p><a href="#" class="btn btn-default" role="button">Add to cart</a></p>
+        <h5>${{ object.price }}</h5><br/>
+        <h5>{{ object.description }}</h5><br/>
+        <form method="get" action="">
+            <input name="qty" type="number" placeholder="Quantity"/>
+            <!--<input onclick="M.toast({html: '{{ object.name }} <br/> Added to cart'})" type="" value="add to cart"/>--!>
+            <p><a onclick="M.toast({html: '{{ object.name }} <br/> Added to cart'})" class="btn btn-default" role="button">Add to cart</a></p>
+        </form>
+
     </div>
 </div>
 {% endblock %}
