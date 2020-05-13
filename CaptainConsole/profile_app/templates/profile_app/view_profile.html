@@ -2,15 +2,24 @@
 {% load static %}
 
 {% block head %}
-    <link rel="stylesheet" type="text/css" href="{% static 'profile_app/edit_profile.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'profile_app/view_profile.css' %}">
 {% endblock %}
 
+{% block header %}
+{% include 'header.html' %}
+{% endblock %}
 
 {% block content %}
-{% include 'header.html' %}
 
-hello
+<div class="container">
+    <img class="circle responsive-img" src="/{{ user.profileImage }}" alt="Profile picture">
+    {% for order in order_history %}
+    <div>{{ order }}</div>
+    {% endfor %}
+</div>
 
-{% include 'footer.html' %}
 {% endblock %}
 
+{% block footer %}
+{% include 'footer.html' %}
+{% endblock %}

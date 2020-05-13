@@ -50,7 +50,18 @@ def my_profile_view(request, *args, **kwargs):
 
 @login_required
 def my_profile_update(request, *args, **kwargs):
-    pass
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            new_first_name = request.POST.get('first_name')
+            new_last_name = request.POST.get('last_name')
+            new_profile_image = request.POST.get('profileImage')
+            print(new_first_name, new_last_name, new_profile_image)
+    else:
+        form = ProfileForm()
+        context = {'user': request.user, 'form': form}
+        return render(request, 'profile_app/view_profile.html', context)
+
 
 
 def sign_up_view(request, *args, **kwargs):

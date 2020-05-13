@@ -7,8 +7,11 @@
 <link rel="stylesheet" type="text/css" href="{% static 'store_app/frontpage.css' %}" />
 {% endblock %}
 
-{% block content %}
+{% block header %}
 {% include 'header.html' %}
+{% endblock %}
+
+{% block content %}
 
 <div id="page_header">
     <img
@@ -57,4 +60,8 @@
     </div>
 </div>
 
-{% include 'footer.html' %} {% endblock %}
+{% endblock %}
+
+{% block footer %}
+{% include 'footer.html' %}
+{% endblock %}
