@@ -11,5 +11,5 @@ urlpatterns = [
     path('login/', login_view, name='login_page'),
     path('logout/', logout_view, name='logout_page'),
     path('my_profile/', my_profile_view, name='profile_detail'),
-    path('my_profile/update/', my_profile_update, name='profile_update')
+    path('my_profile/update/', my_profile_update, name='profile_update'),
 ]

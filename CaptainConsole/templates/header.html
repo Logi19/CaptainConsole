@@ -1,38 +1,43 @@
 {% load static %}
+<header>
+    <nav class="nav-extended">
+        <div class="nav-wrapper indigo lighten-1">
+            <a href="/store" class="brand-logo">
+                <img id="logo" src="{% static 'media/console-logo.png' %}" />
+                <h1>Captain console</h1>
+            </a>
+            <ul id="nav-mobile" class="right">
+                {% if user.is_authenticated %}
 
-<nav class="nav-extended">
-    <div class="nav-wrapper indigo lighten-1">
-        <a href="/store" class="brand-logo">
-            <img id="logo" src="{% static 'media/console-logo.png' %}" />
-            <h1>Captain console</h1>
-        </a>
-        <ul id="nav-mobile" class="right">
-            {% if user.is_authenticated %}
+                <!--TODO: user profile dropdown-->
+                <li id="welcome_msg">Welcome, {{ user.first_name }}</li>
+                {% if user.profileImage %}
+                    <li><img class="circle" src="/{{ user.profileImage }}" alt="My profile" /></li>
+                {% else %}
+                    <li><img class="circle" src="{% static 'media/profile.png' %}" alt="My profile" /></li>
+                {% endif %}
+                
+                {% else %}
 
-            <!--TODO: user profile dropdown-->
-            <li id="welcome_msg">Welcome, {{ user.first_name }}</li>
-            <li><img src="{% static 'media/profile.png' %}" alt="My profile" /></li>
+                <li class="text-li"><a href="/profile/login">Log In</a></li>
+                <li class="text-li"><a href="/profile/sign_up" class="header">Sign Up</a></li>
 
-            {% else %}
-
-            <li class="text-li"><a href="/profile/login">Log In</a></li>
-            <li class="text-li"><a href="/profile/sign_up" class="header">Sign Up</a></li>
-
-            {% endif %}
-            <!--TODO: shopping cart dropdown, change to icon?-->
-            <li><img id="shopping_cart" src="{% static 'media/shopping-cart.png' %}" /></li>
-        </ul>
-    </div>
-    <div class="nav-content indigo">
-        <ul id="lower-nav-ul">
-            <!--TODO: implement filtering on anchor click-->
-            <li><a href="/store/products">All Products</a></li>
-            <li><a href="/store/products">Sega</a></li>
-            <li><a href="/store/products">Playstation</a></li>
-            <li><a href="/store/products">Atari</a></li>
-            <li><a href="/store/products">Nintendo</a></li>
-            <li><a href="/store/products">Xbox</a></li>
-            <li><a href="/store/products">Commodore</a></li>
-        </ul>
-    </div>
-</nav>
+                {% endif %}
+                <!--TODO: shopping cart dropdown, change to icon?-->
+                <li><img id="shopping_cart" src="{% static 'media/shopping-cart.png' %}" /></li>
+            </ul>
+        </div>
+        <div class="nav-content indigo">
+            <ul id="lower-nav-ul">
+                <!--TODO: implement filtering on anchor click-->
+                <li><a href="/store/products">All Products</a></li>
+                <li><a href="/store/products">Sega</a></li>
+                <li><a href="/store/products">Playstation</a></li>
+                <li><a href="/store/products">Atari</a></li>
+                <li><a href="/store/products">Nintendo</a></li>
+                <li><a href="/store/products">Xbox</a></li>
+                <li><a href="/store/products">Commodore</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
