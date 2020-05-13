@@ -5,11 +5,11 @@
 {% endblock %}
 {% block content %}
 
+{% if shopping_cart_items %}
 <div class="cart-container">
-    {% if shopping_cart_items %}
     <div class="cart-content">
         <div class="grid-item title">
-            <h4>My Cart</h4>
+            <h4><strong>My Cart</strong></h4>
         </div>
         {% for item in shopping_cart_items %}
         <div class="grid-item cart-item item-{{ forloop.counter0 }}">
@@ -17,8 +17,8 @@
                 <img src="{% static 'media/product_img/coron.jpg' %}" alt={{ item.name }}>
             </div>
             <div class="details">
-                <h5>&dollar;{{ item.price }}</h5>
-                <h5>{{ item.name }} - {{ item.manufacturer }}</h5>
+                <h5 id="price">&dollar;{{ item.price }}</h5>
+                <h5 id="name">{{ item.name }} - {{ item.manufacturer }}</h5>
             </div>
             <h5 class="delete-cross">
                 <a href="{% url 'remove_from_cart' product_id=item.id cart_id=cart_key %}">&#x2715;</a>
@@ -35,12 +35,23 @@
         <a href="{% url 'front_page_redirect' %}"><button type="button" id="continue-shopping">Continue Shopping</button></a>
         <a href="#"><button type="button" id="place-order">Checkout Now</button></a>
     </div>
-    {% else %}
-    <h3>YOUR SHOPPING CART IS <strong>EMPTY</strong></h3>
-    <a href="{% url 'front_page_redirect' %}"><button type="button">Continue Shopping</button></a>
-    {% endif %}
 </div>
+{% else %}
+<div class="empty-cart">
+    <div class="line-01">
+        <h3>YOUR SHOPPING CART IS <strong>EMPTY</strong></h3>
+        <img id="shopping_cart" src="{% static 'media/shopping-cart.png' %}" />
+    </div>
+    <div class="line-02">
+        <a href="{% url 'front_page_redirect' %}"><button type="button">Continue Shopping</button></a>
+    </div>
+</div>
+{% endif %}
 <script src="{% static 'shopping_cart_app/js/shopping_cart_detail.js' %}"></script>
-{% block footer %} {% include 'footer.html' %}
-{% endblock footer %}
 {% endblock content %}
+<footer>
+    {% block footer %}
+    {% include 'footer.html' %}
+    {% endblock footer %}
+</footer>
+
