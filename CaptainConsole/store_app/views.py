@@ -1,8 +1,11 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, Http404, redirect
 
 from django.views.generic.base import TemplateView, View
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
+
+import datetime
 
 from .models import Product, ProductImage, Order, TopSeller
 from .forms import CheckOutForm
@@ -43,49 +46,52 @@ class ProductDetail(DetailView):
         return context
 
 
-
-class ProfileSearchView(ListView):
-    template_name = 'store_app/all_productsView.html'
-    model = Product
-
-    def get_queryset(self):
-        try:
-            name = self.kwargs['name']
-        except:
-            name = ''
-        if (name != ''):
-            object_list = self.model.objects.filter(name__icontains = name)
-        else:
-            object_list = self.model.objects.all()
-        return object_list
-
-#
 # class CheckOut(View):
 #     def get(self, *args, **kwargs):
 #         form = CheckOutForm()
-#         context = {
-#             'form': form,
-#         }
-#         return render(self.request, "order_form.html", context)
+#         return render(self.request, "checkouts.html", {'form': form})
 #
 #     def post(self, *args, **kwargs):
-#         form = CheckoutForm(self.request.POST or None)
+#         form = CheckOutForm(self.request.POST)
+#         print(self.request.POST)
 #         if form.is_valid():
+#             new_obj = [self.request.id, ]
+#             post = form.save(commit=False)
+#             post.profile = self.request.user
+#             post.processed = 'True'
+#             post.items = 2 #Þarf að gera post.items.set(request.id,
+#             # fa einhvern veginn öll products ,
+#             # setja inn orderDiscount
+#             # og setja inn quantity en þetta fer inn i list sem er svo settur hingað inn)
+#             post.orderDiscount = 12
+#             post.tax = 12
+#             post.deliveryPrice = 12
+#             post.save()
+#             print(post.cleaned_data)
 #             print("this works")
 #             return redirect("/")
+#         return redirect("/cart")
 
-
+@login_required
 def check_out(request):
+    print("je")
     if request.method == "POST":
         form = CheckOutForm(request.POST)
+        print(request.POST)
         if form.is_valid():
-            form.save()
+            print("ble")
+            post = form.save(commit=False)
             # post.save()
+            post.deliveryCountry = 'Iceland'
+            post.processed = True
+            post.profile = request.user
+            post.orderDiscount = 0
+            post.tax = 12
+            post.deliveryPrice = 10
+            post.date = datetime.datetime.now()
+            post.save()
             return redirect('/')
     else:
         form = CheckOutForm()
 
-    return render(request, 'store_app/order_form.html', {'form': form})
-
-
-
+    return render(request, 'store_app/checkouts.html', {'form': form})

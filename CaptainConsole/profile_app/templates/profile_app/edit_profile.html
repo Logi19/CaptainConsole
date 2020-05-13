@@ -5,27 +5,53 @@
     <link rel="stylesheet" type="text/css" href="{% static 'profile_app/edit_profile.css' %}">
 {% endblock %}
 
-
-{% block content %}
+{% block header %}
 {% include 'header.html' %}
-
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {% for field in form %}
-    <p>
-        {{ field.label_tag }}<br>
-        {{ field }}
-        {% if field.help_text %}
-        <small style="color: grey">{{ field.help_text }}</small>
-        {% endif %}
-        {% for error in field.errors %}
-        <p style="color: red">{{ error }}</p>
-        {% endfor %}
-    </p>
-    {% endfor %}
-    <button type="submit">Sign up</button>
-</form>
-
-{% include 'footer.html' %}
 {% endblock %}
 
+{% block content %}
+<div id="profile_div" class="container">
+    <form method="POST" enctype="multipart/form-data" class="row">
+        {% csrf_token %}
+        <div class="col s3 center">
+            {% if user.profileImage %}
+            <img class="circle profile-pic" src="/{{ user.profileImage }}" alt="Profile picture" />
+            {% else %}
+            <img class="circle profile-pic" src="{% static 'media/profile.png' %}" alt="Profile picture" />
+            {% endif %}
+            <label for="id_profileImage">Choose a new profile image:</label>
+            {{ form.profileImage }}
+        </div>
+    <div class="col s4 offset-s1">
+        <p>
+            {{ form.first_name.label_tag }}
+            <br>
+            {{ form.first_name }}
+            {% for error in form.first_name.errors %}
+            <p style="color: red">{{ error }}</p>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.last_name.label_tag }}
+            <br>
+            {{ form.last_name }}
+            {% for error in form.last_name.errors %}
+            <p style="color: red">{{ error }}</p>
+            {% endfor %}
+        </p>
+
+        <button type="submit">Save changes</button>
+        {% if messages %}
+        {% for message in messages %}
+        <p id="msg_txt">{{ message }}</p>
+        {% endfor %}
+        {% endif %}
+    </div>
+</form>
+</div>
+
+{% endblock %}
+
+{% block footer %}
+{% include 'footer.html' %}
+{% endblock %}

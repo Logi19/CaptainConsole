@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'profile_app.apps.ProfileAppConfig',
     'shopping_cart_app',
     'store_app',
-    'django_countries',
 ]
 
 AUTH_USER_MODEL = 'profile_app.Profile'
@@ -62,6 +61,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(BASE_DIR, 'templates'),
+            r'C:\Haskoli\Verklegt2\CaptainConsole\CaptainConsole\store_app\templates\store_app'
         ],
         'APP_DIRS': True,
         'OPTIONS': {

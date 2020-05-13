@@ -3,7 +3,7 @@
 
     {% block head %}
         <link rel="stylesheet" type="text/css" href="{% static "store_app/checkout.css" %}">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<!--        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">-->
     {% endblock %}
 
 
@@ -46,7 +46,7 @@
 <!--                </div>-->
 <!--            </div>-->
 
-<!--            <button type="submit" class="btn btn-primary">Proceed</button>-->
+<!--&lt;!&ndash;            <button type="submit" class="btn btn-primary">Proceed</button>&ndash;&gt;-->
 <!--        </form>-->
         <div class="container-items">
             <div class="row">
@@ -55,7 +55,6 @@
                     <div class="grid-item1">
     <!--                    Billing Information-->
                         <h3><strong>Billing</strong></h3>
-                        <div class="row">
                             <div class="input-field col s5">
                                 {{form.billingFirstName}}
                                 <label>First Name</label>
@@ -102,10 +101,17 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="sel col s10">
+                            {{form.billingCountry}}
+                            <label>Country</label>
+                        </div>
+                    </div>
                     <div class="grid-item2">
     <!--                    Delivery Information-->
                         <h3><strong>Delivery</strong></h3>
                         <div class="row">
+                            <div class=""></div>
                             <div class="input-field col s6">
                                 {{form.deliveryFirstName}}
                                 <label>First Name</label>
@@ -145,10 +151,31 @@
                                 <label>Phone Number</label>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="input-field col s10">
+                                {{form.deliveryCountry}}
+                                <label>Country</label>
+                            <div class="input-field col s10">
+                                {{form.deliveryMethod}}
+                                <label>Method</label>
+                        </div>
                     </div>
                     <button type="submit" onclick="insertJSON()" class="btn btn-primary">Proceed</button>
                 </form>
                 <button class="btn btn-primary">Go Back</button>
             </div>
         </div>
-    {% endblock %}
+<!--        <form method="post" action="">-->
+<!--            {% csrf_token %}-->
+<!--            <div class="container">-->
+<!--                {% for fields in form %}-->
+<!--                {{fields.label}}-->
+<!--                {{fields}}-->
+<!--                {% endfor %}-->
+<!--                {% for error in field.error %}-->
+<!--                <p class="error">{{error}}</p>-->
+<!--                {% endfor %}-->
+<!--            </div>-->
+<!--            <button type="submit">Proceed</button>-->
+<!--        </form>-->
+<!--    {% endblock %}-->

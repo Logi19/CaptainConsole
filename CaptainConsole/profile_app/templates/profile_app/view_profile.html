@@ -1,25 +1,72 @@
-{% extends "base.html" %}
-{% load static %}
+{% extends "base.html" %} {% load static %} {% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'profile_app/view_profile.css' %}" />
+{% endblock %} {% block header %} {% include 'header.html' %} {% endblock %} {% block content %}
 
-{% block head %}
-    <link rel="stylesheet" type="text/css" href="{% static 'profile_app/view_profile.css' %}">
-{% endblock %}
-
-{% block header %}
-{% include 'header.html' %}
-{% endblock %}
-
-{% block content %}
-
-<div class="container">
-    <img class="circle responsive-img" src="/{{ user.profileImage }}" alt="Profile picture">
-    {% for order in order_history %}
-    <div>{{ order }}</div>
-    {% endfor %}
+<div id="profile_div" class="container row">
+    <div class="col s3 center">
+        {% if user.profileImage %}
+        <img class="circle profile-pic" src="/{{ user.profileImage }}" alt="Profile picture" />
+        {% else %}
+        <img
+        class="circle profile-pic"
+        src="{% static 'media/profile.png' %}"
+        alt="Profile picture"
+        />
+        {% endif %}
+        <h4>{{ user }}</h4>
+        <h6>{{ user.email }}</h6>
+        <p><a href="update/" class="btn">Edit profile</a></p>
+    </div>
+    <div class="col s8 offset-s1">
+        <h4>Order history:</h4>
+        <div id="order_hist_div">
+            <ul class="collapsible expandable">
+                {% for order, orderitems in order_history %}
+                {% with order.get_total_price as total_price %}
+                <li>
+                    <div class="waves-effect collapsible-header order_div">
+                        <span>Order {{ forloop.revcounter }}</span>
+                        <span>{{ order.date }}</span>
+                        <span>${{ total_price }}</span>
+                    </div>
+                    <div class="collapsible-body">
+                        <h5>Items:</h5>
+                        <ul>
+                            {% for item in orderitems %}
+                            <li class="orderitem_li">
+                                <a class="black-text orderitem_link" href="/store/products/{{ item.product.id }}"><h6>{{ item.product|truncatechars:30 }}</h6></a>
+                                <span>Quantity: {{ item.quantity }}</span>
+                                <span>Price: ${{ item.get_price }}</span>
+                            </li>
+                            {% endfor %}
+                            <li class="divider"></li>
+                            <li class="summary_li">
+                                <span></span>
+                                <span>Tax: {{ order.tax }}%</span>
+                            </li>
+                            <li class="summary_li">
+                                <span></span>
+                                <span>Delivery: ${{ order.deliveryPrice }}</span>
+                            </li>
+                            <li class="summary_li">
+                                <span></span>
+                                <h6>Total: ${{ total_price }}</h6>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                {% endwith %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
 </div>
 
-{% endblock %}
-
-{% block footer %}
-{% include 'footer.html' %}
+{% endblock %} {% block footer %} {% include 'footer.html' %} {% endblock %} {% block javascript %}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var elem = document.querySelector(".collapsible.expandable");
+        var instance = M.Collapsible.init(elem, { accordion: false });
+    });
+</script>
 {% endblock %}

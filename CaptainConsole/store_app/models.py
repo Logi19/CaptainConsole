@@ -1,5 +1,7 @@
 from django.db import models
 
+import django_countries
+from django_countries.fields import CountryField
 
 class Product(models.Model):
     """
@@ -75,7 +77,7 @@ class Order(models.Model):
     deliveryStreetNum = models.CharField(max_length=20)
     deliveryCity = models.CharField(max_length=256)
     deliveryPostal = models.CharField(max_length=10)
-    deliveryCountry = models.CharField(max_length=256)
+    deliveryCountry = models.CharField(max_length=10, blank=True, null=True)
     deliveryPhone = models.CharField(max_length=20, blank=True, null=True)
 
     billingFirstName = models.CharField(max_length=30)
@@ -91,19 +93,19 @@ class Order(models.Model):
 
 
     def get_total_price(self):
-        """ Calculate and return total price of order, taking discounts into account. """
+        """
+        Calculate and return total price of order, taking discounts, tax and delivery into account.
+        """
         total = 0
-        for item in self.items:
-            item_price = item.product.productPrice - (
-                item.product.productPrice * (item.itemDiscount / 100)
-            )
-            total += item.quantity * item_price
-        total = total - (total * (self.orderDiscount / 100))
+        for item in OrderItem.objects.filter(order=self.id):
+            total += item.get_price()
+
+        total -= (total * (self.orderDiscount / 100))
         # Add tax
-        total += total * self.tax
+        total += (total * (self.tax / 100))
         # Add the cost of shipping
         total += self.deliveryPrice
-        return total
+        return round(total, 2)
 
     def __str__(self):
         return f"Order {self.id}, account: {str(self.profile)}"
@@ -116,6 +118,9 @@ class OrderItem(models.Model):
     product = models.ForeignKey("Product", on_delete=models.CASCADE)
     itemDiscount = models.DecimalField(max_digits=3, decimal_places=2)
     quantity = models.SmallIntegerField()
+
+    def get_price(self):
+        return round(self.quantity * (self.product.price - (self.product.price * (self.itemDiscount / 100))), 2)
 
     def __str__(self):
         return f"{str(self.order)} - {str(self.product)}"
