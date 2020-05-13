@@ -42,28 +42,47 @@ class ProductDetail(DetailView):
         context["images"] = images
         return context
 
-#
+
 # class CheckOut(View):
 #     def get(self, *args, **kwargs):
 #         form = CheckOutForm()
-#         context = {
-#             'form': form,
-#         }
-#         return render(self.request, "order_form.html", context)
+#         return render(self.request, "checkouts.html", {'form': form})
 #
 #     def post(self, *args, **kwargs):
-#         form = CheckoutForm(self.request.POST or None)
+#         form = CheckOutForm(self.request.POST)
+#         print(self.request.POST)
 #         if form.is_valid():
+#             new_obj = [self.request.id, ]
+#             post = form.save(commit=False)
+#             post.profile = self.request.user
+#             post.processed = 'True'
+#             post.items = 2 #Þarf að gera post.items.set(request.id,
+#             # fa einhvern veginn öll products ,
+#             # setja inn orderDiscount
+#             # og setja inn quantity en þetta fer inn i list sem er svo settur hingað inn)
+#             post.orderDiscount = 12
+#             post.tax = 12
+#             post.deliveryPrice = 12
+#             post.save()
+#             print(post.cleaned_data)
 #             print("this works")
 #             return redirect("/")
+#         return redirect("/cart")
 
 
 def check_out(request):
+    print("je")
     if request.method == "POST":
         form = CheckOutForm(request.POST)
+        print("ble")
         if form.is_valid():
-            form.save()
+            print("ble")
+            post = form.save(commit=False)
             # post.save()
+            post.orderDiscount = 1.20
+            post.tax = 12
+            post.deliveryPrice = 12
+            post.save()
             return redirect('/')
     else:
         form = CheckOutForm()
