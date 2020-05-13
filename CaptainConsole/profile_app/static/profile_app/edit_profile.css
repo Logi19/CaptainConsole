@@ -1,0 +1,13 @@
+#profile_div {
+    margin-top: 50px;
+}
+
+.profile-pic {
+    object-fit: cover;
+    height: 16rem;
+    width: 16rem;
+}
+
+#msg_txt {
+    color: green;
+}

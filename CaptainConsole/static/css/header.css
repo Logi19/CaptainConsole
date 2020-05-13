@@ -3,7 +3,9 @@
 }
 
 #nav-mobile img {
-    height: 42px;
+    object-fit: cover;
+    height: 2.65rem;
+    width: 2.65rem;
     margin-top: 10px;
     margin-left: 15px;
 }
