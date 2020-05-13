@@ -1,6 +1,12 @@
 {% extends "base.html" %} {% load static %} {% block head %}
 <link rel="stylesheet" type="text/css" href="{% static 'store_app/productslist.css' %}" />
-{% endblock %} {% block content %} {% include 'header.html' %}
+{% endblock %}
+
+{% block header %}
+{% include 'header.html' %}
+{% endblock %}
+
+{% block content %}
         <div class="grid-container">
             <div class="grid-item product-list-description">
                 <h5 id="desc">Sega - Genesis</h5>
@@ -71,4 +77,8 @@
                 </div>
             </div>
         </div>
-{% include 'footer.html' %} {% endblock %}
+{% endblock %}
+
+{% block footer %}
+{% include 'footer.html' %}
+{% endblock %}
