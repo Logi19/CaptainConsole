@@ -6,9 +6,13 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import Profile
 
 class ProfileForm(forms.ModelForm):
+    first_name = forms.CharField(max_length=30, label='First name', required=False)
+    last_name = forms.CharField(max_length=30, label='Last name', required=False)
+    profileImage = forms.ImageField(required=False, label='Profile image')
+
     class Meta:
         model = Profile
-        fields = '__all__'
+        fields = ('first_name', 'last_name', 'profileImage')
 
 
 class SignUpForm(UserCreationForm):

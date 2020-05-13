@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block header %} {% include 'header.html' %}
+    <link rel="stylesheet" type="text/css" href="{% static 'shopping_cart_app/shopping_cart_detail.css' %}">
+{% endblock %}
+{% block content %}
+
+<div class="cart-container">
+    {% if shopping_cart_items %}
+    <div class="cart-content">
+        <div class="grid-item title">
+            <h4>My Cart</h4>
+        </div>
+        {% for item in shopping_cart_items %}
+        <div class="grid-item cart-item item-{{ forloop.counter0 }}">
+            <div class="thumbnail">
+                <img src="{% static 'media/product_img/coron.jpg' %}" alt={{ item.name }}>
+            </div>
+            <div class="details">
+                <h5>&dollar;{{ item.price }}</h5>
+                <h5>{{ item.name }} - {{ item.manufacturer }}</h5>
+            </div>
+            <h5 class="delete-cross">
+                <a href="{% url 'remove_from_cart' product_id=item.id cart_id=cart_key %}">&#x2715;</a>
+            </h5>
+        </div>
+        {% endfor %}
+        <div class="grid-item subtotal">
+            <h4 id="text">Subtotal: </h4>
+            <h4 id="price">&dollar;{{ subtotal }}</h4>
+            <!-- price of cart-->
+        </div>
+    </div>
+    <div class="buttons">
+        <a href="{% url 'front_page_redirect' %}"><button type="button" id="continue-shopping">Continue Shopping</button></a>
+        <a href="#"><button type="button" id="place-order">Checkout Now</button></a>
+    </div>
+    {% else %}
+    <h3>YOUR SHOPPING CART IS <strong>EMPTY</strong></h3>
+    <a href="{% url 'front_page_redirect' %}"><button type="button">Continue Shopping</button></a>
+    {% endif %}
+</div>
+<script src="{% static 'shopping_cart_app/js/shopping_cart_detail.js' %}"></script>
+{% block footer %} {% include 'footer.html' %}
+{% endblock footer %}
+{% endblock content %}
