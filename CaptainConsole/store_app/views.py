@@ -1,16 +1,18 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, Http404, redirect
+from django.http import JsonResponse
 
 from django.views.generic.base import TemplateView, View
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
+from django.http import JsonResponse
 
 import datetime
 import json
 
+from shopping_cart_app.models import ShoppingCart, ShoppingCartItem
 from .models import Product, ProductImage, Order, TopSeller
 from .forms import CheckOutForm
-
 
 class FrontPageView(TemplateView):
     template_name = 'store_app/frontpage.html'
@@ -32,6 +34,14 @@ class ProductList(ListView):
         context = super().get_context_data(**kwargs)
         return context
 
+    def get_queryset(self):
+        query = self.request.GET.get('search')
+        if query:
+            object_list = self.model.objects.filter(name__icontains=query)
+        else:
+            object_list = self.model.objects.all()
+        return object_list
+
 
 class ProductDetail(DetailView):
     model = Product
@@ -45,6 +55,8 @@ class ProductDetail(DetailView):
         images = [img.image.name for img in image_objects]
         context["images"] = images
         return context
+
+
 
 
 # class CheckOut(View):
@@ -90,10 +102,30 @@ def check_out(request):
             post.orderDiscount = 0
             post.tax = 12
             post.deliveryPrice = 10
-            post.date = datetime.datetime.now()
+            post.date = datetime.datetime.now() # held að django sjái sjálfkrafa um þetta, því auto_add_now=True í modelinu
             post.save()
             return redirect('/')
     else:
         form = CheckOutForm()
 
     return render(request, 'store_app/checkouts.html', {'form': form})
+
+
+
+
+def add_to_cart(request, *args, **kwargs):
+    data = {}
+    
+    product_id = request.POST.get('product_id')
+    quantity = request.POST.get('quantity')
+    shopping_cart_id = request.user.shoppingCart.id
+
+    cart_item = ShoppingCartItem()
+    cart_item.item = Product.objects.get(id=product_id)
+    cart_item.shoppingCart = ShoppingCart.objects.get(id=shopping_cart_id)
+    cart_item.quantity = int(quantity)
+
+    cart_item.save()
+
+    data['message'] = 'Item successfully added to cart.'
+    return JsonResponse(data)

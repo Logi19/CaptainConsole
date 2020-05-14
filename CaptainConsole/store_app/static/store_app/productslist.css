@@ -31,7 +31,8 @@
 }
 
 .search-history{
-    grid-column: 5;
+    grid-column-start: 5;
+    grid-column-end: 6;
 }
 
 .nav {
@@ -49,6 +50,10 @@
 
 
 #desc{
+    text-align: center;
+}
+
+#sort-by{
     text-align: center;
 }
 
