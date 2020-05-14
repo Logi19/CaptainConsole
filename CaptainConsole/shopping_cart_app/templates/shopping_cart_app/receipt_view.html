@@ -1,1 +1,25 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'shopping_cart_app/receipt_view.css' %}">
+{% endblock %}
+{% block header %} {% include 'header.html' %}
+{% endblock header %}
+{% block content %}
+<div class="cont">
+    <div class="cover";>
+        <div class="animation">
+            <section>
+                <img class="bottom" src="/static/media/winking-gameboy.png">
+                <img class="top" src="/static/media/smiling-gameboy.png">
+            </section>
+        </div>
+        <div class="text">
+            <h5>Your order has been received and a confirmation</h5>
+            <h5>email has been sent with all further details</h5>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+{% block footer %} {% include 'footer.html' %}
+{% endblock footer %}

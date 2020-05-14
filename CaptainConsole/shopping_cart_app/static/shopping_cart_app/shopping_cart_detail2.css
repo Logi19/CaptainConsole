@@ -1,0 +1,135 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-size: 1em;
+}
+
+.cart-container {
+    display: grid;
+    grid-template-columns: 0.25fr 0.5fr 0.25fr;
+    margin: 2em;
+}
+
+.thumbnail {
+    width: 150px;
+    height: 170px;
+    background-image: url('/{{ item.get_thumbnail }}');
+    margin: 1em;
+    margin-left: 1em;
+    margin-right: auto;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center
+}
+
+.cart-content {
+    display: grid;
+    grid-auto-rows: auto;
+    border: 2px solid #C4C4C4;
+    padding: 1em;
+}
+
+.title {
+    margin-left: 1em;
+}
+
+.grid-item {
+    display: grid;
+    grid-template-columns: 0.6fr 1fr 0.6fr auto;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+a {
+    color: inherit;
+}
+
+.delete-cross {
+    color: #C4C4C4;
+    opacity: 0.3;
+    cursor: pointer;
+    justify-self: end;
+    align-self: start;
+    margin: 0 1em 0 0;
+}
+
+.delete-cross:hover {
+    opacity: 1;
+}
+
+.quantity {
+    justify-self: center;
+    align-self: center;
+}
+
+.cart-item {
+    border-top: 2px solid #C4C4C4;
+}
+
+.subtotal {
+    border-top: 2px solid #C4C4C4;
+}
+
+.subtotal-content {
+    grid-column: 4;
+}
+
+.details {
+    display: grid;
+    grid-template-rows: 0.7fr auto auto 1fr;
+    justify-self: stretch;
+    align-self: stretch;
+}
+
+
+#price {
+    grid-row: 2;
+    margin: 0;
+    padding: 0.5em;
+}
+
+#name {
+    grid-row: 3;
+    margin: 0;
+    padding: 0.5em;
+}
+
+button {
+    background-color: #3370CB;
+    border: none;
+    color: white;
+    padding: 1em 2em;
+    text-align: center;
+    font-size: 1.5em;
+    opacity: 0.7;
+    margin-top: 0.2em;
+    transition: 0.3s;
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.button-section {
+    margin-top: 2em;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0;
+    grid-column: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.redirect {
+    grid-column: 1;
+}
+
+.proceed {
+    grid-column: 2;
+    justify-self: end;
+}
+
+
+

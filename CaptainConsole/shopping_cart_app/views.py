@@ -16,7 +16,6 @@ from store_app.models import Order
 from profile_app.models import Profile
 
 
-
 def my_cart(request, *args, **kwargs):
     context = {}
     shopping_cart = request.user.shoppingCart
@@ -26,7 +25,7 @@ def my_cart(request, *args, **kwargs):
     return render(request, 'shopping_cart_app/shopping_cart_detail.html', context)
 
 
-def remove_from_cart(request,  *args, **kwargs):
+def remove_from_cart(request, *args, **kwargs):
     data = {}
 
     shopping_cart_id = request.POST.get('shopping_cart_id')
@@ -40,6 +39,24 @@ def remove_from_cart(request,  *args, **kwargs):
 
 class ReceiptView(DetailView):
     model = Order
+    template_name = 'shopping_cart_app/receipt_view.html'
+
+    def get_object(self):
+        profile_id = self.request.session['_auth_user_id']
+        return get_object_or_404(self.model, pk=7)
+
+
+def receipt_view(request, *args, **kwargs):
+    return render(request, 'shopping_cart_app/receipt_view.html', context={})
+
+
+def my_order_detail(request, *args, **kwargs):
+    context = {}
+    shopping_cart = request.user.shoppingCart
+    context['cart_key'] = shopping_cart.id
+    context['cart_items'] = ShoppingCartItem.objects.filter(shopping_cart=shopping_cart.id)
+    context['subtotal'] = shopping_cart.get_total_price()
+    return render(request, 'shopping_cart_app/order_detail.html', context)
 
 
 class OrderDetail(DetailView):
