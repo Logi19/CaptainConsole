@@ -1,29 +1,38 @@
-#signup_header{
-    color: darkblue;
-    text-align: center;
-}
+
 .sign_up_form{
-    width: 300px;
+    width: 800px;
     box-shadow: 0 0 3px 0 rgba(0,0,0,0.3);
     background: white;
-    padding: 20px;
-    text-align: center;
+    padding: 40px;
     position: absolute;
-    top: 50%;
+    top: 80%;
     left: 50%;
     transform: translate(-50%,-50%);
 }
-.signup_body{
-    margin: 0;
-    padding: 0;
-}
-#signup_button{
+
+.signup_button{
     background-color: midnightblue;
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 19px;
+
 }
+.button-div{
+    text-align: center;
+}
+
+.sign{
+    color: midnightblue;
+    text-align: center;
+}
+
+#logo {
+    width: 100px;
+    height: 90px;
+    float: left;
+}
+
