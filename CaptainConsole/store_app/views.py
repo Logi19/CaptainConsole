@@ -6,6 +6,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 
 import datetime
+import json
 
 from .models import Product, ProductImage, Order, TopSeller
 from .forms import CheckOutForm
@@ -74,6 +75,7 @@ class ProductDetail(DetailView):
 
 @login_required
 def check_out(request):
+    
     print("je")
     if request.method == "POST":
         form = CheckOutForm(request.POST)
