@@ -1,6 +1,8 @@
-{% extends "base.html" %} {% load static %} {% block head %}
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
 <link rel="stylesheet" type="text/css" href="{% static 'store_app/productslist.css' %}" />
-    <script src="{% static 'store_app/all-products.js' %}"></script>
 {% endblock %}
 
 {% block header %}
@@ -8,73 +10,75 @@
 {% endblock %}
 
 {% block content %}
-        <div class="grid-container">
-            <div class="grid-item product-list-description">
-                <h4 id="desc">All Products</h4>
-            </div>
-            <div class="grid-item sort-by">
-                <h5 id="sort-by">Sort-by: None</h5>
-            </div>
-            <div class="grid-item search-history">
-                        <form class="form-inline my-2 my-lg-1">
-                            <input name="search" class="form-control mr-sm-2" type="text" placeholder="Search" value='{{ request.GET.search }}'>
-                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                        </form>
-            </div>
-            <div class="grid-item nav">
-                <h5>Type:</h5>
-                <label class="container">Video Game<input type="checkbox" checked="checked">
-                    <span class="checkmark"></span>
-                </label>
-                <label class="container">Consoldjdde<input type="checkbox"><span class="checkmark"></span>
-                </label>
-                <label class="container">Otxsdasfher<input type="checkbox">
-                    <span class="checkmark"></span>
-                </label>
-                <h5>Platform:</h5>
-                <label class="container">Consoldjdde<input type="checkbox"><span class="checkmark"></span>
-                </label>
-                <label class="container">Otxsdasfher<input type="checkbox">
-                    <span class="checkmark"></span>
-            </div>
-            <div class="grid-item products">
-                <div class="row">
-                    {% for product in product_list %}
-                        <div class="col s12 m4">
-                            <div class="card">
-                                <a href="/store/products/{{ product.id }}" class="waves-effect">
-                                    <div style="width: 150px;height: 170px;background-image: url('/{{ product.get_thumbnail }}');margin: 0 auto;background-repeat: no-repeat;background-size: cover;background-position: center"></div>
-                                    <div class="card-content">
-                                        <span class="card-title">{{ product.name }}</span>
-                                        <p>${{ product.price}}</p>
-                                    </div>
-                                </a>
+<div class="grid-container">
+    <div class="grid-item product-list-description">
+        <h4 id="desc">All Products</h4>
+    </div>
+    <div class="grid-item sort-by">
+        <h5 id="sort-by">Sort-by: None</h5>
+    </div>
+    <div class="grid-item search-history">
+        <form class="form-inline my-2 my-lg-1">
+            <input name="search" class="form-control mr-sm-2" type="text" placeholder="Search" value='{{ request.GET.search }}'>
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+    <div class="grid-item nav">
+        <h5>Type:</h5>
+        <label class="container">Video Game<input type="checkbox" checked="checked">
+            <span class="checkmark"></span>
+        </label>
+        <label class="container">Consoldjdde<input type="checkbox"><span class="checkmark"></span>
+        </label>
+        <label class="container">Otxsdasfher<input type="checkbox">
+            <span class="checkmark"></span>
+        </label>
+        <h5>Platform:</h5>
+        <label class="container">Consoldjdde<input type="checkbox"><span class="checkmark"></span>
+        </label>
+        <label class="container">Otxsdasfher<input type="checkbox">
+            <span class="checkmark"></span>
+    </div>
+    <div class="grid-item products">
+        <div class="row">
+            {% for product in product_list %}
+                <div class="col s12 m4">
+                    <div class="card">
+                        <a href="/store/products/{{ product.id }}" class="waves-effect">
+                            <div style="width: 150px;height: 170px;background-image: url('/{{ product.get_thumbnail }}');margin: 0 auto;background-repeat: no-repeat;background-size: cover;background-position: center"></div>
+                            <div class="card-content">
+                                <span class="card-title">{{ product.name }}</span>
+                                <p>${{ product.price}}</p>
                             </div>
-                        </div>
-                        {% cycle "" "" "" "</div><br/><hr/><div class='row'>" %}
-                    {% endfor %}
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="grid-item pagination">
-                <div class="pagination">
-                    <span class="step-links">
-                        {% if page_obj.has_previous %}
-                            <li class="waves-affect"><a href="?page={{ page_obj.previous_page_number }}"><i class="material-icons">chevron_left</i></a></li>
-                        {% endif %}
-                        <span class="waves-affect">
-                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-                        </span>
-                        {% if page_obj.has_next %}
-                            <li class="waves-effect"><a href="?page={{ page_obj.next_page_number }}"><i class="material-icons">chevron_right</i></a></li>
-                        {% endif %}
-                    </span>
-                </div>
-            </div>
+                {% cycle "" "" "" "</div><br/><hr/><div class='row'>" %}
+            {% endfor %}
         </div>
+    </div>
+    <div class="grid-item pagination">
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <li class="waves-affect"><a href="?page={{ page_obj.previous_page_number }}"><i class="material-icons">chevron_left</i></a></li>
+                {% endif %}
+                <span class="waves-affect">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+                {% if page_obj.has_next %}
+                    <li class="waves-effect"><a href="?page={{ page_obj.next_page_number }}"><i class="material-icons">chevron_right</i></a></li>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block footer %}
 {% include 'footer.html' %}
 {% endblock %}
 
-<!--lalalalla'-->
+{% block javascript %}
+<script src="{% static 'store_app/all-products.js' %}"></script>
+{% endblock %}

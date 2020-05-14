@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, Http404, redirect
 from django.http import JsonResponse
+from django.db.models import Q
 
 from django.views.generic.base import TemplateView, View
 from django.views.generic.detail import DetailView
@@ -19,26 +20,47 @@ class FrontPageView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         top_sellers = TopSeller.objects.all()[:3]
-        context['top_3'] = [Product.objects.get(id=item.product_id) for item in top_sellers]
+        context['top_3'] = [Product.objects.get(id=item.id) for item in top_sellers]
         context['todays_deals'] = Product.objects.all()[:3]
         return context
 
 
 class ProductList(ListView):
-    paginate_by = 3
-    model = Product
-    template_name = "store_app/all_productsView.html"
+    paginate_by = 24
+    queryset = Product.objects.filter(active=True)
+    template_name = "store_app/product_list.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
 
     def get_queryset(self):
+        object_list = self.queryset
+
+        manufacturer_filter = self.request.GET.get('manufacturer')
+        platform_filter = self.request.GET.get('platform')
         query = self.request.GET.get('search')
-        if query:
-            object_list = self.model.objects.filter(name__icontains=query)
-        else:
-            object_list = self.model.objects.all()
+
+        if manufacturer_filter is not None:
+            object_list = object_list.filter(Q(manufacturer__icontains=manufacturer_filter))
+
+        if platform_filter is not None:
+            object_list = object_list.filter(Q(platform__icontains=platform_filter))
+
+        if query is not None:
+            object_list = object_list.filter(Q(name__icontains=query) | Q(manufacturer__icontains=query) | Q(platform__icontains=query))
+
+        order_by = self.request.GET.get('order')
+
+        if order_by == 'year-asc':
+            object_list = object_list.order_by('year')
+        elif order_by == 'year-desc':
+            object_list = object_list.order_by('-year')
+        elif order_by == 'name-asc':
+            object_list = object_list.order_by('name')
+        elif order_by == 'name-desc':
+            object_list = object_list.order_by('-name')
+
         return object_list
 
 
