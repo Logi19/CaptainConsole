@@ -85,13 +85,43 @@ class ProductDetail(DetailView):
 #             return redirect("/")
 #         return redirect("/cart")
 
+def check_number(number):
+    theNumber = str(number)
+    lennumber = len(theNumber)
+    x = theNumber.isdigit()
+    if lennumber == 16 and x is True:
+        return True
+    elif lennumber == 3 and x is True:
+        return True
+    else:
+        return False
+
+def check_String(strings):
+    x = strings.isalpha()
+    if x is True:
+        return True
+    else:
+        return False
+
+# def check_date(string):
+#
+
+
 @login_required
 def check_out(request):
+    cardno = check_number(request.GET.get('cardNumber'))
+    cardname = check_String(request.GET.get('cardName'))
+    cvc_card = check_number(request.GET.get('cvc'))
+    # expiryDate = check_date(request.POST.get('expiryDate'))
     if request.method == "POST":
         form = CheckOutForm(request.POST)
-        # if cardno == True and cardname == True
-        #     and cvc is Tru and expirydate == True:
         if form.is_valid():
+            # cardno = check_number(request.POST.get('cardNumber'))
+            # cardname = check_String(request.POST.get('cardName'))
+            # cvc_card = check_number(request.POST.get('cvc'))
+            # # expiryDate = check_date(request.POST.get('expiryDate'))
+            # # if cardno == True and cardname == True
+            # #     and cvc_card is True and expiryDate == True:
             post = form.save(commit=False)
             # post.save()
             post.deliveryCountry = 'Iceland'
@@ -100,15 +130,14 @@ def check_out(request):
             post.orderDiscount = 0
             post.tax = 12
             post.deliveryPrice = 10
-            cardname = request.POST.get('cardName')
-            cardno = request.POST.get('cardNumber')
-            cvc = request.POST.get('cvc')
+            cardName = request.POST.get('cardName')
+            cardNumber = request.POST.get('cardNumber')
             expirydate = request.POST.get('expiryDate')
-            # post.date = datetime.datetime.now() # held að django sjái sjálfkrafa um þetta, því auto_add_now=True í modelinu
+            cvc = request.POST.get('cvc')
             post.save()
             return render(request, 'shopping_cart_app/order_detail.html', {'post': post,
-                                                                            'cardno': cardno,
-                                                                            'cardname': cardname,
+                                                                            'cardno': cardNumber,
+                                                                            'cardname': cardName,
                                                                             'cvc': cvc,
                                                                             'expirydate': expirydate
                                                                            })
