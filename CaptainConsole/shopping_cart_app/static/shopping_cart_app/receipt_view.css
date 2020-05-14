@@ -1,0 +1,62 @@
+.cont {
+    background: url("/static/media/games-pile.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.cover {
+    display: grid;
+    grid-template-columns: 0.5fr auto 0.5fr;
+    grid-template-rows: 0.10fr auto 0.35fr;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(201, 201, 201, 0.7);
+
+}
+
+.animation {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.text {
+    grid-column: 2;
+    grid-row: 3;
+}
+
+h5 {
+    margin: 0;
+    font-weight: bolder;
+    text-align: center;
+}
+
+section {
+    position: relative;
+}
+
+section img {
+    position: absolute;
+}
+
+.top {
+    animation: fade 1s ease-in-out 1s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
