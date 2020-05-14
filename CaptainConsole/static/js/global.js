@@ -26,3 +26,8 @@ function add_to_shopping_cart(product_id, product_name, quantity) {
         });
     }
 }
+
+
+$( document ).ready(function () {
+    $(".dropdown-trigger").dropdown();
+});
