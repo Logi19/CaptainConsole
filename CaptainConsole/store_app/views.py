@@ -44,13 +44,13 @@ class ProductList(ListView):
 
 class ProductDetail(DetailView):
     model = Product
-    template_name = "store_app/productDetail.html"
+    template_name = "store_app/product_detail.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
         image_objects = list(self.object.get_images())
-        image_objects.sort()
+        image_objects.sort(key=lambda x: x.displayOrder)
         images = [img.image.name for img in image_objects]
         context["images"] = images
         return context
@@ -113,7 +113,7 @@ def check_out(request):
 
 def add_to_cart(request, *args, **kwargs):
     data = {}
-    
+
     product_id = request.POST.get('product_id')
     quantity = request.POST.get('quantity')
     shopping_cart_id = request.user.shoppingCart.id

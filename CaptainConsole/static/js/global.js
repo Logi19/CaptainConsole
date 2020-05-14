@@ -3,9 +3,10 @@
  * a given quantity of the product to the users shopping cart.
  * @param {String} product_id ID of the given product
  * @param {String} product_name Name of the given product
+ * @param {String} quantity Quantity of product to put in shopping cart
  */
-function add_to_shopping_cart(product_id, product_name) {
-    let quantity = Number(document.getElementById('quantity').value)
+function add_to_shopping_cart(product_id, product_name, quantity) {
+    quantity = Number(quantity)
     if (quantity > 0) {
         let csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
         $.ajax({
