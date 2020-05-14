@@ -4,9 +4,19 @@
     /*grid-template-rows: 200px 200px;*/
     /*grid-gap: 20px;*/
     border: solid black;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
 
 }
 
+.grid-item3{
+    border: solid black;
+}
+
+.grid-item1{
+    border: solid black;
+}
+
+.grid-item2{
+    border: solid black;
+}
