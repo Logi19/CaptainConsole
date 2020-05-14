@@ -1,132 +1,117 @@
 * {
     margin: 0;
     padding: 0;
-    font-family: Roboto;
+    box-sizing: border-box;
 }
-
-html, body {
-    height: 100%;
-    overflow: auto;
+body {
+    font-size: 1em;
 }
 
 .cart-container {
-    overflow: auto;
-    text-align: center;
-    margin: 4em;
-    margin-left: 6em;
-    margin-right: 6em;
+    display: grid;
+    grid-template-columns: 0.25fr 0.5fr 0.25fr;
+    margin: 2em;
+}
+
+.empty-cart {
+    margin-top: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column nowrap;
+}
+
+.text {
+    align-self: center;
+    justify-self: center;
+}
+
+.direct {
+    align-self: center;
+    justify-self: center;
+}
+
+.thumbnail {
+    width: 150px;
+    height: 170px;
+    margin: 1em;
+    margin-left: 1em;
+    margin-right: auto;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center
+}
+
+.cart-content {
+    display: grid;
+    grid-auto-rows: auto;
+    border: 2px solid #C4C4C4;
+    padding: 1em;
+}
+
+.title {
+    margin-left: 1em;
+}
+
+.grid-item {
+    display: grid;
+    grid-template-columns: 0.6fr 1fr 0.6fr auto;
+    margin-left: 1em;
+    margin-right: 1em;
 }
 
 a {
     color: inherit;
 }
 
-.cart-content {
-    margin: 2em 2em 1em;
-    padding: 1.5em 1.5em 0;
-    border: 2px solid #C4C4C4;
-    display: grid;
-    grid-template-rows: 0.5fr;
-    grid-template-columns: 1fr;
-    grid-auto-columns: 1fr 1fr 1fr;
-    grid-auto-rows: 1fr;
-}
-
-.cart-empty {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.cart-item {
-    border-bottom: 2px solid #C4C4C4;
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
-    display: grid;
-    grid-template:
-        "image details delete" auto
-        "image details nothing" 1fr
-        / 0.2fr 1fr auto;
-}
-
-.empty-cart{
-    display: grid;
-    grid-template:
-        "image text" auto
-        "button button" auto
-        / 1fr 1fr;
-    justify-content: center;
-    align-items: center;
-}
-.line-01 {
-    border: 2px solid black;
-}
-
-.line-01 #shopping_cart {
-    border: 2px solid black;
-    grid-area: image;
-}
-
-.line-02 {
-    border: 2px solid black;
-    grid-area: button;
-}
-
-.line-01 h3 {
-    border: 2px solid black;
-    grid-area: text;
-}
-
-.subtotal {
-    display:grid;
-    grid-template:
-        "stuff stuff subtotal price" 1fr
-        / 1fr 1fr 0.2fr 0.1fr;
-    justify-items: center;
-    align-items: center;
-}
-
-.subtotal #text {
-    grid-area: subtotal;
-}
-
-.subtotal #price {
-    grid-area: price;
-    float: left;
-}
-
-.details {
-    border: 2px solid black;
-    grid-area: details;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
-}
-
-.title {
-    margin: 0;
-    padding: 0;
-    border-bottom: 2px solid #C4C4C4;
-    text-align: center;
-
-}
-
-.title h4 {
-    float: left;
-    margin-left: 1em;
-}
-
 .delete-cross {
     color: #C4C4C4;
     opacity: 0.3;
     cursor: pointer;
-    margin: 0;
-    border: 2px solid black;
-    grid-area: delete;
+    justify-self: end;
+    align-self: start;
+    margin: 0 1em 0 0;
 }
 
 .delete-cross:hover {
     opacity: 1;
+}
+
+.quantity {
+    justify-self: center;
+    align-self: center;
+}
+
+.cart-item {
+    border-top: 2px solid #C4C4C4;
+}
+
+.subtotal {
+    border-top: 2px solid #C4C4C4;
+}
+
+.subtotal-content {
+    grid-column: 4;
+}
+
+.details {
+    display: grid;
+    grid-template-rows: 0.7fr auto auto 1fr;
+    justify-self: stretch;
+    align-self: stretch;
+}
+
+
+#price {
+    grid-row: 2;
+    margin: 0;
+    padding: 0.5em;
+}
+
+#name {
+    grid-row: 3;
+    margin: 0;
+    padding: 0.5em;
 }
 
 button {
@@ -135,7 +120,7 @@ button {
     color: white;
     padding: 1em 2em;
     text-align: center;
-    font-size: 1.3em;
+    font-size: 1.5em;
     opacity: 0.7;
     margin-top: 0.2em;
     transition: 0.3s;
@@ -144,27 +129,26 @@ button {
     cursor: pointer;
 }
 
-.buttons {
-    margin: 2em;
+.button-section {
+    margin-top: 2em;
+    margin-left: 0;
+    margin-right: 0;
     padding: 0;
+    grid-column: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 
-#continue-shopping {
-    float:left;
+.redirect {
+    grid-column: 1;
 }
 
-#place-order {
-    float:right
+.proceed {
+    grid-column: 2;
+    justify-self: end;
 }
 
-.thumbnail {
-    grid-area: image;
-    text-align: center;
-}
 
-img {
-    height: 80px;
-    width: auto;
 
-}
+
 

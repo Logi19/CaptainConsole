@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'shopping_cart_app/shopping_cart_detail.css' %}">
+{% endblock %}
+
+{% block header %}
+{% include 'header.html' %}
+{% endblock %}
+
+{% block content %}
+
+{% if shopping_cart_items %}
+<div class="cart-container">
+    <div class="left-sidebar">
+    </div>
+    <div class="cart-content">
+
+        <div class="grid-item">
+            <div class="title">
+                <h4><strong>My Cart</strong></h4>
+            </div>
+        </div>
+        {% csrf_token %}
+        {% for item in shopping_cart_items %}
+        <div class="grid-item cart-item item-{{ forloop.counter0 }}">
+            <div class="thumbnail grid-section" style="background-image: url('/{{ item.item.get_thumbnail }}');"></div>
+            <div class="details grid-section">
+                <h5 id="price">&dollar;{{ item.item.price }}</h5>
+                <h5 id="name">{{ item.item.name }} - {{ item.item.manufacturer }}</h5>
+            </div>
+            <div class="quantity grid-section">
+                <h5>{{ item.quantity }}</h5>
+            </div>
+            <div class="delete-cross grid-section">
+                <h4 onclick="remove_from_shopping_cart({{ cart_key }}, {{ item.item.id }})">&#x2715;</h4>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="grid-item subtotal">
+            <div class="subtotal-content">
+                <h4 id="text">Subtotal: &dollar;{{ subtotal }}</h4>
+            </div>
+            <!-- price of cart-->
+        </div>
+    </div>
+    <div class="right-sidebar">
+    </div>
+    <div class="button-section">
+        <div class="redirect">
+            <a href="{% url 'front_page_redirect' %}"><button type="button" id="continue-shopping">Continue Shopping</button></a>
+        </div>
+        <div class="proceed">
+            <a href="#"><button type="button">Checkout Now</button></a>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="container empty-cart">
+    <h3>Your shopping cart is empty.</h3>
+    <a href="{% url 'front_page_redirect' %}"><button type="button">Continue Shopping</button></a>
+</div>
+{% endif %}
+<script src="{% static 'shopping_cart_app/js/shopping_cart_detail.js' %}"></script>
+{% endblock content %}
+<footer>
+    {% block footer %}
+    {% include 'footer.html' %}
+    {% endblock footer %}
+</footer>
+
