@@ -16,6 +16,7 @@ class CheckOutForm(forms.ModelForm):
 		model = Order
 		exclude = ['items', 'profile', 'processed', 'orderDiscount', 'tax', 'deliveryPrice']
 		widgets = {'country': CountrySelectWidget()}
+
 	# 	email = forms.EmailField(max_length=256)
 	# 	deliveryFirstName = forms.CharField(max_length=30)
 	# 	deliveryLastName = forms.CharField(max_length=30)

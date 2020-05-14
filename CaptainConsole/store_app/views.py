@@ -9,6 +9,7 @@ from django.views.generic.list import ListView
 from django.http import JsonResponse
 
 import datetime
+import json
 
 from shopping_cart_app.models import ShoppingCart, ShoppingCartItem
 from .models import Product, ProductImage, Order, TopSeller
@@ -108,12 +109,11 @@ class ProductDetail(DetailView):
 
 @login_required
 def check_out(request):
-    print("je")
     if request.method == "POST":
         form = CheckOutForm(request.POST)
-        print(request.POST)
+        # if cardno == True and cardname == True
+        #     and cvc is Tru and expirydate == True:
         if form.is_valid():
-            print("ble")
             post = form.save(commit=False)
             # post.save()
             post.deliveryCountry = 'Iceland'
@@ -122,9 +122,21 @@ def check_out(request):
             post.orderDiscount = 0
             post.tax = 12
             post.deliveryPrice = 10
-            post.date = datetime.datetime.now() # held að django sjái sjálfkrafa um þetta, því auto_add_now=True í modelinu
+            cardname = request.POST.get('cardName')
+            cardno = request.POST.get('cardNumber')
+            cvc = request.POST.get('cvc')
+            expirydate = request.POST.get('expiryDate')
+            # post.date = datetime.datetime.now() # held að django sjái sjálfkrafa um þetta, því auto_add_now=True í modelinu
             post.save()
-            return redirect('/')
+            return render(request, 'shopping_cart_app/order_detail.html', {'post': post,
+                                                                            'cardno': cardno,
+                                                                            'cardname': cardname,
+                                                                            'cvc': cvc,
+                                                                            'expirydate': expirydate
+                                                                           })
+            # return redirect('/')
+        else:
+            form = CheckOutForm
     else:
         form = CheckOutForm()
 
