@@ -7,7 +7,13 @@
 }
 
 .container {
-    height: 100vh;
+
+}
+
+
+
+.content {
+
     margin: 2em;
     padding: 1em;
     border: 1px solid black;
