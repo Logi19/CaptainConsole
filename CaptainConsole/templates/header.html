@@ -1,6 +1,7 @@
 {% load static %}
+<script src="{% static 'js/global.js' %}"></script>
 <header>
-    <nav class="nav-extended">
+<nav class="nav-extended">
         <div class="nav-wrapper indigo lighten-1">
             <a href="/store" class="brand-logo">
                 <img id="logo" src="{% static 'media/console-logo.png' %}" />
@@ -8,13 +9,11 @@
             </a>
             <ul id="nav-mobile" class="right">
                 {% if user.is_authenticated %}
-
-                <!--TODO: user profile dropdown-->
                 <li id="welcome_msg">Welcome, {{ user.first_name }}</li>
                 {% if user.profileImage %}
-                    <li><img class="circle" src="/{{ user.profileImage }}" alt="My profile" /></li>
+                    <li><a class="dropdown-trigger" data-target="dropdown-menu" href="#"><img class="circle" src="/{{ user.profileImage }}" alt="My profile" /></a></li>
                 {% else %}
-                    <li><img class="circle" src="{% static 'media/profile.png' %}" alt="My profile" /></li>
+                    <li><a class="dropdown-trigger" data-target="dropdown-menu" href="#"><img class="circle" src="{% static 'media/profile.png' %}" alt="My profile" /></a></li>
                 {% endif %}
                 
                 {% else %}
@@ -26,6 +25,10 @@
                 <!--TODO: shopping cart dropdown, change to icon?-->
                 <li><img id="shopping_cart" src="{% static 'media/shopping-cart.png' %}" /></li>
             </ul>
+        <ul id="dropdown-menu" class="dropdown-content">
+            <li><a href="/profile/my_profile">My account</a></li>
+            <li><a href="/profile/logout">Log Out</a></li>
+        </ul>
         </div>
         <div class="nav-content indigo">
             <ul id="lower-nav-ul">

@@ -52,3 +52,8 @@ function remove_from_shopping_cart(shopping_cart_id, product_id) {
         },
     });
 }
+
+
+$( document ).ready(function () {
+    $(".dropdown-trigger").dropdown();
+});
