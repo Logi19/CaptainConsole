@@ -15,6 +15,16 @@ from store_app.models import Order
 from profile_app.models import Profile
 
 
+
+def my_cart(request, *args, **kwargs):
+    context = {}
+    shopping_cart = request.user.shoppingCart
+    context['cart_key'] = shopping_cart.id
+    context['shopping_cart_items'] = ShoppingCartItem.objects.filter(shoppingCart=shopping_cart.id)
+    context['subtotal'] = shopping_cart.get_total_price()
+    return render(request, 'shopping_cart_app/shopping_cart_detail.html', context)
+
+
 class ShoppingCartDetail(DetailView):
     model = ShoppingCart
 

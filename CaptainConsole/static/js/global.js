@@ -18,7 +18,7 @@ function add_to_shopping_cart(product_id, product_name, quantity) {
                 csrfmiddlewaretoken: csrftoken
             },
             success: function (result) {
-                M.toast({ html: product_name + "<br />was added to cart!" });
+                M.toast({ html: product_name + "<br />was added to your cart!" });
             },
             error: function (result) {
                 M.toast({ html: "We're sorry,<br />something went wrong" });

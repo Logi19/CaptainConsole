@@ -5,8 +5,11 @@ from .views import ReceiptView
 from .views import OrderDetail
 from .views import OrderCreate
 from .views import remove_from_cart
+from .views import my_cart
+
 
 urlpatterns = [
+    path('my_cart/', my_cart, name="cart_detail"),
     path('<pk>/', ShoppingCartDetail.as_view(), name='shoppingcart_detail'),
     path('delete/<product_id>/<cart_id>/', remove_from_cart, name='remove_from_cart'),
     path('order/create/', OrderCreate.as_view(), name='order_create'),
