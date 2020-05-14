@@ -6,6 +6,7 @@ from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
+from django.http import JsonResponse
 
 from .models import ShoppingCart
 from .forms import OrderForm
@@ -25,24 +26,17 @@ def my_cart(request, *args, **kwargs):
     return render(request, 'shopping_cart_app/shopping_cart_detail.html', context)
 
 
-class ShoppingCartDetail(DetailView):
-    model = ShoppingCart
+def remove_from_cart(request,  *args, **kwargs):
+    data = {}
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        cart_key = self.kwargs['pk']
-        context['cart_key'] = cart_key
-        items = ShoppingCart.objects.get(pk=cart_key).items.all()
-        context['shopping_cart_items'] = items
-        context['subtotal'] = sum([item.price for item in items])
-        return context
+    shopping_cart_id = request.POST.get('shopping_cart_id')
+    product_id = request.POST.get('product_id')
 
+    item = ShoppingCartItem.objects.get(shoppingCart=shopping_cart_id, item=product_id)
+    item.delete()
 
-def remove_from_cart(request, product_id, cart_id):
-    current_cart = ShoppingCartItem.objects.filter(shoppingCart=cart_id)
-    current_item = current_cart.filter(item_id=product_id)
-    current_item.delete()
-    return HttpResponseRedirect(reverse("shoppingcart_detail", kwargs={'pk': cart_id}))
+    return JsonResponse(data)
+
 
 class ReceiptView(DetailView):
     model = Order
