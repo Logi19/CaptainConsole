@@ -21,6 +21,8 @@
     flex-flow: column nowrap;
     width: 12%;
     margin: 7.5px 20px 0px 10px;
+    height: 50%;
+    overflow: scroll;
 }
 
 #filters form {

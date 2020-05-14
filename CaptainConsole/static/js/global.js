@@ -53,18 +53,26 @@ function remove_from_shopping_cart(shopping_cart_id, product_id) {
 }
 
 function change_url(text) {
-    curr_url = window.location.href
+    curr_url = window.location.href;
     if (!curr_url.includes(text)) {
         if (curr_url.includes("/?")) {
             new_url = curr_url + "&" + text;
         } else {
             new_url = curr_url + "?" + text;
         }
-        window.location = new_url;
+    } else {
+        if (curr_url[curr_url.indexOf(text) - 1] === "?") {
+            if (curr_url.endsWith(text)) {
+                new_url = curr_url.replace("?" + text, "");
+            }
+            else {
+                new_url = curr_url.replace("?" + text + "&", "?");
+            }
+        } else {
+            new_url = curr_url.replace("&" + text, "");
+        }
     }
-    else {
-        
-    }
+    window.location = new_url;
 }
 
 $(document).ready(function () {

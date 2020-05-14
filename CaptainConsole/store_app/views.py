@@ -27,6 +27,7 @@ class FrontPageView(TemplateView):
         return context
 
 
+
 class ProductList(ListView):
     paginate_by = 24
     queryset = Product.objects.filter(active=True)
@@ -34,44 +35,74 @@ class ProductList(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        manufacturers = [m['manufacturer'] for m in Product.objects.values('manufacturer')]
+        manufacturer_set = set()
+        for manuf in manufacturers:
+            manufacturer_set.add((manuf, manuf.replace(' ', '+')))
+        context['manufacturers'] = sorted(list(manufacturer_set))
+        platforms = [p['platform'] for p in Product.objects.values('platform')]
+        platform_set = set()
+        for platf in platforms:
+            platform_set.add((platf, platf.replace(' ', '+')))
+        context['platforms'] = sorted(list(platform_set))
         return context
 
     def get_queryset(self):
         object_list = self.queryset
 
-        manufacturer_filter = self.request.GET.get("manufacturer")
-        type_filter = self.request.GET.get("type")
-        platform_filter = self.request.GET.get("platform")
-        query = self.request.GET.get("search")
+        params = dict(self.request.GET.lists())
 
-        if manufacturer_filter is not None:
-            object_list = object_list.filter(
-                Q(manufacturer__icontains=manufacturer_filter)
-            )
+        if 'manufacturer' in params:
+            manufacturer_filter = Q(manufacturer__iexact=params['manufacturer'][0])
 
-        if type_filter is not None:
-            object_list = object_list.filter(Q(type__iexact=type_filter))
+            if len(params['manufacturer']) > 1:
+                for i in range(1, len(params['manufacturer'])):
+                    manufacturer_filter = manufacturer_filter | Q(manufacturer__iexact=params['manufacturer'][i])
 
-        if platform_filter is not None:
-            object_list = object_list.filter(Q(platform__icontains=platform_filter))
+            object_list = object_list.filter(manufacturer_filter)
 
-        if query is not None:
+        if 'type' in params:
+            type_filter = Q(type__iexact=params['type'][0])
+
+            if len(params['type']) > 1:
+                for i in range(1, len(params['type'])):
+                    type_filter = type_filter | Q(type__iexact=params['type'][i])
+
+            object_list = object_list.filter(type_filter)
+
+        if 'platform' in params:
+            platform_filter = Q(platform__iexact=params['platform'][0])
+
+            if len(params['platform']) > 1:
+                for i in range(1, len(params['platform'])):
+                    platform_filter = platform_filter | Q(platform__iexact=params['platform'][i])
+
+            object_list = object_list.filter(platform_filter)
+
+
+        if 'query' in params:
+            query = params['query']
             object_list = object_list.filter(
                 Q(name__icontains=query)
                 | Q(manufacturer__icontains=query)
                 | Q(platform__icontains=query)
             )
 
-        order_by = self.request.GET.get("order")
+        if 'order' in params:
+            order_by = params["order"]
 
-        if order_by == "year-asc":
-            object_list = object_list.order_by("year")
-        elif order_by == "year-desc":
-            object_list = object_list.order_by("-year")
-        elif order_by == "name-asc":
-            object_list = object_list.order_by("name")
-        elif order_by == "name-desc":
-            object_list = object_list.order_by("-name")
+            if order_by == "year-asc":
+                object_list = object_list.order_by("year")
+            elif order_by == "year-desc":
+                object_list = object_list.order_by("-year")
+            elif order_by == "price-asc":
+                object_list = object_list.order_by("price")
+            elif order_by == "price-desc":
+                object_list = object_list.order_by("-price")
+            elif order_by == "name-asc":
+                object_list = object_list.order_by("name")
+            elif order_by == "name-desc":
+                object_list = object_list.order_by("-name")
 
         return object_list
 
