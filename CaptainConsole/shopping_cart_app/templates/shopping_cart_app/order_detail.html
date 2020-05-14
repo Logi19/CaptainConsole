@@ -1,63 +1,85 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block head %}
-    <link rel="stylesheet" type="text/css" href="{% static 'shopping_cart_app/order_review.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'shopping_cart_app/order_detail.css' %}">
 {% endblock %}
+{% block header %} {% include 'header.html' %}
+{% endblock header %}
 {% block content %}
-<div class="container">
-    <div class="grid-item delivery-details">
-        <strong>Delivery Details</strong>
-        <!-- Delivery details -->
-        <p>Gummi</p>
-        <p>Reykjavík</p>
-        <p>Menntavegur 1</p>
-        <button type="button" id="edit-info">Edit Delivery</button>
-    </div>
-    <div class="grid-item delivery-method">
-        <strong>Delivery Method</strong>
-        <p>Standard Delivery Within 5 Working Days Free</p>
-        <!-- Delivery Method information -->
-    </div>
-    <div class="grid-item title">
-        <strong>Payment</strong>
-    </div>
-    <div class="grid-item payment-type">
-        <label id="payment-type">Credit/Debit Card</label>
-    </div>
-    <div class="grid-item payment-detail">
-        <!-- Card Information  -->
+<div class="review-container">
+    <div class="content">
+        <div class="grid-item delivery-details">
+            <strong>Delivery Details</strong>
+            <!-- Delivery details -->
+            <p>Gummi</p>
+            <p>Reykjavík</p>
+            <p>Menntavegur 1</p>
+            <button type="button" id="edit-info">Edit Delivery</button>
+        </div>
+        <div class="grid-item delivery-method">
+            <strong>Delivery Method</strong>
+            <p>Standard Delivery Within 5 Working Days Free</p>
+            <!-- Delivery Method information -->
+        </div>
+        <div class="grid-item title">
+            <strong>Payment</strong>
+        </div>
+        <div class="grid-item payment-type">
+            <label id="payment-type">Credit/Debit Card</label>
+        </div>
+        <div class="grid-item payment-detail">
+            <!-- Card Information  -->
+            <p>{{ post }}</p>
+            <p>{{ cardno }}</p>
+            <p>{{ cardname }}</p>
+            <p>{{ cvc }}</p>
+            <p>{{ expirydate }}</p>
+        </div>
 
-    </div>
-
-    <div class="grid-item items">
-        {% if order_obj.items %}
-            <strong>Shopping Cart ({{ order_obj.items|length }} Items)</strong>
-        {% else %}
-            <strong>No Orders</strong>
-        {% endif %}
-        <hr/>
-        {% for item in order_obj.items %}
-            <strong>&dollar;{{item.product.productPrice}}</strong>
-            <h5>{{item.product.productName}}</h5>
-            <h5>{{item.product.productType}}</h5>
-        {% endfor %}
-        <hr/>
-    </div>
-    <div class="grid-item subtotal">
-        <strong>Subtotal</strong>
-        <hr/>
-        <strong>Cart Total</strong>
-        <span><strong>&dollar;{{ order_obj.get_total_price }}</strong></span>
-        <br/>
-        <strong>Delivery Charge</strong>
-        <span><strong>Free</strong></span>
-        <!-- Delivery Cost  -->
-        <hr/>
-        <strong>Total: &dollar;</strong>
-    </div>
-    <div class="grid-item buttons">
-        <button type="button" id="go-back">Go Back</button>
-        <button type="button" id="place-order">Place Order</button>
+        <div class="grid-item items">
+            {% if order_obj.items %}
+                <strong>Shopping Cart ({{ order_obj.items|length }} Items)</strong>
+            {% else %}
+                <strong>No Orders</strong>
+            {% endif %}
+            {% for item in order_obj.items %}
+                <strong>&dollar;{{item.product.productPrice}}</strong>
+                <h5>{{item.product.productName}}</h5>
+                <h5>{{item.product.productType}}</h5>
+            {% endfor %}
+        </div>
+        <div class="grid-item subtotal">
+            <div class="grid-title">
+                <strong>Subtotal</strong>
+            </div>
+            <div class="total-title">
+                <strong>Cart Total</strong>
+            </div>
+            <div class="total-price">
+                <span><strong>&dollar;{{ order_obj.get_total_price }}</strong></span>
+            </div>
+            <div class="delivery-charge">
+                <strong>Delivery Charge</strong>
+            </div>
+            <div class="delivery-price">
+                <span><strong>Free</strong></span>
+            </div>
+            <!-- Delivery Cost  -->
+            <div class="total">
+                <strong>Total:</strong>
+            </div>
+            <div class="cost">
+                <strong>&dollar;</strong>
+            </div>
+        </div>
+        <div class="grid-item go-back">
+            <button type="button" id="go-back">Go Back</button>
+        </div>
+        <div class="grid-item place-order">
+            <button type="button" id="place-order">Place Order</button>
+        </div>
     </div>
 </div>
 {% endblock %}
+{% block footer %} {% include 'footer.html' %}
+{% endblock footer %}
