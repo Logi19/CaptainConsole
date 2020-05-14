@@ -18,6 +18,7 @@ class Product(models.Model):
 
     name = models.CharField(max_length=256)
     type = models.CharField(max_length=50, choices=PRODUCT_TYPE_CHOICES)
+    platform = models.CharField(max_length=100)
     manufacturer = models.CharField(max_length=256)
     year = models.CharField(max_length=4)
     price = models.DecimalField(decimal_places=2, max_digits=19, null=False, blank=False)
@@ -77,7 +78,7 @@ class Order(models.Model):
     deliveryStreetNum = models.CharField(max_length=20)
     deliveryCity = models.CharField(max_length=256)
     deliveryPostal = models.CharField(max_length=10)
-    deliveryCountry = models.CharField(max_length=10, blank=True, null=True)
+    deliveryCountry = models.CharField(max_length=256)
     deliveryPhone = models.CharField(max_length=20, blank=True, null=True)
 
     billingFirstName = models.CharField(max_length=30)
@@ -130,7 +131,7 @@ class TopSeller(models.Model):
     """
     Django model which maps to a postgres view which ranks products by copies sold.
     """
-    product_id = models.IntegerField(primary_key=True)
+    id = models.IntegerField(primary_key=True)
     copies_sold = models.IntegerField()
 
     # Make django not create a table for the model

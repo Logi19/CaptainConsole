@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'store_app/product_list.css' %}" />
+{% endblock %}
+
+{% block header %}
+{% include 'header.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="grid-container">
+    <div class="product_list_header">
+        <h3 id="all_products">All Products</h3>
+        <div class="pagination">
+                {% if page_obj.has_previous %}
+                <span class="waves-effect"><a href="?page={{ page_obj.previous_page_number }}">
+                    <i class="material-icons">chevron_left</i></a>
+                </span>
+                {% else %}
+                <span class="filler"></span>
+                {% endif %}
+                <h6>
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </h6>
+                {% if page_obj.has_next %}
+                <span class="waves-effect"><a href="?page={{ page_obj.next_page_number }}">
+                    <i class="material-icons">chevron_right</i></a>
+                </span>
+                {% else %}
+                <span class="filler"></span>
+                {% endif %}
+        </div>
+        <div id="sort_search_div">
+            <div id="sort_div">
+                <h5 id="sort-by">Sort-by:</h5>
+                <button class="btn">None</button>
+            </div>
+            <form class="form-inline">
+                <input name="search" type="text" placeholder="Search" value='{{ request.GET.search }}'>
+                <button class="btn" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div id="filters" class="col z-depth-1">
+            <h5>Type:</h5>
+            <form action="">
+                <p>
+                    <label for="video_games">
+                        <input id="video_games" type="checkbox" class="filled-in" checked="checked" />
+                        <span>Video Games</span>
+                    </label>
+                </p>
+            </form>
+            <form action="">
+                <p>
+                    <label for="console">
+                        <input id="console" type="checkbox" class="filled-in" />
+                        <span>Consoles</span>
+                    </label>
+                </p>
+            </form>
+            <form action="">
+                <p>
+                    <label for="misc">
+                        <input id="misc" type="checkbox" class="filled-in" />
+                        <span>Miscellaneous</span>
+                    </label>
+                </p>
+            </form>
+
+
+            <h5>Manufacturer:</h5>
+            <div class="filter_item">
+                <label>Atari</label>
+                <input type="checkbox">
+                <span class="checkmark"></span>
+            </div>
+            <div class="filter_item">
+                <label>Sega</label>
+                <input type="checkbox">
+                <span class="checkmark"></span>
+            </div>
+        </div>
+        <div class="col s10">
+            <div id="product_list" class="row">
+                {% for product in product_list %}
+                <div class="col s3 card waves-effect">
+                    <a href="/store/products/{{ product.id }}" class="waves-effect">
+                        <div class="card_img" style="background-image: url('/{{ product.get_thumbnail }}');"></div>
+                        <div class="card-content black-text">
+                            <h5>{{ product.name|truncatechars:18 }}</h5>
+                            <p>${{ product.price }}</p>
+                            <p>{{ product.description|truncatechars:55 }}</p>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div id="lower_pagination" class="pagination">
+        {% if page_obj.has_previous %}
+        <span class="waves-affect"><a href="?page={{ page_obj.previous_page_number }}">
+            <i class="material-icons">chevron_left</i></a>
+        </span>
+        {% endif %}
+        <h6>
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </h6>
+        {% if page_obj.has_next %}
+        <span class="waves-effect"><a href="?page={{ page_obj.next_page_number }}">
+            <i class="material-icons">chevron_right</i></a>
+        </span>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+{% include 'footer.html' %}
+{% endblock %}
+
+{% block javascript %}
+<script src="{% static 'store_app/all-products.js' %}"></script>
+{% endblock %}

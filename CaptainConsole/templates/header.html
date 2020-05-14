@@ -15,7 +15,7 @@
                 {% else %}
                     <li><a class="dropdown-trigger" data-target="dropdown-menu" href="#"><img class="circle" src="{% static 'media/profile.png' %}" alt="My profile" /></a></li>
                 {% endif %}
-                
+
                 {% else %}
 
                 <li class="text-li"><a href="/profile/login">Log In</a></li>
@@ -32,14 +32,14 @@
         </div>
         <div class="nav-content indigo">
             <ul id="lower-nav-ul">
-                <!--TODO: implement filtering on anchor click-->
+                <!-- TODO: IMPLEMENT DROPDOWN-->
                 <li><a href="/store/products">All Products</a></li>
-                <li><a href="/store/products">Sega</a></li>
-                <li><a href="/store/products">Playstation</a></li>
-                <li><a href="/store/products">Atari</a></li>
-                <li><a href="/store/products">Nintendo</a></li>
-                <li><a href="/store/products">Xbox</a></li>
-                <li><a href="/store/products">Commodore</a></li>
+                <li><a href="/store/products/?manufacturer=Sega">Sega</a></li>
+                <li><a href="/store/products/?platform=Playstation">Playstation</a></li>
+                <li><a href="/store/products/?manufacturer=Atari">Atari</a></li>
+                <li><a href="/store/products/?manufacturer=Nintendo">Nintendo</a></li>
+                <li><a href="/store/products/?platform=Xbox">Xbox</a></li>
+                <li><a href="/store/products/?platform=Commodore">Commodore</a></li>
             </ul>
         </div>
     </nav>
