@@ -1,8 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block header %} {% include 'header.html' %}
-    <link rel="stylesheet" type="text/css" href="{% static 'shopping_cart_app/shopping_cart_detail.css' %}">
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'shopping_cart_app/shopping_cart_detail.css' %}">
 {% endblock %}
+
+{% block header %}
+{% include 'header.html' %}
+{% endblock %}
+
 {% block content %}
 
 {% if shopping_cart_items %}
