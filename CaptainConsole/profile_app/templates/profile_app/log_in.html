@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Captain console - Log in
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static "profile_app/log_in.css" %}"/>
+{% endblock %}
+
+{% block content %}
+    <div class="content">
+        <div class="login-form">
+            <div class="box">
+                <h1 class="title">Log in</h1>
+                <div class="inputs">
+                    <form method="post">
+                        {% csrf_token %}
+                        <label for="email">Email:</label>
+                        <input type="text" name="email">
+                        <label for="password">Password:</label>
+                        <input type="password" name="password">
+                        <div class="button-div">
+                            <button class="login_button" type="submit">Login</button>
+                        </div>
+                    </form>
+                </div>
+                <h6 class="noaccount">Don't have an account?</h6>
+                <div class="button-div2">
+                    <a href="/profile/sign_up/" class="button">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content%}
