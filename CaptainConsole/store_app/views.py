@@ -131,12 +131,16 @@ def check_String(strings):
 
 @login_required
 def check_out(request):
-    cardno = check_number(request.GET.get('cardNumber'))
-    cardname = check_String(request.GET.get('cardName'))
-    cvc_card = check_number(request.GET.get('cvc'))
+    print(request.POST.get("cardNumber"))
+
+    # cardno = check_number(request.POST.get('cardNumber', None))
+    # cardname = check_String(request.POST.get('cardName', None))
+    # cvc_card = check_number(request.GET.get('cvc', None))
     # expiryDate = check_date(request.POST.get('expiryDate'))
+
     if request.method == "POST":
         form = CheckOutForm(request.POST)
+
         if form.is_valid():
             # cardno = check_number(request.POST.get('cardNumber'))
             # cardname = check_String(request.POST.get('cardName'))
@@ -157,13 +161,13 @@ def check_out(request):
             expirydate = request.POST.get('expiryDate')
             cvc = request.POST.get('cvc')
             post.save()
+
             return render(request, 'shopping_cart_app/order_detail.html', {'post': post,
                                                                             'cardno': cardNumber,
                                                                             'cardname': cardName,
                                                                             'cvc': cvc,
                                                                             'expirydate': expirydate
                                                                            })
-            # return redirect('/')
         else:
             form = CheckOutForm
     else:
