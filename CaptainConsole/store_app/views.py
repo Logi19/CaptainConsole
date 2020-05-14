@@ -111,8 +111,6 @@ def check_out(request):
     return render(request, 'store_app/checkouts.html', {'form': form})
 
 
-
-
 def add_to_cart(request, *args, **kwargs):
     data = {}
 
@@ -120,12 +118,24 @@ def add_to_cart(request, *args, **kwargs):
     quantity = request.POST.get('quantity')
     shopping_cart_id = request.user.shoppingCart.id
 
-    cart_item = ShoppingCartItem()
-    cart_item.item = Product.objects.get(id=product_id)
-    cart_item.shoppingCart = ShoppingCart.objects.get(id=shopping_cart_id)
-    cart_item.quantity = int(quantity)
+    in_cart_item = ShoppingCartItem.objects.filter(shoppingCart=shopping_cart_id, item=product_id)
 
-    cart_item.save()
+    if len(in_cart_item) > 0:
+        if in_cart_item[0].quantity + quantity <= 32767:
+            in_cart_item[0].quantity += quantity
+            in_cart_item[0].save()
 
-    data['message'] = 'Item successfully added to cart.'
+            data['message'] = 'Item quantity updated.'
+            return JsonResponse(data)
+    else:
+        cart_item = ShoppingCartItem()
+        cart_item.item = Product.objects.get(id=product_id)
+        cart_item.shoppingCart = ShoppingCart.objects.get(id=shopping_cart_id)
+        cart_item.quantity = int(quantity)
+
+        cart_item.save()
+        data['message'] = 'Item successfully added to cart.'
+        return JsonResponse(data)
+
+    data['message'] = 'Something went wrong.'
     return JsonResponse(data)

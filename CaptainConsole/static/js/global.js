@@ -6,7 +6,12 @@
  * @param {String} quantity Quantity of product to put in shopping cart
  */
 function add_to_shopping_cart(product_id, product_name, quantity) {
-    quantity = Number(quantity)
+    quantity = Number(quantity);
+    if (quantity > 32767) {
+        M.toast({ html: "Specified quantity is too high." });
+        return false;
+    }
+
     if (quantity > 0) {
         let csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
         $.ajax({
@@ -15,14 +20,35 @@ function add_to_shopping_cart(product_id, product_name, quantity) {
             data: {
                 product_id: product_id,
                 quantity: quantity,
-                csrfmiddlewaretoken: csrftoken
+                csrfmiddlewaretoken: csrftoken,
             },
             success: function (result) {
-                M.toast({ html: product_name + "<br />was added to cart!" });
+                M.toast({ html: product_name + "<br />was added to your cart!" });
             },
             error: function (result) {
                 M.toast({ html: "We're sorry,<br />something went wrong" });
-            }
+            },
         });
     }
+}
+
+
+function remove_from_shopping_cart(shopping_cart_id, product_id) {
+    let csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+    $.ajax({
+        url: "/cart/ajax/remove_item/",
+        method: "POST",
+        data: {
+            shopping_cart_id: shopping_cart_id,
+            product_id: product_id,
+            csrfmiddlewaretoken: csrftoken,
+        },
+        success: function (result) {
+            M.toast({ html: "Item removed from cart." });
+            location.reload();
+        },
+        error: function (result) {
+            M.toast({ html: "We're sorry,<br />something went wrong" });
+        },
+    });
 }
