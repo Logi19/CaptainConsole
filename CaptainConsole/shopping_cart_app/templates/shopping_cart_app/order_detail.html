@@ -94,7 +94,7 @@
                 <h6>Total</h6>
             </div>
             <div class="cost">
-                <strong>&dollar;{{ post.profile.shoppingCart.get_total_price | add:post.deliveryPrice | add:post.tax | floatformat:2 }}</strong>
+                <strong>&dollar;{{ post.get_total_price }}</strong>
             </div>
         </div>
         <div class="grid-item go-back">
