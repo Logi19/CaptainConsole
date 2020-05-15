@@ -28,7 +28,8 @@ main {
 }
 
 #login_btn {
-    margin: 5px 0px 25px 0px;
+    margin: 5px 0px 20px 0px;
+    font-size: 20px;
 }
 
 #logo_div {
