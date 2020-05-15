@@ -59,6 +59,15 @@ h6 {
     padding: 0.7em;
 }
 
+.cart-items {
+
+}
+
+.items {
+    max-height: 250px;
+    overflow: scroll;
+}
+
 .subtotal {
     margin-left: 1em;
     border: 1px solid black;
@@ -66,6 +75,10 @@ h6 {
     grid-template-columns: 0.5fr 0.5fr;
     padding: 0.7em;
     align-items: center;
+}
+
+.order-items {
+    border-bottom: 2px solid gray;
 }
 
 .grid-title {
@@ -94,6 +107,17 @@ h6 {
 
 a {
     color: inherit;
+}
+
+.thumbnail {
+    width: 150px;
+    height: 170px;
+    margin: 1em;
+    margin-left: 1em;
+    margin-right: auto;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center
 }
 
 button {

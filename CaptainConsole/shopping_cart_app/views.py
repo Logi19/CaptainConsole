@@ -19,20 +19,12 @@ from profile_app.models import Profile
 def my_cart(request, *args, **kwargs):
     context = {}
     shopping_cart = request.user.shoppingCart
-<<<<<<< HEAD
-    context['cart_key'] = shopping_cart.id
-    print(ShoppingCartItem.objects.filter(shoppingCart=shopping_cart.id))
-    context['shopping_cart_items'] = ShoppingCartItem.objects.filter(shoppingCart=shopping_cart.id)
-    context['subtotal'] = shopping_cart.get_total_price()
-    return render(request, 'shopping_cart_app/shopping_cart_detail.html', context)
-=======
     context["cart_key"] = shopping_cart.id
     context["shopping_cart_items"] = ShoppingCartItem.objects.filter(
         shoppingCart=shopping_cart.id
     )
     context["subtotal"] = shopping_cart.get_total_price()
     return render(request, "shopping_cart_app/shopping_cart_detail.html", context)
->>>>>>> 643f3cb1f4ffc418610a4972b013c50f6ab28405
 
 
 def remove_from_cart(request, *args, **kwargs):
@@ -53,8 +45,6 @@ def remove_from_cart(request, *args, **kwargs):
     return JsonResponse(data)
 
 
-<<<<<<< HEAD
-=======
 class ReceiptView(DetailView):
     model = Order
     template_name = "shopping_cart_app/receipt_view.html"
@@ -64,7 +54,6 @@ class ReceiptView(DetailView):
         return get_object_or_404(self.model, pk=7)
 
 
->>>>>>> 643f3cb1f4ffc418610a4972b013c50f6ab28405
 def receipt_view(request, *args, **kwargs):
     return render(request, "shopping_cart_app/receipt_view.html", context={})
 
@@ -72,32 +61,14 @@ def receipt_view(request, *args, **kwargs):
 def my_order_detail(request, *args, **kwargs):
     context = {}
     shopping_cart = request.user.shoppingCart
-    key = shopping_cart.id
-    print(key)
-    context['post'] = {
-        'deliveryLastName': 'test',
-        'deliveryCountry': 'country',
-        'deliveryStreet': 'street',
-        'deliveryCity': 'city',
-        'deliveryPostal': 'postal',
-        'deliveryMethod': 'method',
-        'billingStreet': 'billingStreet',
-        'billingStreetNum': 'billingStreetNum',
-        'billingPostal': 'billingPostal',
-        'billingCountry': 'billingCountry',
-        'tax': 'tax',
-        'items': ShoppingCartItem.objects.filter(shoppingCart=key)
-    }
-    for item in context['post']['items']:
-        print(item['items'])
-    return render(request, 'shopping_cart_app/order_detail.html', context)
     context["cart_key"] = shopping_cart.id
-    context["cart_items"] = ShoppingCartItem.objects.filter(
-        shopping_cart=shopping_cart.id
-    )
+    context["cart_items"] = ShoppingCartItem.objects.filter(shoppingCart=shopping_cart)
     context["subtotal"] = shopping_cart.get_total_price()
+    context['post'] = {
+        'tax': 12,
+        'items': ShoppingCartItem.objects.filter(shoppingCart=shopping_cart.id)
+    }
     return render(request, "shopping_cart_app/order_detail.html", context)
-
 
 
 class OrderDetail(DetailView):

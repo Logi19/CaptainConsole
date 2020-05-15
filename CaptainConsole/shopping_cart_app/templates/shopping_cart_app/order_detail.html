@@ -51,17 +51,22 @@
 
         <div class="grid-item items">
             {% if post.items %}
-                <h5>Shopping Cart ({{ post.items|length }} Items)</h5>
-            {% else %}
+                <div class="grid-title">
+                    <h5>Shopping Cart ({{ request.user.shoppingCart.items.all|length }} Items)</h5>
+                </div>
+                    {% else %}
                 <h5>No Orders</h5>
             {% endif %}
-            {% for item in items %}
-                <div class="cart-items item-{{ forloop.counter0 }}">
-                    <strong>&dollar;{{item.product.productPrice}}</strong>
-                    <h5>{{item.product.productName}}</h5>
-                    <h5>{{item.product.productType}}</h5>
+            <div class="cart-items">
+                {% for game in post.profile.shoppingCart.shoppingcartitem_set.all %}
+                <div class="item-{{ forloop.counter0 }} order-items">
+                    <div class="thumbnail grid-section" style="background-image: url('/{{ game.item.get_thumbnail }}');"></div>
+                    <h6>Price: &dollar;{{ game.item.price }}</h6>
+                    <h6>Product Name: {{game.item.name}}</h6>
+                    <h6>Quantity: {{game.quantity}}</h6>
                 </div>
-            {% endfor %}
+                {% endfor %}
+            </div>
         </div>
         <div class="grid-item subtotal">
             <div class="grid-title">
