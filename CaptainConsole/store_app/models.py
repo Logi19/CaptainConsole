@@ -1,9 +1,9 @@
 from django.core.validators import MaxValueValidator, MinValueValidator, RegexValidator
 from django.db import models
 
-import django_countries
-from django_countries.fields import CountryField
+from country_list import countries_for_language
 
+COUNTRIES = tuple(countries_for_language('en'))
 
 class Product(models.Model):
     """
@@ -103,7 +103,7 @@ class Order(models.Model):
     billingStreetNum = models.CharField(max_length=20)
     billingCity = models.CharField(max_length=256)
     billingPostal = models.CharField(max_length=10)
-    billingCountry = models.CharField(max_length=256)
+    billingCountry = models.CharField(max_length=256, choices=COUNTRIES)
     billingPhone = models.CharField(max_length=20, blank=True, null=True)
 
     def get_total_price(self):
