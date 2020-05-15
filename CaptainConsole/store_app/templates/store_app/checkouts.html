@@ -383,7 +383,7 @@
 <form action="" method="post">
     {% csrf_token %}
     <div class="container">
-        <div class="row">
+        <div class="billing-info">
             <h3><strong>Billing Information</strong></h3>
             <div class="billing-info">
                 {{form.billingFirstName}}
@@ -410,17 +410,17 @@
                 {{form.billingPhone}}
             </div>
         </div>
-        <div class="row">
+        <div class="delivery-info">
             <h3><strong>Delivery Information</strong></h3>
-            <div class="billing-info">
+            <div class="row">
                 {{form.deliveryFirstName}}
                 {{form.deliveryLastName}}
             </div>
-            <div class="row">
-                {{form.deliveryStreet}}
+            <div class="row" id="delstreet">
                 {{form.deliveryStreetNum}}
+                {{form.deliveryStreet}}
             </div>
-            <div class="row">
+            <div class="row" id="delcom">
                 {{form.deliveryCompany}}
                 {{form.deliveryPhone}}
             </div>

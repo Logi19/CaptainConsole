@@ -25,6 +25,24 @@
 /*    margin: 10px;*/
 /*}*/
 
-p{
-    width: 20%;
+.container{
+    border: solid blue;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.billing-info{
+    padding: 3px;
+    margin: 3px;
+}
+
+.delivery-info{
+    padding: 3px;
+    margin: 3px;
+}
+
+.card-info{
+    padding: 3px;
+    margin: 3px;
 }

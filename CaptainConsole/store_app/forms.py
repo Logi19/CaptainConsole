@@ -1,11 +1,6 @@
 from django import forms
 
 from django_countries.fields import CountryField
-from django_countries.widgets import CountrySelectWidget
-from django_countries import countries
-import django_countries
-from country_list import countries_for_language
-from django_countries.fields import CountryField
 
 from .models import Order, OrderItem
 
@@ -17,10 +12,6 @@ DELIVERY_METHODS = (
 
 class CheckOutForm(forms.ModelForm):
 	""" The form for receiving the Order model and process that to html for the user to put into data """
-
-	# COUNTRIES = tuple(countries_for_language('en'))
-	# countrydel = forms.ChoiceField(choices=COUNTRIES, required=True)
-	# countrybil = forms.ChoiceField(choices=countries, required=True)
 
 	class Meta:
 		""" The meta class of the Check Out form """

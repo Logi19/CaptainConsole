@@ -175,7 +175,7 @@ def check_String(theinput):
                              )
 
 def combine(month, year):
-    expiry_date = month + "-" + year
+    expiry_date = str(month) + "-" + str(year)
     return expiry_date
 
 
