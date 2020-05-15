@@ -1,0 +1,22 @@
+.search_img {
+    object-fit: cover;
+    width: 70px;
+    height: 70px;
+}
+
+.order_div {
+    align-items: center;
+}
+
+.order_div > div {
+    display: flex;
+    align-items: center;
+}
+.order_div > div h5 {
+    display: inline-block;
+    margin-left: 1rem;
+}
+
+.order_div h6 {
+    margin-right: 1rem;
+}

@@ -7,19 +7,23 @@ from django.contrib.auth.base_user import AbstractBaseUser
 from .managers import ProfileManager
 
 
-
 class Profile(AbstractBaseUser, PermissionsMixin):
     """
     Model for the site's profiles.
     Overrides Django's default 'User' model, changing the username field to use email instead
     and adds other attributes.
     """
+
     email = models.EmailField(unique=True)
     first_name = models.CharField(max_length=30, blank=True)
     last_name = models.CharField(max_length=30, blank=True)
     date_joined = models.DateTimeField(auto_now_add=True)
-    profileImage = models.ImageField(upload_to='static/media/profile_img/', null=True, blank=True)
-    shoppingCart = models.OneToOneField("shopping_cart_app.ShoppingCart", on_delete=models.CASCADE)
+    profileImage = models.ImageField(
+        upload_to="static/media/profile_img/", null=True, blank=True
+    )
+    shoppingCart = models.OneToOneField(
+        "shopping_cart_app.ShoppingCart", on_delete=models.CASCADE
+    )
     searches = models.ManyToManyField("store_app.Product", through="SearchHistory")
 
     is_active = models.BooleanField(default=True)
@@ -27,7 +31,7 @@ class Profile(AbstractBaseUser, PermissionsMixin):
 
     objects = ProfileManager()
 
-    USERNAME_FIELD = 'email'
+    USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
 
     def get_full_name(self):
@@ -78,6 +82,7 @@ class Address(models.Model):
 
     def __str__(self):
         return f"{self.street} {self.house_num}"
+
 
 class SearchHistory(models.Model):
     """

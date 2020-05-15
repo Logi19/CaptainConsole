@@ -39,8 +39,10 @@
             <p style="color: red">{{ error }}</p>
             {% endfor %}
         </p>
-
-        <button type="submit">Save changes</button>
+        <div id="btn_div">
+            <a href="/profile/my_profile/" class="btn">Back</a>
+            <button class="btn" type="submit">Save changes</button>
+        </div>
         {% if messages %}
         {% for message in messages %}
         <p id="msg_txt">{{ message }}</p>

@@ -6,36 +6,49 @@ Captain console - Sign up
 {% endblock %}
 
 {% block head %}
-    <link rel="stylesheet" type="text/css" href="{% static "profile_app/signup.css" %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'profile_app/signup.css' %}"/>
 {% endblock %}
 
 {% block content %}
-    <h2>
-        <img id="logo" src="{% static 'media/console-logo.png' %}" />
-        Captain <br/>console
-    </h2>
-    <div class="sign_up_form">
-        <form method="POST" enctype="multipart/form-data">
-            <h3 class="sign">Create an Account</h3>
-            <div class="forms">
-                {% csrf_token %}
-                {% for field in form %}
-                    <p>
-                        {{ field.label_tag }}
-                        {{ field }}
-                        {% if field.help_text %}
-                            <small style="color: grey">{{ field.help_text }}</small>
-                        {% endif %}
-                        {% for error in field.errors %}
-                            <p style="color: red">{{ error }}</p>
-                        {% endfor %}
-                {% endfor %}
-            </div>
-            <div class="button-div">
-                <button class="signup_button" type="submit">Sign up</button>
-                <P class="haveone">Already Have one?</P>
-                <a href="/profile/login" class="click-me">Click me to log in!</a><br/><br/>
-            </div>
-        </form>
-    </div>
+<h2>
+    <img id="logo" src="{% static 'media/console-logo.png' %}" />
+    Captain <br />console
+</h2>
+<div class="sign_up_form">
+    <form method="POST" enctype="multipart/form-data">
+        <h3 class="sign">Create an Account</h3>
+        <div class="forms">
+            {% csrf_token %}
+
+            {% for field in form %}
+            <p>
+                {{ field.label_tag }}
+                {{ field }}
+                {% if field.help_text %}
+                <small style="color: grey;">{{ field.help_text }}</small>
+                {% endif %}
+            </p>
+            {% for error in field.errors %}
+            <p style="color: red;">{{ error }}</p>
+            {% endfor %}
+            {% endfor %}
+        </div>
+        <div class="button-div">
+            <button class="signup_button" type="submit">Sign up</button>
+            <p class="haveone">Already Have one?</p>
+            <a href="/profile/login" class="click-me">Click me to log in!</a><br /><br />
+        </div>
+    </form>
+</div>
+{% endblock %} {% block javascript %}
+
+<script>
+    let inputs = document.getElementsByTagName("input");
+    for (let i=0; i< inputs.length; i++) {
+        if (inputs[i].getAttribute('type') !== "hidden") {
+            inputs[i].setAttribute("class", "white-text");
+        }
+    }
+</script>
+
 {% endblock %}

@@ -18,7 +18,10 @@
         <p><a href="update/" class="btn">Edit profile</a></p>
     </div>
     <div class="col s8 offset-s1">
-        <h4>Order history:</h4>
+        <div id="top_div">
+            <h4>Order history:</h4>
+            <a href="/profile/my_profile/search_history/" class="btn">Search history</a>
+        </div>
         <div id="order_hist_div">
             <ul class="collapsible expandable">
                 {% for order, orderitems in order_history %}

@@ -16,10 +16,10 @@
         <div class="pagination">
             <!-- TODO: add color, show arrows better -->
             {% if page_obj.has_previous %}
-            <span class="waves-effect">
+            <span>
                 <i
                     onclick="change_page('page={{ page_obj.previous_page_number }}')"
-                    class="material-icons"
+                    class="waves-effect material-icons white-text hoverable"
                     >chevron_left</i
                 >
             </span>
@@ -30,10 +30,10 @@
                 Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
             </h6>
             {% if page_obj.has_next %}
-            <span class="waves-effect">
+            <span>
                 <i
                     onclick="change_page('page={{ page_obj.next_page_number }}')"
-                    class="material-icons"
+                    class="waves-effect material-icons hoverable white-text"
                     >chevron_right</i
                 >
             </span>

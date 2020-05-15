@@ -11,3 +11,8 @@
 #msg_txt {
     color: green;
 }
+
+#btn_div {
+    display: flex;
+    justify-content: space-between;
+}

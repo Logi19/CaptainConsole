@@ -15,7 +15,7 @@ function add_to_shopping_cart(product_id, product_name, quantity) {
     if (quantity > 0) {
         let csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
         $.ajax({
-            url: "/store/ajax/add_product_to_cart/",
+            url: "/cart/ajax/add_item/",
             method: "POST",
             data: {
                 product_id: product_id,
@@ -23,7 +23,11 @@ function add_to_shopping_cart(product_id, product_name, quantity) {
                 csrfmiddlewaretoken: csrftoken,
             },
             success: function (result) {
-                M.toast({ html: product_name + "<br />was added to your cart!" });
+                if (result.message === 'LOGIN NEEDED') {
+                    M.toast({ html: "Please log in before adding item to cart." });
+                } else {
+                    M.toast({ html: product_name + "<br />was added to your cart!" });
+                }
             },
             error: function (result) {
                 M.toast({ html: "We're sorry,<br />something went wrong" });
@@ -32,6 +36,11 @@ function add_to_shopping_cart(product_id, product_name, quantity) {
     }
 }
 
+/**
+ * Adds given product to given shopping cart, using an AJAX request.
+ * @param {Number} shopping_cart_id ID of given shopping cart
+ * @param {Number} product_id ID of given product
+ */
 function remove_from_shopping_cart(shopping_cart_id, product_id) {
     let csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
     $.ajax({
@@ -43,8 +52,12 @@ function remove_from_shopping_cart(shopping_cart_id, product_id) {
             csrfmiddlewaretoken: csrftoken,
         },
         success: function (result) {
-            M.toast({ html: "Item removed from cart." });
-            location.reload();
+            if (result.message === 'REMOVED') {
+                M.toast({ html: "Item removed from cart." });
+                location.reload();
+            } else {
+                M.toast({ html: "We're sorry,<br />something went wrong" });
+            }
         },
         error: function (result) {
             M.toast({ html: "We're sorry,<br />something went wrong" });
@@ -52,6 +65,10 @@ function remove_from_shopping_cart(shopping_cart_id, product_id) {
     });
 }
 
+/**
+ * Adds a GET parameter to the new_url global variable or removes if parameter already in new_url.
+ * @param {String} text A new GET parameter for the URL
+ */
 function change_url(text) {
     if (!new_url.includes(text)) {
         if (new_url.includes("/?")) {
@@ -72,6 +89,9 @@ function change_url(text) {
     }
 }
 
+/**
+ * Changes URL to the new_url global variable, activating any parameters set by change_url().
+ */
 function go_to_url() {
     new_url = new_url.replace(/\?page=[0-9]&?/, "?");
     new_url = new_url.replace(/&page=[0-9]/, "");
@@ -81,6 +101,7 @@ function go_to_url() {
 var curr_url = window.location.href;
 var new_url = curr_url;
 
+// Ready dropdown
 $(document).ready(function () {
     $(".dropdown-trigger").dropdown();
 });

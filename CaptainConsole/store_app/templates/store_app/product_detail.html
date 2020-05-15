@@ -1,38 +1,77 @@
 {% extends "base.html" %} {% load static %} {% block head %}
 <link rel="stylesheet" type="text/css" href="{% static 'store_app/product-detail.css'%}" />
-    <script src="{% static 'store_app/product_detail.js' %}"></script>
-{% endblock %}
-
-{% block header %}
-{% include 'header.html' %}
-{% endblock %}
-
-{% block content %}
-    <div class="grid-container">
-    <div class="grid-item title">
-        <h3>{{ object.name }}</h3>
-    </div>
-    <div class="grid-item images">
+{% endblock %} {% block header %} {% include 'header.html' %} {% endblock %} {% block content %}
+<div class="row">
+    <div class="col s5 images center-align">
         {% for image in images %}
-                <div>
-                <div style="width: 200px;height: 240px;background-image: url('/{{ image }}');margin: 0 auto;background-repeat: no-repeat;background-size: cover;background-position: center"></div>
-                </div>
-            {% endfor %}
+        <img class="responsive-img" src="/{{ image }}" alt="Product image {{ forloop.counter }}" />
+        {% endfor %}
     </div>
-    <div class="grid-item other">
-        <h5>${{ object.price }}</h5><br/>
-        <h5>{{ object.description }}</h5><br/>
-        <form method="post">
-            {% csrf_token %}
-            <input id="quantity" name="qty" type="number" placeholder="Quantity"/>
-            <!--<input onclick="M.toast({html: '{{ object.name }} <br/> Added to cart'})" type="" value="add to cart"/>-->
-            <p><a onclick="add_to_shopping_cart({{ object.id }}, '{{ object.name }}', document.getElementById('quantity').value)" class="btn btn-default" role="button">Add to cart</a></p>
-        </form>
+    <div class="col s5">
+        <h3>{{ object.name }}</h3>
+        <div id="info_div">
+            <div id="detail_div">
+                <h5>Platform: {{ object.platform }}</h5>
+                <h5>Price: ${{ object.price }}</h5>
+                <h5>Manufacturer: {{ object.manufacturer }}</h5>
+            </div>
+            <div id="cart_quantity_div">
+                <div id="quantity_div">
+                    <div id="quantity_btn_div">
+                        <a class="btn waves-effect" onclick="change_quantity('+')"
+                        ><i class="material-icons">add</i></a
+                        >
+                        <a class="btn waves-effect" onclick="change_quantity('-')"
+                        ><i class="material-icons">remove</i></a
+                        >
+                    </div>
+                    {% csrf_token %}
 
+                    <input
+                    id="quantity"
+                    name="qty"
+                    type="number"
+                    placeholder="Quantity"
+                    value="0"
+                    disabled
+                    class="btn"
+                    />
+                </div>
+                <a id="add_to_cart_btn" onclick="add_to_shopping_cart({{ object.id }}, '{{ object.name }}', document.getElementById('quantity').value)"
+                class="btn btn-default" role="button">Add to cart</a>
+            </div>
+        </div>
+        <p id="description">{{ object.description }}</p>
     </div>
 </div>
-{% endblock %}
+{% endblock %} {% block footer %} {% include 'footer.html' %} {% endblock %} {% block javascript %}
+<script>
+    function change_quantity(operator) {
+        let curr_val = Number(document.getElementById("quantity").value);
+        if (!isNaN(curr_val)) {
+            if (operator === "-" && curr_val > 0) {
+                document.getElementById("quantity").value = curr_val - 1;
+            } else if (operator === "+" && curr_val < 3000) {
+                document.getElementById("quantity").value = curr_val + 1;
+            }
+        }
+    }
+    document.getElementById("quantity").value = "0";
+</script>
+{% if user.is_authenticated %}
+<script>
+    let object_id = {{ object.id }};
+    let user_id = {{ user.id }};
 
-{% block footer %}
-{% include 'footer.html' %}
-{% endblock %}
+    let csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+    $.ajax({
+        url: "/profile/ajax/add_to_search_history/",
+        method: "POST",
+        data: {
+            product_id: object_id,
+            profile_id: user_id,
+            csrfmiddlewaretoken: csrftoken,
+        }
+    });
+</script>
+{% endif %} {% endblock %}
