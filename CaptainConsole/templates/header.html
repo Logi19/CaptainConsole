@@ -8,21 +8,20 @@
             </a>
             <ul id="nav-mobile" class="right">
                 {% if user.is_authenticated %}
-                <li id="welcome_msg">Welcome, {{ user.first_name }}</li>
+                <li class="my_li">Welcome, {{ user.first_name }}</li>
                 {% if user.profileImage %}
-                    <li><a class="dropdown-trigger" data-target="dropdown-menu" href="#"><img class="circle" src="/{{ user.profileImage }}" alt="My profile" /></a></li>
+                <li class="my_li"><a class="dropdown-trigger" data-target="dropdown-menu"><img class="circle" src="/{{ user.profileImage }}" alt="My profile" /></a></li>
                 {% else %}
-                    <li><a class="dropdown-trigger" data-target="dropdown-menu" href="#"><img class="circle" src="{% static 'media/profile.png' %}" alt="My profile" /></a></li>
+                <li class="my_li"><a class="dropdown-trigger" data-target="dropdown-menu"><img class="circle" src="{% static 'media/profile.png' %}" alt="My profile" /></a></li>
                 {% endif %}
 
                 {% else %}
-
-                <li class="text-li"><a href="/profile/login">Log In</a></li>
-                <li class="text-li"><a href="/profile/sign_up" class="header">Sign Up</a></li>
-
+                <li class="my_li"><a href="/profile/login">Log In</a></li>
+                <li class="my_li"><a href="/profile/sign_up" class="header">Sign Up</a></li>
                 {% endif %}
-                <!--TODO: shopping cart dropdown, change to icon?-->
-                <li><img id="shopping_cart" src="{% static 'media/shopping-cart.png' %}" /></li>
+                {% if user.is_authenticated %}
+                <li class="my_li"><a href="/cart/my_cart/"><img id="shopping_cart" src="{% static 'media/shopping-cart.png' %}" /></a></li>
+                {% endif %}
             </ul>
         <ul id="dropdown-menu" class="dropdown-content">
             <li><a href="/profile/my_profile">My account</a></li>
