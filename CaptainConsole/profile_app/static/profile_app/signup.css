@@ -1,24 +1,25 @@
 
 .sign_up_form{
-    width: 800px;
+    width: 700px;
     box-shadow: 0 0 3px 0 rgba(0,0,0,0.3);
-    background: white;
-    padding: 40px;
+    background: midnightblue;
+    padding: 80px;
     position: absolute;
     top: 80%;
     left: 50%;
     transform: translate(-50%,-50%);
+    border: 5px solid black;
 }
 
 .signup_button{
-    background-color: midnightblue;
+    background-color: cornflowerblue;
     border: none;
     color: white;
-    padding: 15px 32px;
+    padding: 12px 30px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 19px;
+    font-size: 23px;
 
 }
 .button-div{
@@ -26,13 +27,18 @@
 }
 
 .sign{
-    color: midnightblue;
+    color: white;
     text-align: center;
+    font-family: cursive;
 }
 
 #logo {
     width: 100px;
     height: 90px;
     float: left;
+}
+
+.haveone{
+    color: white;
 }
 
