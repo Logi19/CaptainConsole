@@ -15,14 +15,13 @@
             <p><strong>First Name:</strong> {{ post.deliveryFirstName }}</p>
             <p>Last Name: {{ post.deliveryLastName }}</p>
             <p>Country: {{ post.deliveryCountry }}</p>
-            <p>Address: {{ post.deliveryStreet }}, {{ post.deliveryCity }}, {{ post.deliveryPostal }}</p>
+            <p>Address: {{ post.deliveryStreet }} {{ post.deliveryStreetNum }}, {{ post.deliveryCity }}, {{ post.deliveryPostal }}</p>
             <!-- <button type="button" id="edit-info">Edit Delivery</button>-->
         </div>
         <div class="grid-item delivery-method">
             <h5>Delivery Method</h5>
-            <p>Standard Delivery Within 5 Working Days Free</p>
-            <p>{{ post.deliveryMethod }}</p>
-            <!-- Delivery Method information -->
+                <!-- <p>Standard Delivery Within 5 Working Days Free</p> -->
+                <p>{{ post.deliveryMethod }}</p>
         </div>
         <div class="grid-item title">
             <h5>Payment</h5>
@@ -38,13 +37,13 @@
                 <p>Cardholder Name: {{ cardname }}</p>
             </div>
             <div class="billing-address">
-                <p>Billing Address: {{ post.billingStreet }}, {{ post.billingStreetNum }}, , {{ post.billingPostal }}, {{ post.billingCountry }}</p>
+                <p>Billing Address: {{ post.billingStreet }}, {{ post.billingStreetNum }}, {{ post.billingPostal }}, {{ post.billingCountry }}</p>
             </div>
             <div class="cvc">
                 <p>CVC: {{ cvc }}</p>
             </div>
             <div class="expiry-date">
-                <p>Expiration Date: {{ expirydate }}</p>
+                <p>Expiration Date: {{ expiry_date }}</p>
             </div>
             <!-- Card Information  -->
         </div>
@@ -54,7 +53,7 @@
                 <div class="grid-title">
                     <h5>Shopping Cart ({{ request.user.shoppingCart.items.all|length }} Items)</h5>
                 </div>
-                    {% else %}
+            {% else %}
                 <h5>No Orders</h5>
             {% endif %}
             <div class="cart-items">
@@ -76,7 +75,7 @@
                 <h6>Cart Total</h6>
             </div>
             <div class="total-price">
-                <span><strong>&dollar;{{ order_obj.get_total_price }}</strong></span>
+                <span><strong>&dollar;{{ post.profile.shoppingCart.get_total_price }}</strong></span>
             </div>
             <div class="delivery-charge">
                 <h6>Delivery Charge</h6>
@@ -95,7 +94,7 @@
                 <h6>Total</h6>
             </div>
             <div class="cost">
-                <strong>&dollar;{{ post.deliveryPrice | add:post.tax }}</strong>
+                <strong>&dollar;{{ post.profile.shoppingCart.get_total_price | add:post.deliveryPrice | add:post.tax | floatformat:2 }}</strong>
             </div>
         </div>
         <div class="grid-item go-back">
