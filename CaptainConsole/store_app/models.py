@@ -1,9 +1,6 @@
 from django.core.validators import MaxValueValidator, MinValueValidator, RegexValidator
 from django.db import models
 
-from country_list import countries_for_language
-
-COUNTRIES = tuple(countries_for_language('en'))
 
 class Product(models.Model):
     """

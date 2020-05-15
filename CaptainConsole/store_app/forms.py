@@ -32,6 +32,7 @@ class CheckOutForm(forms.ModelForm):
 				 'margin-top: 10px;'
 				 'margin-bottom: 10px; '
 				 'font-size: 20px;'
+				'color: white;'
 	}))
 	deliveryFirstName = forms.CharField(max_length=30, widget=forms.TextInput(attrs={
 		'placeholder': 'John',
@@ -42,6 +43,8 @@ class CheckOutForm(forms.ModelForm):
 				 'margin-top: 10px; '
 				 'margin-bottom: 10px; '
 				 'font-size: 20px;'
+				 'color: white;'
+
 	}))
 	deliveryLastName = forms.CharField(max_length=30, widget=forms.TextInput(attrs={
 		'placeholder': 'Doe',
@@ -52,6 +55,7 @@ class CheckOutForm(forms.ModelForm):
 				 'margin-top: 10px; '
 				 'margin-bottom: 10px; '
 				 'font-size: 20px;'
+				 'color: white;'
 	}))
 
 
@@ -64,6 +68,7 @@ class CheckOutForm(forms.ModelForm):
 				 'margin-top: 10px; '
 				 'margin-bottom: 10px; '
 				 'font-size: 20px;'
+				 'color: white;'
 
 	}))
 	deliveryMethod = forms.ChoiceField(
@@ -78,6 +83,7 @@ class CheckOutForm(forms.ModelForm):
 				 'margin-top: 10px; '
 				 'margin-bottom: 10px; '
 				 'font-size: 20px;'
+				 'color: white;'
 
 	}))
 	deliveryStreetNum = forms.CharField(max_length=20, widget=forms.TextInput(attrs={
@@ -89,6 +95,7 @@ class CheckOutForm(forms.ModelForm):
 				 'margin-top: 10px; '
 				 'margin-bottom: 10px; '
 				 'font-size: 20px;'
+				 'color: white;'
 
 	}))
 	deliveryCity = forms.CharField(max_length=256, widget=forms.TextInput(attrs={
@@ -100,6 +107,7 @@ class CheckOutForm(forms.ModelForm):
 				 'margin-top: 10px; '
 				 'margin-bottom: 10px; '
 				 'font-size: 20px;'
+				 'color: white;'
 
 	}))
 	deliveryPostal = forms.CharField(max_length=10, widget=forms.TextInput(attrs={
@@ -111,6 +119,7 @@ class CheckOutForm(forms.ModelForm):
 				 'margin-top: 10px; '
 				 'margin-bottom: 10px; '
 				 'font-size: 20px;'
+				 'color: white;'
 
 	}))
 	billingCountry = CountryField().formfield()
@@ -123,6 +132,7 @@ class CheckOutForm(forms.ModelForm):
 				 'margin-top: 10px; '
 				 'margin-bottom: 10px; '
 				 'font-size: 20px;'
+				 'color: white;'
 
 	}))
 	billingFirstName = forms.CharField(max_length=30, widget=forms.TextInput(attrs={
@@ -134,6 +144,7 @@ class CheckOutForm(forms.ModelForm):
 				 'margin-top: 10px; '
 				 'margin-bottom: 10px; '
 				 'font-size: 20px;'
+				 'color: white;'
 
 	}))
 	billingLastName = forms.CharField(max_length=30, widget=forms.TextInput(attrs={
@@ -145,6 +156,7 @@ class CheckOutForm(forms.ModelForm):
 				 'margin-top: 10px; '
 				 'margin-bottom: 10px; '
 				 'font-size: 20px;'
+				 'color: white;'
 
 	}))
 	billingCompany = forms.CharField(max_length=50, required=False, widget=forms.TextInput(attrs={
@@ -156,6 +168,7 @@ class CheckOutForm(forms.ModelForm):
 				 'margin-top: 10px; '
 				 'margin-bottom: 10px; '
 				 'font-size: 20px;'
+				 'color: white;'
 
 	}))
 
@@ -168,6 +181,7 @@ class CheckOutForm(forms.ModelForm):
 				 'margin-top: 10px; '
 				 'margin-bottom: 10px; '
 				 'font-size: 20px;'
+				 'color: white;'
 
 	}))
 	billingStreetNum = forms.CharField(max_length=20, widget=forms.TextInput(attrs={
@@ -179,6 +193,7 @@ class CheckOutForm(forms.ModelForm):
 				 'margin-top: 10px; '
 				 'margin-bottom: 10px; '
 				 'font-size: 20px;'
+				 'color: white;'
 
 	}))
 	billingCity = forms.CharField(max_length=256, widget=forms.TextInput(attrs={
@@ -190,6 +205,7 @@ class CheckOutForm(forms.ModelForm):
 				 'margin-top: 10px; '
 				 'margin-bottom: 10px; '
 				 'font-size: 20px;'
+				 'color: white;'
 	}))
 	billingPostal = forms.CharField(max_length=10, widget=forms.TextInput(attrs={
 		'placeholder': '102',
@@ -200,6 +216,7 @@ class CheckOutForm(forms.ModelForm):
 				 'margin-top: 10px; '
 				 'margin-bottom: 10px; '
 				 'font-size: 20px;'
+				 'color: white;'
 
 	}))
 	billingCountry = CountryField().formfield()
@@ -212,6 +229,7 @@ class CheckOutForm(forms.ModelForm):
 				 'margin-top: 10px; '
 				 'margin-bottom: 10px; '
 				 'font-size: 20px;'
+				 'color: white;'
 
 	}))
 
