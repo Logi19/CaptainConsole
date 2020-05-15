@@ -9,7 +9,6 @@ from django.views.generic.edit import UpdateView
 from django.http import JsonResponse
 
 from .models import ShoppingCart, ShoppingCartItem
-from .forms import OrderForm
 from .models import ShoppingCartItem
 
 from store_app.models import Order, Product
@@ -87,11 +86,6 @@ class OrderDetail(DetailView):
 
     # def get(self, request, *args, **kwargs):
     #    return render(request, "shopping_cart_app/order_detail.html", {"pk": self.kwargs['pk']})
-
-
-class OrderCreate(UpdateView):
-    model = Profile
-    form_class = OrderForm
 
 
 def add_to_cart(request, *args, **kwargs):
