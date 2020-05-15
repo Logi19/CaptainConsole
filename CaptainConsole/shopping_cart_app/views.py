@@ -96,7 +96,7 @@ def add_to_cart(request, *args, **kwargs):
     data = {}
 
     product_id = request.POST.get("product_id")
-    quantity = request.POST.get("quantity")
+    quantity = int(request.POST.get("quantity"))
     if not request.user.is_authenticated:
         data["message"] = "LOGIN NEEDED"
         return JsonResponse(data)

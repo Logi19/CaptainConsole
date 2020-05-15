@@ -14,13 +14,13 @@ Captain console - Log in
         <div class="login-form">
             <div class="box">
                 <h1 class="title">Log in</h1>
-                <div class="inputs">
+                <div class="inputs white-text">
                     <form method="post">
                         {% csrf_token %}
                         <label for="email">Email:</label>
-                        <input type="text" name="email">
+                        <input type="text" class="white-text" name="email">
                         <label for="password">Password:</label>
-                        <input type="password" name="password">
+                        <input type="password" class="white-text" name="password">
                         <div class="button-div">
                             <button class="login_button" type="submit">Login</button>
                         </div>

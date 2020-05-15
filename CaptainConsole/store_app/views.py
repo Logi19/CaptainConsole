@@ -224,3 +224,21 @@ def check_out(request):
         form = CheckOutForm()
 
     return render(request, "store_app/checkouts.html", {"form": form})
+
+
+def error_404(request, exception):
+    data = {}
+    return render(request, 'store_app/404.html', data)
+
+
+def error_500(request):
+    data = {}
+    return render(request, 'store_app/500.html', data)
+
+def error_403(request, exception):
+    data = {}
+    return render(request, 'store_app/403.html', data)
+
+def error_400(request, exception):
+    data = {}
+    return render(request, 'store_app/400.html', data)
