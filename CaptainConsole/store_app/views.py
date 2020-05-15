@@ -126,23 +126,23 @@ class ProductDetail(DetailView):
         return context
 
 
-
 def check_number(theinput):
-    number = str(theinput.replace(' ', '').replace('-',''))
+    number = str(theinput.replace(" ", "").replace("-", ""))
     if len(number) == 16:
         return True
     elif len(number) == 3:
         return True
     else:
-        raise ValidationError('Invalid card number or CVV')
+        raise ValidationError("Invalid card number or CVV")
 
 
 def check_String(theinput):
-    x = theinput.replace(' ', '').isalpha()
+    x = theinput.replace(" ", "").isalpha()
     if x is True:
         return True
     else:
-        raise ValidationError('Invalid string')
+        raise ValidationError("Invalid string")
+
 
 def combine(month, year):
     expiry_date = str(month) + "-" + str(year)
@@ -160,8 +160,8 @@ def check_out(request):
         cardNumber = request.POST.get("cardNumber")
         cardName = request.POST.get("cardName")
         cvc = request.POST.get("cvc")
-        month = request.POST.get('month')
-        year = request.POST.get('year')
+        month = request.POST.get("month")
+        year = request.POST.get("year")
         cardno = check_number(cardNumber)
         cardname = check_String(cardName)
         cvc_card = check_number(cvc)
@@ -170,104 +170,141 @@ def check_out(request):
 
         if form.is_valid():
             if cardno is True and cardname is True and cvc_card is True:
-                request.session['deliveryCountry'] = request.POST.get('deliveryCountry')
-                request.session['deliveryCity'] = request.POST.get('deliveryCity')
-                request.session['deliveryPostal'] = request.POST.get('deliveryPostal')
-                request.session['deliveryFirstName'] = request.POST.get('deliveryFirstName')
-                request.session['deliveryLastName'] = request.POST.get('deliveryLastName')
-                request.session['deliveryPhone'] = request.POST.get('deliveryPhone')
-                request.session['deliveryCompany'] = request.POST.get('deliveryCompany')
-                request.session['deliveryStreet'] = request.POST.get('deliveryStreet')
-                request.session['deliveryStreetNum'] = request.POST.get('deliveryStreetNum')
+                request.session["deliveryCountry"] = request.POST.get("deliveryCountry")
+                request.session["deliveryCity"] = request.POST.get("deliveryCity")
+                request.session["deliveryPostal"] = request.POST.get("deliveryPostal")
+                request.session["deliveryFirstName"] = request.POST.get(
+                    "deliveryFirstName"
+                )
+                request.session["deliveryLastName"] = request.POST.get(
+                    "deliveryLastName"
+                )
+                request.session["deliveryPhone"] = request.POST.get("deliveryPhone")
+                request.session["deliveryCompany"] = request.POST.get("deliveryCompany")
+                request.session["deliveryStreet"] = request.POST.get("deliveryStreet")
+                request.session["deliveryStreetNum"] = request.POST.get(
+                    "deliveryStreetNum"
+                )
 
-                request.session['billingFirstName'] = request.POST.get('billingFirstName')
-                request.session['billingLastName'] = request.POST.get('billingLastName')
-                request.session['billingPostal'] = request.POST.get('billingPostal')
-                request.session['billingCountry'] = request.POST.get('billingCountry')
-                request.session['billingCity'] = request.POST.get('billingCity')
-                request.session['billingPhone'] = request.POST.get('billingPhone')
-                request.session['billingCompany'] = request.POST.get('billingCompany')
-                request.session['email'] = request.POST.get('email')
-                request.session['billingStreet'] = request.POST.get('billingStreet')
-                request.session['billingStreetNum'] = request.POST.get('billingStreetNum')
+                request.session["billingFirstName"] = request.POST.get(
+                    "billingFirstName"
+                )
+                request.session["billingLastName"] = request.POST.get("billingLastName")
+                request.session["billingPostal"] = request.POST.get("billingPostal")
+                request.session["billingCountry"] = request.POST.get("billingCountry")
+                request.session["billingCity"] = request.POST.get("billingCity")
+                request.session["billingPhone"] = request.POST.get("billingPhone")
+                request.session["billingCompany"] = request.POST.get("billingCompany")
+                request.session["email"] = request.POST.get("email")
+                request.session["billingStreet"] = request.POST.get("billingStreet")
+                request.session["billingStreetNum"] = request.POST.get(
+                    "billingStreetNum"
+                )
 
-                request.session['cardNumber'] = request.POST.get('cardNumber')
-                request.session['cardName'] = request.POST.get('cardName')
-                request.session['cvc'] = request.POST.get('cvc')
+                request.session["cardNumber"] = request.POST.get("cardNumber")
+                request.session["cardName"] = request.POST.get("cardName")
+                request.session["cvc"] = request.POST.get("cvc")
 
                 post = form.save(commit=False)
                 post.profile = request.user
                 post.orderDiscount = 0
                 post.tax = 12
                 post.deliveryPrice = 10
-                
-                post.deliveryCountry = request.POST.get('deliveryCountry')
+
+                post.deliveryCountry = request.POST.get("deliveryCountry")
                 post.save()
-                shopping_items = ShoppingCartItem.objects.filter(shoppingCart=request.user.shoppingCart)
+                shopping_items = ShoppingCartItem.objects.filter(
+                    shoppingCart=request.user.shoppingCart
+                )
 
                 return render(
                     request,
                     "shopping_cart_app/order_detail.html",
-                    {"post": post, "cardno": cardNumber, "cardname": cardName, "cvc": cvc, 'expiry_date': expiry_date, 'shopping_items': shopping_items}
+                    {
+                        "post": post,
+                        "cardno": cardNumber,
+                        "cardname": cardName,
+                        "cvc": cvc,
+                        "expiry_date": expiry_date,
+                        "shopping_items": shopping_items,
+                    },
                 )
             else:
-                raise ValidationError(cardno, cardname, cvc_card + "are not valid, please write valid inputs")
+                raise ValidationError(
+                    cardno,
+                    cardname,
+                    cvc_card + "are not valid, please write valid inputs",
+                )
         else:
             print("not valid")
             raise ValidationError("WRONG!")
     else:
-        deliveryfirstname = request.session.get('deliveryFirstName')
-        deliverylastname = request.session.get('deliveryLastName')
-        deliverystreet = request.session.get('deliveryStreet')
-        deliverystreetnum = request.session.get('deliveryStreetNum')
-        deliverypostal = request.session.get('deliveryPostal')
-        deliverycity = request.session.get('deliveryCity')
-        deliveryphone = request.session.get('deliveryPhone')
-        deliverycompany = request.session.get('deliveryCompany')
+        deliveryfirstname = request.session.get("deliveryFirstName")
+        deliverylastname = request.session.get("deliveryLastName")
+        deliverystreet = request.session.get("deliveryStreet")
+        deliverystreetnum = request.session.get("deliveryStreetNum")
+        deliverypostal = request.session.get("deliveryPostal")
+        deliverycity = request.session.get("deliveryCity")
+        deliveryphone = request.session.get("deliveryPhone")
+        deliverycompany = request.session.get("deliveryCompany")
 
-        billingfirstname = request.session.get('billingFirstName')
-        billinglastname = request.session.get('billingLastName')
-        billingstreet = request.session.get('billingStreet')
-        billingstreetnum = request.session.get('billingStreetNum')
-        billingpostal = request.session.get('billingPostal')
-        billingcity = request.session.get('billingCity')
-        billingphone = request.session.get('billingPhone')
-        billingcompany = request.session.get('billingCompany')
-        email = request.session.get('email')
+        billingfirstname = request.session.get("billingFirstName")
+        billinglastname = request.session.get("billingLastName")
+        billingstreet = request.session.get("billingStreet")
+        billingstreetnum = request.session.get("billingStreetNum")
+        billingpostal = request.session.get("billingPostal")
+        billingcity = request.session.get("billingCity")
+        billingphone = request.session.get("billingPhone")
+        billingcompany = request.session.get("billingCompany")
+        email = request.session.get("email")
 
-        cvc = request.session.get('cvc')
-        cardname = request.session.get('cardName')
-        cardnumber = request.session.get('cardNumber')
+        cvc = request.session.get("cvc")
+        cardname = request.session.get("cardName")
+        cardnumber = request.session.get("cardNumber")
 
-        form = CheckOutForm({'deliveryCity': deliverycity, 'deliveryPhone': deliveryphone,
-                             'deliveryPostal': deliverypostal, 'deliveryStreet': deliverystreet,
-                             'deliveryCompany': deliverycompany, 'deliveryFirstName': deliveryfirstname,
-                             'deliveryLastName': deliverylastname, 'deliveryStreetNum': deliverystreetnum,
-                             'billingCity': billingcity, 'billingPhone': billingphone,
-                             'billingPostal': billingpostal, 'billingStreet': billingstreet,
-                             'billingCompany': billingcompany, 'billingFirstName': billingfirstname,
-                             'billingLastName': billinglastname, 'billingStreetNum': billingstreetnum,
-                             'cvc': cvc, 'cardName': cardname, 'cardNumber': cardnumber, 'email': email
+        form = CheckOutForm(
+            {
+                "deliveryCity": deliverycity,
+                "deliveryPhone": deliveryphone,
+                "deliveryPostal": deliverypostal,
+                "deliveryStreet": deliverystreet,
+                "deliveryCompany": deliverycompany,
+                "deliveryFirstName": deliveryfirstname,
+                "deliveryLastName": deliverylastname,
+                "deliveryStreetNum": deliverystreetnum,
+                "billingCity": billingcity,
+                "billingPhone": billingphone,
+                "billingPostal": billingpostal,
+                "billingStreet": billingstreet,
+                "billingCompany": billingcompany,
+                "billingFirstName": billingfirstname,
+                "billingLastName": billinglastname,
+                "billingStreetNum": billingstreetnum,
+                "cvc": cvc,
+                "cardName": cardname,
+                "cardNumber": cardnumber,
+                "email": email,
+            }
+        )
 
-                             })
-
-
-return render(request, "store_app/checkout_page.html", {"form": form})
+    return render(request, "store_app/checkout_page.html", {"form": form})
 
 
 def error_404(request, exception):
     data = {}
-    return render(request, 'store_app/404.html', data)
+    return render(request, "store_app/404.html", data)
 
 
 def error_500(request):
     data = {}
-    return render(request, 'store_app/500.html', data)
+    return render(request, "store_app/500.html", data)
+
 
 def error_403(request, exception):
     data = {}
-    return render(request, 'store_app/403.html', data)
+    return render(request, "store_app/403.html", data)
+
 
 def error_400(request, exception):
     data = {}
-    return render(request, 'store_app/400.html', data)
+    return render(request, "store_app/400.html", data)
