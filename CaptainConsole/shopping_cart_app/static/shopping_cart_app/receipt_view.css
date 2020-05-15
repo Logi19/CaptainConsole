@@ -27,12 +27,18 @@ img {
 
 .text {
     grid-column: 2;
-    grid-row: 3;
+    grid-row: 5;
+    /*breytti thessu i 5 i stad fyrir 3*/
 }
 
 .test {
     grid-area: featured;
     overflow: hidden;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    /*baetti vid her fra display og niput*/
 }
 
 h5 {
