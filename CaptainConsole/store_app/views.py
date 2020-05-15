@@ -200,7 +200,7 @@ def check_out(request):
     else:
         form = CheckOutForm()
 
-    return render(request, "store_app/checkouts.html", {"form": form})
+    return render(request, "store_app/checkout_page.html", {"form": form})
 
 
 def error_404(request, exception):

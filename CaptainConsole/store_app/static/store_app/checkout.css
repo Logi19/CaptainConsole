@@ -5,7 +5,8 @@
     justify-content: space-between;
     background-color: darkblue;
     color: white;
-
+    padding: 20px;
+    margin: 20px auto;
 }
 
 .billing-info{
@@ -29,7 +30,7 @@
     margin: 0 auto;
 }
 
-.everything{
+main {
     background: url("/static/media/games-pile.jpg") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -37,9 +38,6 @@
     background-size: cover;
 }
 
-.row{
-    color: white;
-}
 
 input[type='text']{
     color: white;
@@ -49,8 +47,6 @@ input[type='number']{
     color: white;
 }
 
-.proceed-button{
-    position: absolute;
-     bottom: 0;
-     right: 0;
+#submit-btn {
+    align-self: flex-end;
 }
