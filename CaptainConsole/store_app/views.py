@@ -170,6 +170,31 @@ def check_out(request):
 
         if form.is_valid():
             if cardno is True and cardname is True and cvc_card is True:
+                request.session['deliveryCountry'] = request.POST.get('deliveryCountry')
+                request.session['deliveryCity'] = request.POST.get('deliveryCity')
+                request.session['deliveryPostal'] = request.POST.get('deliveryPostal')
+                request.session['deliveryFirstName'] = request.POST.get('deliveryFirstName')
+                request.session['deliveryLastName'] = request.POST.get('deliveryLastName')
+                request.session['deliveryPhone'] = request.POST.get('deliveryPhone')
+                request.session['deliveryCompany'] = request.POST.get('deliveryCompany')
+                request.session['deliveryStreet'] = request.POST.get('deliveryStreet')
+                request.session['deliveryStreetNum'] = request.POST.get('deliveryStreetNum')
+
+                request.session['billingFirstName'] = request.POST.get('billingFirstName')
+                request.session['billingLastName'] = request.POST.get('billingLastName')
+                request.session['billingPostal'] = request.POST.get('billingPostal')
+                request.session['billingCountry'] = request.POST.get('billingCountry')
+                request.session['billingCity'] = request.POST.get('billingCity')
+                request.session['billingPhone'] = request.POST.get('billingPhone')
+                request.session['billingCompany'] = request.POST.get('billingCompany')
+                request.session['email'] = request.POST.get('email')
+                request.session['billingStreet'] = request.POST.get('billingStreet')
+                request.session['billingStreetNum'] = request.POST.get('billingStreetNum')
+
+                request.session['cardNumber'] = request.POST.get('cardNumber')
+                request.session['cardName'] = request.POST.get('cardName')
+                request.session['cvc'] = request.POST.get('cvc')
+
                 post = form.save(commit=False)
                 post.profile = request.user
                 post.orderDiscount = 0
@@ -191,9 +216,43 @@ def check_out(request):
             print("not valid")
             raise ValidationError("WRONG!")
     else:
-        form = CheckOutForm()
+        deliveryfirstname = request.session.get('deliveryFirstName')
+        deliverylastname = request.session.get('deliveryLastName')
+        deliverystreet = request.session.get('deliveryStreet')
+        deliverystreetnum = request.session.get('deliveryStreetNum')
+        deliverypostal = request.session.get('deliveryPostal')
+        deliverycity = request.session.get('deliveryCity')
+        deliveryphone = request.session.get('deliveryPhone')
+        deliverycompany = request.session.get('deliveryCompany')
 
-    return render(request, "store_app/checkout_page.html", {"form": form})
+        billingfirstname = request.session.get('billingFirstName')
+        billinglastname = request.session.get('billingLastName')
+        billingstreet = request.session.get('billingStreet')
+        billingstreetnum = request.session.get('billingStreetNum')
+        billingpostal = request.session.get('billingPostal')
+        billingcity = request.session.get('billingCity')
+        billingphone = request.session.get('billingPhone')
+        billingcompany = request.session.get('billingCompany')
+        email = request.session.get('email')
+
+        cvc = request.session.get('cvc')
+        cardname = request.session.get('cardName')
+        cardnumber = request.session.get('cardNumber')
+
+        form = CheckOutForm({'deliveryCity': deliverycity, 'deliveryPhone': deliveryphone,
+                             'deliveryPostal': deliverypostal, 'deliveryStreet': deliverystreet,
+                             'deliveryCompany': deliverycompany, 'deliveryFirstName': deliveryfirstname,
+                             'deliveryLastName': deliverylastname, 'deliveryStreetNum': deliverystreetnum,
+                             'billingCity': billingcity, 'billingPhone': billingphone,
+                             'billingPostal': billingpostal, 'billingStreet': billingstreet,
+                             'billingCompany': billingcompany, 'billingFirstName': billingfirstname,
+                             'billingLastName': billinglastname, 'billingStreetNum': billingstreetnum,
+                             'cvc': cvc, 'cardName': cardname, 'cardNumber': cardnumber, 'email': email
+
+                             })
+
+
+return render(request, "store_app/checkout_page.html", {"form": form})
 
 
 def error_404(request, exception):
