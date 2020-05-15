@@ -1,6 +1,8 @@
 from django import forms
-import django_countries
+
+from django_countries.fields import CountryField
 from django_countries.widgets import CountrySelectWidget
+from django_countries import countries
 
 from .models import Order, OrderItem
 
@@ -10,13 +12,24 @@ DELIVERY_METHODS = (
 )
 
 
+YEAR_IN_SCHOOL_CHOICES = (
+    ('FR', 'Freshman'),
+    ('SO', 'Sophomore'),
+    ('JR', 'Junior'),
+    ('SR', 'Senior'),
+)
+
 class CheckOutForm(forms.ModelForm):
+	""" The form for receiving the Order model and process that to html for the user to put into data """
 
 	class Meta:
+		""" The meta class of the Check Out form """
 		model = Order
-		exclude = ['items', 'profile', 'processed', 'orderDiscount', 'tax', 'deliveryPrice']
+		exclude = ['items', 'profile', 'processed', 'orderDiscount', 'tax', 'deliveryPrice', 'deliveryCountry', 'billingCountry']
 		widgets = {'country': CountrySelectWidget()}
 
+	# countrydel = forms.ChoiceField(choices=YEAR_IN_SCHOOL_CHOICES, required=True)
+	# countrybil = forms.ChoiceField(choices=countries, required=True)
 	# 	email = forms.EmailField(max_length=256)
 	# 	deliveryFirstName = forms.CharField(max_length=30)
 	# 	deliveryLastName = forms.CharField(max_length=30)
