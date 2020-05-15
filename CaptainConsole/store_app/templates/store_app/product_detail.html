@@ -1,6 +1,5 @@
 {% extends "base.html" %} {% load static %} {% block head %}
 <link rel="stylesheet" type="text/css" href="{% static 'store_app/product-detail.css'%}" />
-    <script src="{% static 'store_app/product_detail.js' %}"></script>
 {% endblock %}
 
 {% block header %}
@@ -35,4 +34,27 @@
 
 {% block footer %}
 {% include 'footer.html' %}
+{% endblock %}
+
+
+{% block javascript %}
+
+{% if user.is_authenticated %}
+<script>
+    let object_id = {{ object.id }};
+    let user_id = {{ user.id }};
+
+    let csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+    $.ajax({
+        url: "/profile/ajax/add_to_search_history/",
+        method: "POST",
+        data: {
+            product_id: object_id,
+            profile_id: user_id,
+            csrfmiddlewaretoken: csrftoken,
+        }
+    });
+</script>
+{% endif %}
+
 {% endblock %}

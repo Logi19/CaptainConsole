@@ -1,0 +1,46 @@
+{% extends "base.html" %} {% load static %} {% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'profile_app/view_profile.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'profile_app/search_history.css' %}" />
+{% endblock %} {% block header %} {% include 'header.html' %} {% endblock %} {% block content %}
+
+<div id="profile_div" class="container row">
+    <div class="col s3 center">
+        {% if user.profileImage %}
+        <img class="circle profile-pic" src="/{{ user.profileImage }}" alt="Profile picture" />
+        {% else %}
+        <img class="circle profile-pic" src="{% static 'media/profile.png' %}" alt="Profile picture" />
+        {% endif %}
+        <h4>{{ user }}</h4>
+        <h6>{{ user.email }}</h6>
+        <p><a href="update/" class="btn">Edit profile</a></p>
+    </div>
+    <div class="col s8 offset-s1">
+        <div id="top_div">
+            <h4>Search history:</h4>
+            <a href="/profile/my_profile/" class="btn">Order history</a>
+        </div>
+        <div id="order_hist_div">
+            <ul class="collapsible expandable">
+                {% for search in search_history %}
+                <li>
+                    <a href="/store/products/{{ search.searchProduct.id }}" class="black-text">
+                        <div class="waves-effect collapsible-header order_div">
+                            <div>
+                                <img class="search_img" src="/{{search.searchProduct.get_thumbnail}}" alt="{{ search.searchProduct }}">
+                                <h5>{{ search.searchProduct }}</h5>
+                            </div>
+                            <h6>{{ search.time }}</h6>
+                        </div>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block footer %}
+{% include 'footer.html' %}
+{% endblock %}
