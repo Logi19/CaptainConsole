@@ -53,27 +53,33 @@ function remove_from_shopping_cart(shopping_cart_id, product_id) {
 }
 
 function change_url(text) {
-    curr_url = window.location.href;
-    if (!curr_url.includes(text)) {
-        if (curr_url.includes("/?")) {
-            new_url = curr_url + "&" + text;
+    if (!new_url.includes(text)) {
+        if (new_url.includes("/?")) {
+            new_url = new_url + "&" + text;
         } else {
-            new_url = curr_url + "?" + text;
+            new_url = new_url + "?" + text;
         }
     } else {
-        if (curr_url[curr_url.indexOf(text) - 1] === "?") {
-            if (curr_url.endsWith(text)) {
-                new_url = curr_url.replace("?" + text, "");
-            }
-            else {
-                new_url = curr_url.replace("?" + text + "&", "?");
+        if (new_url[new_url.indexOf(text) - 1] === "?") {
+            if (new_url.endsWith(text)) {
+                new_url = new_url.replace("?" + text, "");
+            } else {
+                new_url = new_url.replace("?" + text + "&", "?");
             }
         } else {
-            new_url = curr_url.replace("&" + text, "");
+            new_url = new_url.replace("&" + text, "");
         }
     }
+}
+
+function go_to_url() {
+    new_url = new_url.replace(/\?page=[0-9]&?/, "?");
+    new_url = new_url.replace(/&page=[0-9]/, "");
     window.location = new_url;
 }
+
+var curr_url = window.location.href;
+var new_url = curr_url;
 
 $(document).ready(function () {
     $(".dropdown-trigger").dropdown();

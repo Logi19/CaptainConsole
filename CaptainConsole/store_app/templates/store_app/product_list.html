@@ -14,10 +14,11 @@
     <div class="product_list_header">
         <h3 id="all_products">All Products</h3>
         <div class="pagination">
+            <!-- TODO: add color, show arrows better -->
             {% if page_obj.has_previous %}
             <span class="waves-effect">
                 <i
-                    onclick="change_url('page={{ page_obj.previous_page_number }}')"
+                    onclick="change_page('page={{ page_obj.previous_page_number }}')"
                     class="material-icons"
                     >chevron_left</i
                 >
@@ -31,7 +32,7 @@
             {% if page_obj.has_next %}
             <span class="waves-effect">
                 <i
-                    onclick="change_url('page={{ page_obj.next_page_number }}')"
+                    onclick="change_page('page={{ page_obj.next_page_number }}')"
                     class="material-icons"
                     >chevron_right</i
                 >
@@ -40,14 +41,27 @@
             <span class="filler"></span>
             {% endif %}
         </div>
-        <div id="sort_search_div">
-            <div id="sort_div">
-                <h5 id="sort-by">Sort-by:</h5>
-                <button class="btn">None</button>
+        <div class="flex_center">
+            <div id="flex_center">
+                <a class='dropdown-trigger btn-large' data-target='dropdown1'>Sort by:</a>
+                <ul id='dropdown1' class='dropdown-content'>
+                    <li><a onclick="change_order('order=name-desc')">Name - descending</a></li>
+                    <li class="divider" tabindex="-1"></li>
+                    <li><a onclick="change_order('order=name-asc')">Name - ascending</a></li>
+                    <li class="divider" tabindex="-1"></li>
+                    <li><a onclick="change_order('order=price-desc')">Price - descending</a></li>
+                    <li class="divider" tabindex="-1"></li>
+                    <li><a onclick="change_order('order=price-asc')">Price - ascending</a></li>
+                    <li class="divider" tabindex="-1"></li>
+                    <li><a onclick="change_order('order=year-desc')">Year - descending</a></li>
+                    <li class="divider" tabindex="-1"></li>
+                    <li><a onclick="change_order('order=year-asc')">Year - ascending</a></li>
+                </ul>
             </div>
-            <form class="form-inline">
+            <form id="search_form" class="form-inline z-depth-1 hoverable flex_center">
                 <input
                     name="search"
+                    id="search_bar"
                     type="text"
                     placeholder="Search"
                     value="{{ request.GET.search }}"
@@ -58,6 +72,7 @@
     </div>
     <div class="row">
         <div id="filters" class="col z-depth-1">
+            <button id="filter_btn" class="btn" onclick="go_to_url()">Apply filters</button>
             <h5>Type:</h5>
             <form action="">
                 <p>

@@ -89,7 +89,7 @@ class ProductList(ListView):
             )
 
         if 'order' in params:
-            order_by = params["order"]
+            order_by = params["order"][0]
 
             if order_by == "year-asc":
                 object_list = object_list.order_by("year")
@@ -100,9 +100,9 @@ class ProductList(ListView):
             elif order_by == "price-desc":
                 object_list = object_list.order_by("-price")
             elif order_by == "name-asc":
-                object_list = object_list.order_by("name")
-            elif order_by == "name-desc":
                 object_list = object_list.order_by("-name")
+            elif order_by == "name-desc":
+                object_list = object_list.order_by("name")
 
         return object_list
 
