@@ -109,7 +109,7 @@ class Order(models.Model):
         taking discounts, tax and delivery into account.
         """
         total = 0
-        for item in OrderItem.objects.filter(order=self.id):
+        for item in OrderItem.objects.filter(order=self):
             total += item.get_price()
 
         #total -= total * (self.orderDiscount / 100)

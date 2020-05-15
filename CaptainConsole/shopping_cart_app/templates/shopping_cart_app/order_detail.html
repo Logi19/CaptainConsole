@@ -51,13 +51,13 @@
         <div class="grid-item items">
             {% if post.items %}
                 <div class="grid-title">
-                    <h5>Shopping Cart ({{ post.items|length }} Items)</h5>
+                    <h5>Shopping Cart ({{ request.user.shoppingCart.items.all|length }} Items)</h5>
                 </div>
             {% else %}
                 <h5>No Orders</h5>
             {% endif %}
             <div class="cart-items">
-                {% for game in shopping_items %}
+                {% for game in post.profile.shoppingCart.shoppingcartitem_set.all %}
                 <div class="item-{{ forloop.counter0 }} order-items">
                     <div class="thumbnail grid-section" style="background-image: url('/{{ game.item.get_thumbnail }}');"></div>
                     <h6>Price: &dollar;{{ game.item.price }}</h6>
@@ -71,6 +71,7 @@
             <div class="grid-title">
                 <h5>Subtotal</h5>
             </div>
+
             <div class="delivery-charge">
                 <h6>Delivery Charge</h6>
             </div>
@@ -88,35 +89,17 @@
                 <h6>Total</h6>
             </div>
             <div class="cost">
-                <strong>&dollar;{{ post.get_total_price }}</strong>
+                <span><strong>&dollar;{{ post.profile.shoppingCart.get_total_price }}</strong></span>
             </div>
         </div>
         <div class="grid-item go-back">
             <a href="{% url 'checkout' %}"><button type="button" id="go-back">Edit Information</button></a>
         </div>
         <div class="grid-item place-order">
-            {% csrf_token %}
-            <a href="{% url 'receipt_view' %}" onclick="empty_cart()"><button type="button" id="place-order">Place Order</button></div>
+            <a href="{% url 'receipt_view' %}"><button type="button" id="place-order">Place Order</button></div>
         </div>
     </div>
 </div>
 {% endblock %}
-{% block footer %}
-{% include 'footer.html' %}
+{% block footer %} {% include 'footer.html' %}
 {% endblock footer %}
-
-{% block javascript %}
-<script>
-function empty_cart() {
-    let csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
-    $.ajax({
-        url: "/cart/ajax/empty_cart/",
-        method: "POST",
-        data: {
-            csrfmiddlewaretoken: csrftoken,
-        }
-    });
-}
-
-</script>
-{% endblock %}
