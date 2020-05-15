@@ -93,3 +93,24 @@ def add_to_cart(request, *args, **kwargs):
 
     data["message"] = "Something went wrong."
     return JsonResponse(data)
+
+
+def empty_cart(request, *args, **kwargs):
+    """
+    Creates an OrderItem instance for each ShoppingCartItem
+    in user's shopping cart and removes from their cart.
+    """
+    if request.method == 'POST':
+        for item in ShoppingCartItem.objects.filter(shoppingCart=request.user.shoppingCart):
+            orderitem = OrderItem()
+            orderitem.product = item.item
+            orderitem.quantity = item.quantity
+            orderitem.order = post
+            orderitem.itemDiscount = 0
+            orderitem.save()
+            item.delete()
+
+        data = {'message': 'SUCCESS'}
+        return JsonResponse(data)
+    data= {'message': 'ERROR'}
+    return JsonResponse(data)

@@ -112,9 +112,9 @@ class Order(models.Model):
         for item in OrderItem.objects.filter(order=self.id):
             total += item.get_price()
 
-        total -= total * (self.orderDiscount / 100)
+        #total -= total * (self.orderDiscount / 100)
         # Add tax
-        total += total * (self.tax / 100)
+        total += total + self.tax
         # Add the cost of shipping
         total += self.deliveryPrice
         return round(total, 2)

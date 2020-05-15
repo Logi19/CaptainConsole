@@ -13,7 +13,7 @@ import datetime
 import json
 
 from shopping_cart_app.models import ShoppingCart, ShoppingCartItem
-from .models import Product, ProductImage, Order, TopSeller
+from .models import Product, ProductImage, Order, OrderItem, TopSeller
 from .forms import CheckOutForm
 
 
@@ -166,8 +166,6 @@ def check_out(request):
         cardname = check_String(cardName)
         cvc_card = check_number(cvc)
         expiry_date = combine(month, year)
-        print(request.POST)
-
         form = CheckOutForm(request.POST)
 
         if form.is_valid():
@@ -177,13 +175,15 @@ def check_out(request):
                 post.orderDiscount = 0
                 post.tax = 12
                 post.deliveryPrice = 10
+                
                 post.deliveryCountry = request.POST.get('deliveryCountry')
-                print(post.deliveryCountry)
                 post.save()
+                shopping_items = ShoppingCartItem.objects.filter(shoppingCart=request.user.shoppingCart)
+
                 return render(
                     request,
                     "shopping_cart_app/order_detail.html",
-                    {"post": post, "cardno": cardNumber, "cardname": cardName, "cvc": cvc, 'expiry_date': expiry_date}
+                    {"post": post, "cardno": cardNumber, "cardname": cardName, "cvc": cvc, 'expiry_date': expiry_date, 'shopping_items': shopping_items}
                 )
             else:
                 raise ValidationError(cardno, cardname, cvc_card + "are not valid, please write valid inputs")
