@@ -16,6 +16,10 @@
 
 }
 
+img {
+    fit-content: cover;
+}
+
 .animation {
     grid-column: 2;
     grid-row: 2;
@@ -24,6 +28,11 @@
 .text {
     grid-column: 2;
     grid-row: 3;
+}
+
+.test {
+    grid-area: featured;
+    overflow: hidden;
 }
 
 h5 {

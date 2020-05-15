@@ -9,71 +9,92 @@
 <div class="review-container">
     <div class="content">
         <div class="grid-item delivery-details">
-            <strong>Delivery Details</strong>
+            <h5>Delivery Details</h5>
+            <h5>{{ post.items.objects }}</h5>
             <!-- Delivery details -->
-            <p>Gummi</p>
-            <p>Reykjavík</p>
-            <p>Menntavegur 1</p>
-            <button type="button" id="edit-info">Edit Delivery</button>
+            <p><strong>First Name:</strong> {{ post.deliveryFirstName }}</p>
+            <p>Last Name: {{ post.deliveryLastName }}</p>
+            <p>Country: {{ post.deliveryCountry }}</p>
+            <p>Address: {{ post.deliveryStreet }}, {{ post.deliveryCity }}, {{ post.deliveryPostal }}</p>
+            <!-- <button type="button" id="edit-info">Edit Delivery</button>-->
         </div>
         <div class="grid-item delivery-method">
-            <strong>Delivery Method</strong>
+            <h5>Delivery Method</h5>
             <p>Standard Delivery Within 5 Working Days Free</p>
+            <p>{{ post.deliveryMethod }}</p>
             <!-- Delivery Method information -->
         </div>
         <div class="grid-item title">
-            <strong>Payment</strong>
+            <h5>Payment</h5>
         </div>
         <div class="grid-item payment-type">
-            <label id="payment-type">Credit/Debit Card</label>
+            <label><h6 id="payment-type">Credit/Debit Card</h6></label>
         </div>
         <div class="grid-item payment-detail">
+            <div class="card-number">
+                <p><strong>Card Number:</strong> {{ cardno }}</p>
+            </div>
+            <div class="card-name">
+                <p>Cardholder Name: {{ cardname }}</p>
+            </div>
+            <div class="billing-address">
+                <p>Billing Address: {{ post.billingStreet }}, {{ post.billingStreetNum }}, , {{ post.billingPostal }}, {{ post.billingCountry }}</p>
+            </div>
+            <div class="cvc">
+                <p>CVC: {{ cvc }}</p>
+            </div>
+            <div class="expiry-date">
+                <p>Expiration Date: {{ expirydate }}</p>
+            </div>
             <!-- Card Information  -->
-            <p>{{ post }}</p>
-            <p>{{ cardno }}</p>
-            <p>{{ cardname }}</p>
-            <p>{{ cvc }}</p>
-            <p>{{ expirydate }}</p>
         </div>
 
         <div class="grid-item items">
-            {% if order_obj.items %}
-                <strong>Shopping Cart ({{ order_obj.items|length }} Items)</strong>
+            {% if post.items.objects %}
+                <h5>Shopping Cart ({{ post.items|length }} Items)</h5>
             {% else %}
-                <strong>No Orders</strong>
+                <h5>No Orders</h5>
             {% endif %}
             {% for item in order_obj.items %}
-                <strong>&dollar;{{item.product.productPrice}}</strong>
-                <h5>{{item.product.productName}}</h5>
-                <h5>{{item.product.productType}}</h5>
+                <div class="cart-items item-{{ forloop.counter0 }}">
+                    <strong>&dollar;{{item.product.productPrice}}</strong>
+                    <h5>{{item.product.productName}}</h5>
+                    <h5>{{item.product.productType}}</h5>
+                </div>
             {% endfor %}
         </div>
         <div class="grid-item subtotal">
             <div class="grid-title">
-                <strong>Subtotal</strong>
+                <h5>Subtotal</h5>
             </div>
             <div class="total-title">
-                <strong>Cart Total</strong>
+                <h6>Cart Total</h6>
             </div>
             <div class="total-price">
                 <span><strong>&dollar;{{ order_obj.get_total_price }}</strong></span>
             </div>
             <div class="delivery-charge">
-                <strong>Delivery Charge</strong>
+                <h6>Delivery Charge</h6>
             </div>
             <div class="delivery-price">
-                <span><strong>Free</strong></span>
+                <span><strong>&dollar;{{ post.deliveryPrice }}</strong></span>
+            </div>
+            <div class="tax">
+                <h6>Tax</h6>
+            </div>
+            <div class="tax-price">
+                <span><strong>&dollar;{{ post.tax }}</strong></span>
             </div>
             <!-- Delivery Cost  -->
             <div class="total">
-                <strong>Total:</strong>
+                <h6>Total</h6>
             </div>
             <div class="cost">
-                <strong>&dollar;</strong>
+                <strong>&dollar;{{ post.deliveryPrice | add:post.tax }}</strong>
             </div>
         </div>
         <div class="grid-item go-back">
-            <button type="button" id="go-back">Go Back</button>
+            <button type="button" id="go-back">Edit Information</button>
         </div>
         <div class="grid-item place-order">
             <button type="button" id="place-order">Place Order</button>

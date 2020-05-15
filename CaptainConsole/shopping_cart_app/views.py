@@ -37,15 +37,6 @@ def remove_from_cart(request, *args, **kwargs):
     return JsonResponse(data)
 
 
-class ReceiptView(DetailView):
-    model = Order
-    template_name = 'shopping_cart_app/receipt_view.html'
-
-    def get_object(self):
-        profile_id = self.request.session['_auth_user_id']
-        return get_object_or_404(self.model, pk=7)
-
-
 def receipt_view(request, *args, **kwargs):
     return render(request, 'shopping_cart_app/receipt_view.html', context={})
 

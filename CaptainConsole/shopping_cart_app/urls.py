@@ -1,6 +1,5 @@
 from django.urls import path
 
-from .views import ReceiptView
 from .views import OrderDetail
 from .views import OrderCreate
 from .views import remove_from_cart
