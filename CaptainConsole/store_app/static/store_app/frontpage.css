@@ -17,10 +17,10 @@
 }
 
 #page_content {
-    width: max-content;
-    margin: auto;
+    width: 100%;
     display: flex;
     flex-flow: row wrap;
+    justify-content: center;
 }
 
 #top_sellers {

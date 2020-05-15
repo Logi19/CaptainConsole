@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ValidationError
 from django.shortcuts import render, Http404, redirect
 from django.http import JsonResponse
 from django.db.models import Q
@@ -152,24 +153,30 @@ class ProductDetail(DetailView):
 #         return redirect("/cart")
 
 
-def check_number(number):
-    x = number.isdigit()
+def check_number(theinput):
+    x = theinput.isdigit()
     if x is True:
         return True
     else:
-        return False
+        raise ValidationError(
+            ('%(theinput) is not a valid input'),
+            params={'theinput': theinput},
+        )
 
 
-def check_String(strings):
-    x = strings.isalpha()
+def check_String(theinput):
+    x = theinput.isalpha()
     if x is True:
         return True
     else:
-        return False
+        raise ValidationError(
+            '%(theinput)is not valid',
+                                params={'theinput': theinput},
+                             )
 
-
-# def check_date(string):
-#
+def combine(month, year):
+    expiry_date = month + "-" + year
+    return expiry_date
 
 
 @login_required
@@ -179,11 +186,14 @@ def check_out(request):
     print(request.POST)
     if request.method == "POST":
         cardNumber = request.POST.get("cardNumber")
-        cardName = request.POST.get("cardNumber")
+        cardName = request.POST.get("cardName")
         cvc = request.POST.get("cvc")
+        month = request.POST.get('month')
+        year = request.POST.get('year')
         cardno = check_number(cardNumber)
         cardname = check_String(cardName)
         cvc_card = check_number(cvc)
+        expiry_date = combine(month, year)
 
         form = CheckOutForm(request.POST)
 
@@ -207,7 +217,7 @@ def check_out(request):
             return render(
                 request,
                 "shopping_cart_app/order_detail.html",
-                {"post": post, "cardno": cardNumber, "cardname": cardName, "cvc": cvc,},
+                {"post": post, "cardno": cardNumber, "cardname": cardName, "cvc": cvc, 'expiry_date': expiry_date}
             )
         else:
             return redirect("/store/checkout")
@@ -215,3 +225,21 @@ def check_out(request):
         form = CheckOutForm()
 
     return render(request, "store_app/checkouts.html", {"form": form})
+
+
+def error_404(request, exception):
+    data = {}
+    return render(request, 'store_app/404.html', data)
+
+
+def error_500(request):
+    data = {}
+    return render(request, 'store_app/500.html', data)
+
+def error_403(request, exception):
+    data = {}
+    return render(request, 'store_app/403.html', data)
+
+def error_400(request, exception):
+    data = {}
+    return render(request, 'store_app/400.html', data)

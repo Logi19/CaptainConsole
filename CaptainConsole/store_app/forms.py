@@ -3,61 +3,229 @@ from django import forms
 from django_countries.fields import CountryField
 from django_countries.widgets import CountrySelectWidget
 from django_countries import countries
+import django_countries
+from country_list import countries_for_language
+from django_countries.fields import CountryField
 
 from .models import Order, OrderItem
 
 DELIVERY_METHODS = (
-	'PICKUP',
-	'DELIVERY'
+	('P', 'PICKUP'),
+	('D', 'DELIVERY')
 )
 
-
-YEAR_IN_SCHOOL_CHOICES = (
-    ('FR', 'Freshman'),
-    ('SO', 'Sophomore'),
-    ('JR', 'Junior'),
-    ('SR', 'Senior'),
-)
 
 class CheckOutForm(forms.ModelForm):
 	""" The form for receiving the Order model and process that to html for the user to put into data """
 
+	# COUNTRIES = tuple(countries_for_language('en'))
+	# countrydel = forms.ChoiceField(choices=COUNTRIES, required=True)
+	# countrybil = forms.ChoiceField(choices=countries, required=True)
+
 	class Meta:
 		""" The meta class of the Check Out form """
 		model = Order
-		exclude = ['items', 'profile', 'processed', 'orderDiscount', 'tax', 'deliveryPrice', 'deliveryCountry', 'billingCountry']
-		widgets = {'country': CountrySelectWidget()}
+		exclude = ['items', 'profile', 'processed',
+				   'orderDiscount', 'tax',
+				   'deliveryPrice', 'deliveryCountry',
+				   'billingCountry'
+				   ]
+	# widgets = {'country': CountrySelectWidget()}
 
-	# countrydel = forms.ChoiceField(choices=YEAR_IN_SCHOOL_CHOICES, required=True)
-	# countrybil = forms.ChoiceField(choices=countries, required=True)
-	# 	email = forms.EmailField(max_length=256)
-	# 	deliveryFirstName = forms.CharField(max_length=30)
-	# 	deliveryLastName = forms.CharField(max_length=30)
-	# 	deliveryCompany = forms.CharField(max_length=50, required=False)
-	# 	deliveryMethod = forms.ChoiceField(
-	# 		widget=forms.RadioSelect, choices=DELIVERY_METHODS
-	# 	)
-	# 	deliveryStreet = forms.CharField(max_length=256)
-	# 	deliveryStreetNum = forms.CharField(max_length=20)
-	# 	deliveryCity = forms.CharField(max_length=256)
-	# 	deliveryPostal = forms.CharField(max_length=10)
-	# 	deliveryCountry = forms.CountryField().formfield
-	# 	deliveryPhone = forms.CharField(max_length=20, required=False)
-	#
-	# 	billingFirstName = forms.CharField(max_length=30)
-	# 	billingLastName = forms.CharField(max_length=30)
-	# 	billingCompany = forms.CharField(max_length=50, required=False)
-	#
-	# 	billingStreet = forms.CharField(max_length=256)
-	# 	billingStreetNum = forms.CharField(max_length=20)
-	# 	billingCity = forms.CharField(max_length=256)
-	# 	billingPostal = forms.CharField(max_length=10)
-	# 	billingCountry = CountryField()
-	# 	billingPhone = forms.CharField(max_length=20, required=False)
+	email = forms.EmailField(max_length=256, widget=forms.EmailInput(attrs={
+		'placeholder': 'bobby@johnson.com',
+		'class': 'input-field col s6',
+		'style': 'height: 20px; ' 
+				 'width: 250px;'
+				 'padding: 7px; '
+				 'margin-top: 10px;'
+				 'margin-bottom: 10px; '
+				 'font-size: 20px;'
+	}))
+	deliveryFirstName = forms.CharField(max_length=30, widget=forms.TextInput(attrs={
+		'placeholder': 'John',
+		'class': 'input-field col s6',
+		'style': 'height: 20px; '
+				 'width: 250px;'
+				 'padding: 7px; '
+				 'margin-top: 10px; '
+				 'margin-bottom: 10px; '
+				 'font-size: 20px;'
+	}))
+	deliveryLastName = forms.CharField(max_length=30, widget=forms.TextInput(attrs={
+		'placeholder': 'Doe',
+		'class': 'input-field col s6',
+		'style': 'height: 20px; '
+				 'width: 250px;'
+				 'padding: 7px; '
+				 'margin-top: 10px; '
+				 'margin-bottom: 10px; '
+				 'font-size: 20px;'
+	}))
+
+
+	deliveryCompany = forms.CharField(max_length=50, required=False, widget=forms.TextInput(attrs={
+		'placeholder': 'Captain Console',
+		'class': 'input-field col s6',
+		'style': 'height: 20px; '
+				 'width: 250px;'
+				 'padding: 7px; '
+				 'margin-top: 10px; '
+				 'margin-bottom: 10px; '
+				 'font-size: 20px;'
+
+	}))
+	deliveryMethod = forms.ChoiceField(
+		widget=forms.RadioSelect, choices=DELIVERY_METHODS
+	)
+	deliveryStreet = forms.CharField(max_length=256, widget=forms.TextInput(attrs={
+		'placeholder': 'Menntavegur',
+		'class': 'input-field col s6',
+		'style': 'height: 20px; '
+				 'width: 250px;'
+				 'padding: 7px; '
+				 'margin-top: 10px; '
+				 'margin-bottom: 10px; '
+				 'font-size: 20px;'
+
+	}))
+	deliveryStreetNum = forms.CharField(max_length=20, widget=forms.TextInput(attrs={
+		'placeholder': '1',
+		'class': 'input-field col s6',
+		'style': 'height: 20px; '
+				 'width: 250px;'
+				 'padding: 7px; '
+				 'margin-top: 10px; '
+				 'margin-bottom: 10px; '
+				 'font-size: 20px;'
+
+	}))
+	deliveryCity = forms.CharField(max_length=256, widget=forms.TextInput(attrs={
+		'placeholder': 'Reykjavik',
+		'class': 'input-field col s6',
+		'style': 'height: 20px; '
+				 'width: 250px;'
+				 'padding: 7px; '
+				 'margin-top: 10px; '
+				 'margin-bottom: 10px; '
+				 'font-size: 20px;'
+
+	}))
+	deliveryPostal = forms.CharField(max_length=10, widget=forms.TextInput(attrs={
+		'placeholder': '102',
+		'class': 'input-field col s6',
+		'style': 'height: 20px; '
+				 'width: 250px;'
+				 'padding: 7px; '
+				 'margin-top: 10px; '
+				 'margin-bottom: 10px; '
+				 'font-size: 20px;'
+
+	}))
+	billingCountry = CountryField().formfield()
+	deliveryPhone = forms.CharField(max_length=20, required=False, widget=forms.TextInput(attrs={
+		'placeholder': '5812345',
+		'class': 'input-field col s6',
+		'style': 'height: 20px; '
+				 'width: 250px;'
+				 'padding: 7px; '
+				 'margin-top: 10px; '
+				 'margin-bottom: 10px; '
+				 'font-size: 20px;'
+
+	}))
+	billingFirstName = forms.CharField(max_length=30, widget=forms.TextInput(attrs={
+		'placeholder': 'John',
+		'class': 'input-field col s6',
+		'style': 'height: 20px; '
+				 'width: 250px;'
+				 'padding: 7px; '
+				 'margin-top: 10px; '
+				 'margin-bottom: 10px; '
+				 'font-size: 20px;'
+
+	}))
+	billingLastName = forms.CharField(max_length=30, widget=forms.TextInput(attrs={
+		'placeholder': 'Doe',
+		'class': 'input-field col s6',
+		'style': 'height: 20px; '
+				 'width: 250px;'
+				 'padding: 7px; '
+				 'margin-top: 10px; '
+				 'margin-bottom: 10px; '
+				 'font-size: 20px;'
+
+	}))
+	billingCompany = forms.CharField(max_length=50, required=False, widget=forms.TextInput(attrs={
+		'placeholder': 'Captain Console',
+		'class': 'input-field col s6',
+		'style': 'height: 20px; '
+				 'width: 250px;'
+				 'padding: 7px; '
+				 'margin-top: 10px; '
+				 'margin-bottom: 10px; '
+				 'font-size: 20px;'
+
+	}))
+
+	billingStreet = forms.CharField(max_length=256, widget=forms.TextInput(attrs={
+		'placeholder': 'Menntavegur',
+		'class': 'input-field col s6',
+		'style': 'height: 20px; '
+				 'width: 250px;'
+				 'padding: 7px; '
+				 'margin-top: 10px; '
+				 'margin-bottom: 10px; '
+				 'font-size: 20px;'
+
+	}))
+	billingStreetNum = forms.CharField(max_length=20, widget=forms.TextInput(attrs={
+		'placeholder': '1',
+		'class': 'input-field col s6',
+		'style': 'height: 20px; '
+				 'width: 250px;'
+				 'padding: 7px; '
+				 'margin-top: 10px; '
+				 'margin-bottom: 10px; '
+				 'font-size: 20px;'
+
+	}))
+	billingCity = forms.CharField(max_length=256, widget=forms.TextInput(attrs={
+		'placeholder': 'Reykjavik',
+		'class': 'input-field col s6',
+		'style': 'height: 20px; '
+				 'width: 250px;'
+				 'padding: 7px; '
+				 'margin-top: 10px; '
+				 'margin-bottom: 10px; '
+				 'font-size: 20px;'
+	}))
+	billingPostal = forms.CharField(max_length=10, widget=forms.TextInput(attrs={
+		'placeholder': '102',
+		'class': 'input-field col s6',
+		'style': 'height: 20px; '
+				 'width: 250px;'
+				 'padding: 7px; '
+				 'margin-top: 10px; '
+				 'margin-bottom: 10px; '
+				 'font-size: 20px;'
+
+	}))
+	billingCountry = CountryField().formfield()
+	billingPhone = forms.CharField(max_length=20, required=False, widget=forms.TextInput(attrs={
+		'placeholder': '5812345',
+		'class': 'input-field col s6',
+		'style': 'height: 20px; '
+				 'width: 250px;'
+				 'padding: 7px; '
+				 'margin-top: 10px; '
+				 'margin-bottom: 10px; '
+				 'font-size: 20px;'
+
+	}))
 
 
 class OrderItem(forms.ModelForm):
-
 	class Meta:
 		model = OrderItem
 		exclude = ['quantity']
