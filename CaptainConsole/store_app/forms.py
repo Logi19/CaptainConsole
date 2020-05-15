@@ -23,22 +23,22 @@ class CheckOutForm(forms.ModelForm):
 				   ]
 	# widgets = {'country': CountrySelectWidget()}
 
-	email = forms.EmailField(max_length=256, widget=forms.EmailInput(attrs={
+	email = forms.EmailField(widget=forms.EmailInput(attrs={
 		'placeholder': 'bobby@johnson.com',
 		'class': 'input-field col s6',
 		'style': 'height: 20px; ' 
-				 'width: 250px;'
+				 'width: 45%;'
 				 'padding: 7px; '
 				 'margin-top: 10px;'
 				 'margin-bottom: 10px; '
 				 'font-size: 20px;'
 				'color: white;'
 	}))
-	deliveryFirstName = forms.CharField(max_length=30, widget=forms.TextInput(attrs={
+	deliveryFirstName = forms.CharField(widget=forms.TextInput(attrs={
 		'placeholder': 'John',
 		'class': 'input-field col s6',
 		'style': 'height: 20px; '
-				 'width: 250px;'
+				 'width: 45%;'
 				 'padding: 7px; '
 				 'margin-top: 10px; '
 				 'margin-bottom: 10px; '
@@ -46,11 +46,11 @@ class CheckOutForm(forms.ModelForm):
 				 'color: white;'
 
 	}))
-	deliveryLastName = forms.CharField(max_length=30, widget=forms.TextInput(attrs={
+	deliveryLastName = forms.CharField(widget=forms.TextInput(attrs={
 		'placeholder': 'Doe',
 		'class': 'input-field col s6',
 		'style': 'height: 20px; '
-				 'width: 250px;'
+				 'width: 45%;'
 				 'padding: 7px; '
 				 'margin-top: 10px; '
 				 'margin-bottom: 10px; '
@@ -59,11 +59,11 @@ class CheckOutForm(forms.ModelForm):
 	}))
 
 
-	deliveryCompany = forms.CharField(max_length=50, required=False, widget=forms.TextInput(attrs={
+	deliveryCompany = forms.CharField(required=False, widget=forms.TextInput(attrs={
 		'placeholder': 'Captain Console',
 		'class': 'input-field col s6',
 		'style': 'height: 20px; '
-				 'width: 250px;'
+				 'width: 45%;'
 				 'padding: 7px; '
 				 'margin-top: 10px; '
 				 'margin-bottom: 10px; '
@@ -72,13 +72,13 @@ class CheckOutForm(forms.ModelForm):
 
 	}))
 	deliveryMethod = forms.ChoiceField(
-		widget=forms.RadioSelect, choices=DELIVERY_METHODS
+		widget=forms.RadioSelect, choices=DELIVERY_METHODS, required=False
 	)
-	deliveryStreet = forms.CharField(max_length=256, widget=forms.TextInput(attrs={
+	deliveryStreet = forms.CharField(widget=forms.TextInput(attrs={
 		'placeholder': 'Menntavegur',
 		'class': 'input-field col s6',
 		'style': 'height: 20px; '
-				 'width: 250px;'
+				 'width: 45%;'
 				 'padding: 7px; '
 				 'margin-top: 10px; '
 				 'margin-bottom: 10px; '
@@ -86,11 +86,11 @@ class CheckOutForm(forms.ModelForm):
 				 'color: white;'
 
 	}))
-	deliveryStreetNum = forms.CharField(max_length=20, widget=forms.TextInput(attrs={
+	deliveryStreetNum = forms.CharField(widget=forms.TextInput(attrs={
 		'placeholder': '1',
 		'class': 'input-field col s6',
 		'style': 'height: 20px; '
-				 'width: 250px;'
+				 'width: 45%;'
 				 'padding: 7px; '
 				 'margin-top: 10px; '
 				 'margin-bottom: 10px; '
@@ -98,11 +98,11 @@ class CheckOutForm(forms.ModelForm):
 				 'color: white;'
 
 	}))
-	deliveryCity = forms.CharField(max_length=256, widget=forms.TextInput(attrs={
+	deliveryCity = forms.CharField(widget=forms.TextInput(attrs={
 		'placeholder': 'Reykjavik',
 		'class': 'input-field col s6',
 		'style': 'height: 20px; '
-				 'width: 250px;'
+				 'width: 45%;'
 				 'padding: 7px; '
 				 'margin-top: 10px; '
 				 'margin-bottom: 10px; '
@@ -110,11 +110,11 @@ class CheckOutForm(forms.ModelForm):
 				 'color: white;'
 
 	}))
-	deliveryPostal = forms.CharField(max_length=10, widget=forms.TextInput(attrs={
+	deliveryPostal = forms.CharField(widget=forms.TextInput(attrs={
 		'placeholder': '102',
 		'class': 'input-field col s6',
 		'style': 'height: 20px; '
-				 'width: 250px;'
+				 'width: 45%;'
 				 'padding: 7px; '
 				 'margin-top: 10px; '
 				 'margin-bottom: 10px; '
@@ -122,12 +122,12 @@ class CheckOutForm(forms.ModelForm):
 				 'color: white;'
 
 	}))
-	billingCountry = CountryField().formfield()
-	deliveryPhone = forms.CharField(max_length=20, required=False, widget=forms.TextInput(attrs={
+	deliveryCountry = CountryField().formfield()
+	deliveryPhone = forms.CharField(required=False, widget=forms.TextInput(attrs={
 		'placeholder': '5812345',
 		'class': 'input-field col s6',
 		'style': 'height: 20px; '
-				 'width: 250px;'
+				 'width: 45%;'
 				 'padding: 7px; '
 				 'margin-top: 10px; '
 				 'margin-bottom: 10px; '
@@ -135,11 +135,11 @@ class CheckOutForm(forms.ModelForm):
 				 'color: white;'
 
 	}))
-	billingFirstName = forms.CharField(max_length=30, widget=forms.TextInput(attrs={
+	billingFirstName = forms.CharField(widget=forms.TextInput(attrs={
 		'placeholder': 'John',
 		'class': 'input-field col s6',
 		'style': 'height: 20px; '
-				 'width: 250px;'
+				 'width: 45%;'
 				 'padding: 7px; '
 				 'margin-top: 10px; '
 				 'margin-bottom: 10px; '
@@ -147,11 +147,11 @@ class CheckOutForm(forms.ModelForm):
 				 'color: white;'
 
 	}))
-	billingLastName = forms.CharField(max_length=30, widget=forms.TextInput(attrs={
+	billingLastName = forms.CharField(widget=forms.TextInput(attrs={
 		'placeholder': 'Doe',
 		'class': 'input-field col s6',
 		'style': 'height: 20px; '
-				 'width: 250px;'
+				 'width: 45%;'
 				 'padding: 7px; '
 				 'margin-top: 10px; '
 				 'margin-bottom: 10px; '
@@ -159,11 +159,11 @@ class CheckOutForm(forms.ModelForm):
 				 'color: white;'
 
 	}))
-	billingCompany = forms.CharField(max_length=50, required=False, widget=forms.TextInput(attrs={
+	billingCompany = forms.CharField(required=False, widget=forms.TextInput(attrs={
 		'placeholder': 'Captain Console',
 		'class': 'input-field col s6',
 		'style': 'height: 20px; '
-				 'width: 250px;'
+				 'width: 45%;'
 				 'padding: 7px; '
 				 'margin-top: 10px; '
 				 'margin-bottom: 10px; '
@@ -172,11 +172,11 @@ class CheckOutForm(forms.ModelForm):
 
 	}))
 
-	billingStreet = forms.CharField(max_length=256, widget=forms.TextInput(attrs={
+	billingStreet = forms.CharField(widget=forms.TextInput(attrs={
 		'placeholder': 'Menntavegur',
 		'class': 'input-field col s6',
 		'style': 'height: 20px; '
-				 'width: 250px;'
+				 'width: 45%;'
 				 'padding: 7px; '
 				 'margin-top: 10px; '
 				 'margin-bottom: 10px; '
@@ -184,11 +184,11 @@ class CheckOutForm(forms.ModelForm):
 				 'color: white;'
 
 	}))
-	billingStreetNum = forms.CharField(max_length=20, widget=forms.TextInput(attrs={
+	billingStreetNum = forms.CharField(widget=forms.TextInput(attrs={
 		'placeholder': '1',
 		'class': 'input-field col s6',
 		'style': 'height: 20px; '
-				 'width: 250px;'
+				 'width: 45%;'
 				 'padding: 7px; '
 				 'margin-top: 10px; '
 				 'margin-bottom: 10px; '
@@ -196,22 +196,22 @@ class CheckOutForm(forms.ModelForm):
 				 'color: white;'
 
 	}))
-	billingCity = forms.CharField(max_length=256, widget=forms.TextInput(attrs={
+	billingCity = forms.CharField(widget=forms.TextInput(attrs={
 		'placeholder': 'Reykjavik',
 		'class': 'input-field col s6',
 		'style': 'height: 20px; '
-				 'width: 250px;'
+				 'width: 45%;'
 				 'padding: 7px; '
 				 'margin-top: 10px; '
 				 'margin-bottom: 10px; '
 				 'font-size: 20px;'
 				 'color: white;'
 	}))
-	billingPostal = forms.CharField(max_length=10, widget=forms.TextInput(attrs={
+	billingPostal = forms.CharField(widget=forms.TextInput(attrs={
 		'placeholder': '102',
 		'class': 'input-field col s6',
 		'style': 'height: 20px; '
-				 'width: 250px;'
+				 'width: 45%;'
 				 'padding: 7px; '
 				 'margin-top: 10px; '
 				 'margin-bottom: 10px; '
@@ -220,11 +220,11 @@ class CheckOutForm(forms.ModelForm):
 
 	}))
 	billingCountry = CountryField().formfield()
-	billingPhone = forms.CharField(max_length=20, required=False, widget=forms.TextInput(attrs={
+	billingPhone = forms.CharField(required=False, widget=forms.TextInput(attrs={
 		'placeholder': '5812345',
 		'class': 'input-field col s6',
 		'style': 'height: 20px; '
-				 'width: 250px;'
+				 'width: 45%;'
 				 'padding: 7px; '
 				 'margin-top: 10px; '
 				 'margin-bottom: 10px; '

@@ -126,41 +126,17 @@ class ProductDetail(DetailView):
         return context
 
 
-# class CheckOut(View):
-#     def get(self, *args, **kwargs):
-#         form = CheckOutForm()
-#         return render(self.request, "checkouts.html", {'form': form})
-#
-#     def post(self, *args, **kwargs):
-#         form = CheckOutForm(self.request.POST)
-#         print(self.request.POST)
-#         if form.is_valid():
-#             new_obj = [self.request.id, ]
-#             post = form.save(commit=False)
-#             post.profile = self.request.user
-#             post.processed = 'True'
-#             post.items = 2 #Þarf að gera post.items.set(request.id,
-#             # fa einhvern veginn öll products ,
-#             # setja inn orderDiscount
-#             # og setja inn quantity en þetta fer inn i list sem er svo settur hingað inn)
-#             post.orderDiscount = 12
-#             post.tax = 12
-#             post.deliveryPrice = 12
-#             post.save()
-#             print(post.cleaned_data)
-#             print("this works")
-#             return redirect("/")
-#         return redirect("/cart")
-
 
 def check_number(theinput):
-    x = theinput.isdigit()
-    if x is True:
+    number = str(theinput)
+    if len(number) == 16:
+        return True
+    elif len(number) == 3:
         return True
     else:
         raise ValidationError(
-            ('%(theinput) is not a valid input'),
-            params={'theinput': theinput},
+            ('%(number) is not a valid input'),
+            params={'number': number},
         )
 
 
@@ -194,33 +170,33 @@ def check_out(request):
         cardname = check_String(cardName)
         cvc_card = check_number(cvc)
         expiry_date = combine(month, year)
+        print(request.POST.get("cardNumber"))
+        print(request.POST.get("cardName"))
+        print(request.POST.get("month"))
+        print(request.POST.get("year"))
+        print(request.POST.get("cvc"))
 
         form = CheckOutForm(request.POST)
 
         if form.is_valid():
-            # expiryDate = check_date(request.POST.get('expiryDate'))
-            #      and expiryDate == True:
-            post = form.save(commit=False)
-            # post.save()
-            post.deliveryCountry = "Iceland"
-            post.processed = True
-            post.profile = request.user
-            post.orderDiscount = 0
-            post.tax = 12
-            post.deliveryPrice = 10
-            # cardName = request.POST.get('cardName')
-            # cardNumber = request.POST.get('cardNumber')
-            expirydate = request.POST.get('expiryDate')
-            # cvc = cvc
-            print(type(post))
-            post.save()
-            return render(
-                request,
-                "shopping_cart_app/order_detail.html",
-                {"post": post, "cardno": cardNumber, "cardname": cardName, "cvc": cvc, 'expiry_date': expiry_date}
-            )
+            if cardno is True and cardname is True and cvc_card is True:
+                post = form.save(commit=False)
+                post.profile = request.user
+                post.orderDiscount = 0
+                post.tax = 12
+                post.deliveryPrice = 10
+                print(type(post))
+                post.save()
+                return render(
+                    request,
+                    "shopping_cart_app/order_detail.html",
+                    {"post": post, "cardno": cardNumber, "cardname": cardName, "cvc": cvc, 'expiry_date': expiry_date}
+                )
+            else:
+                raise ValidationError(cardno, cardname, cvc_card + "are worng")
         else:
-            return redirect("/store/checkout")
+            print("not valid")
+            raise ValidationError("WRONG!")
     else:
         form = CheckOutForm()
 
