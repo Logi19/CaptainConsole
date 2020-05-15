@@ -1,69 +1,58 @@
 
-.content {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    background: url("/static/media/games-pile.jpg") no-repeat center center fixed;
+main {
+    background: url("/static/media/videogames.jpg") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
 }
 
+.login-form {
+    display: flex;
+    justify-content: center;
+}
+
 .box{
     width: 410px;
-    height: 560px;
-    background: midnightblue;
-    color: #fffccf;
-    top: 50%;
-    left: 50%;
-    position: absolute;
-    transform: translate(-50%,-50%);
-    box-sizing: border-box;
+    height: 500px;
     border: 5px solid black;
-}
-.hello{
-    color: white;
+    border-radius: 5px;
 }
 
 .title{
-    text-align: center;
     font-family: cursive;
-    color: white;
 }
 
 .inputs{
-    padding: 25px;
+    margin: 0px 25px 0px 25px;
 }
 
-.login_button{
-    background-color: cornflowerblue;
-    border: none;
-    color: white;
-    padding: 12px 30px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 23px;
-
-}
-.button-div{
-    text-align: center;
+#login_btn {
+    margin: 5px 0px 20px 0px;
+    font-size: 20px;
 }
 
-.noaccount{
-    text-align: center;
-    color: white;
+#logo_div {
+    margin: 2rem 0rem 0rem 2rem;
+    padding: 15px;
+    display: flex;
+    border-radius: 5px;
 }
 
-.button-div2{
-    text-align: center;
+#logo_text_div {
+    display: flex;
+    flex-flow: column nowrap;
+    padding: 10px;
 }
 
-a.button {
-    -webkit-appearance: button;
-    -moz-appearance: button;
-    appearance: button;
-    text-decoration: underline;
-    color: white;
+#logo_text_div h2 {
+    margin: 0px;
+}
+
+#logo {
+    width: 100px;
+    height: 90px;
+}
+#name{
+    font-weight: bolder;
 }

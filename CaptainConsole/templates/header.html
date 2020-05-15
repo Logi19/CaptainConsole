@@ -1,10 +1,10 @@
 {% load static %}
 <header>
 <nav class="nav-extended">
-        <div class="nav-wrapper indigo lighten-1">
+        <div class="nav-wrapper indigo darken-2">
             <a href="/store" class="brand-logo">
                 <img id="logo" src="{% static 'media/console-logo.png' %}" />
-                <h1>Captain console</h1>
+                <h1>Captain Console</h1>
             </a>
             <ul id="nav-mobile" class="right">
                 {% if user.is_authenticated %}
@@ -28,7 +28,7 @@
             <li><a href="/profile/logout">Log Out</a></li>
         </ul>
         </div>
-        <div class="nav-content indigo">
+        <div class="nav-content indigo darken-1">
             <ul id="lower-nav-ul">
                 <li><a href="/store/products">All Products</a></li>
                 <li><a href="/store/products/?manufacturer=Nintendo">Nintendo</a></li>

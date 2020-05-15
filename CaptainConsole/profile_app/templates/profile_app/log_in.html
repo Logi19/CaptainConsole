@@ -6,31 +6,40 @@ Captain console - Log in
 {% endblock %}
 
 {% block head %}
-    <link rel="stylesheet" type="text/css" href="{% static "profile_app/log_in.css" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'profile_app/log_in.css' %}"/>
 {% endblock %}
 
 {% block content %}
-    <div class="content">
-        <div class="login-form">
-            <div class="box">
-                <h1 class="title">Log in</h1>
-                <div class="inputs white-text">
-                    <form method="post">
-                        {% csrf_token %}
-                        <label for="email">Email:</label>
-                        <input type="text" class="white-text" name="email">
-                        <label for="password">Password:</label>
-                        <input type="password" class="white-text" name="password">
-                        <div class="button-div">
-                            <button class="login_button" type="submit">Login</button>
-                        </div>
-                    </form>
+
+<div id="logo_div">
+    <a href="/store/"><img id="logo" src="{% static 'media/console-logo.png' %}" /></a>
+    <a href="/store/" class="black-text">
+        <div id="logo_text_div">
+            <h2 id="name">Captain Console</h2>
+        </div>
+    </a>
+</div>
+
+<div class="login-form">
+    <div class="box indigo darken-4 white-text z-depth-5">
+        <h1 class="title center-align">Log in</h1>
+        <div class="inputs">
+            <form method="post">
+                {% csrf_token %}
+                <label for="email">Email:</label>
+                <input type="text" class="white-text" name="email">
+                <label for="password">Password:</label>
+                <input type="password" class="white-text" name="password">
+                <div class="center-align">
+                    <button id="login_btn" class="btn-large blue darken-3" type="submit">Login</button>
                 </div>
-                <h6 class="noaccount">Don't have an account?</h6>
-                <div class="button-div2">
-                    <a href="/profile/sign_up/" class="button">Sign Up</a>
-                </div>
-            </div>
+            </form>
+        </div>
+        <div class="no_account_div center-align">
+            <h6 class="center-align">Don't have an account?</h6>
+            <a href="/profile/sign_up/" class="white-text btn blue darken-3">Sign Up</a>
         </div>
     </div>
+</div>
+
 {% endblock content%}
