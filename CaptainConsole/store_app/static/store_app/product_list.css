@@ -1,19 +1,32 @@
 .product_list_header {
     display: flex;
     align-content: center;
-    align-items: baseline;
+    align-items: end;
     justify-content: space-between;
+    margin: 1.5rem 0rem 1rem 0rem;
 }
 
-#sort_search_div,
-#sort_div {
+#all_products {
+    margin: 0px;
+}
+
+
+.flex_center {
     display: flex;
     flex-flow: row nowrap;
-    align-items: baseline;
+    align-items: center;
+}
+
+#search_form {
+    padding: 0.5rem 1rem 0.5rem 1rem;
 }
 
 #sort_div button {
     margin-left: 1rem;
+}
+
+#search_bar {
+    margin-right: 1rem;
 }
 
 #filters {
@@ -21,6 +34,12 @@
     flex-flow: column nowrap;
     width: 12%;
     margin: 7.5px 20px 0px 10px;
+    height: 50%;
+    overflow: scroll;
+}
+
+#filter_btn {
+    margin-top: 1rem;
 }
 
 #filters form {

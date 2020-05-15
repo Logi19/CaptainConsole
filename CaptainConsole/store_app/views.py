@@ -15,15 +15,17 @@ from shopping_cart_app.models import ShoppingCart, ShoppingCartItem
 from .models import Product, ProductImage, Order, TopSeller
 from .forms import CheckOutForm
 
+
 class FrontPageView(TemplateView):
-    template_name = 'store_app/frontpage.html'
+    template_name = "store_app/frontpage.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         top_sellers = TopSeller.objects.all()[:3]
-        context['top_3'] = [Product.objects.get(id=item.id) for item in top_sellers]
-        context['todays_deals'] = Product.objects.all()[:3]
+        context["top_3"] = [Product.objects.get(id=item.id) for item in top_sellers]
+        context["todays_deals"] = Product.objects.all()[:3]
         return context
+
 
 
 class ProductList(ListView):
@@ -33,34 +35,74 @@ class ProductList(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        manufacturers = [m['manufacturer'] for m in Product.objects.values('manufacturer')]
+        manufacturer_set = set()
+        for manuf in manufacturers:
+            manufacturer_set.add((manuf, manuf.replace(' ', '+')))
+        context['manufacturers'] = sorted(list(manufacturer_set))
+        platforms = [p['platform'] for p in Product.objects.values('platform')]
+        platform_set = set()
+        for platf in platforms:
+            platform_set.add((platf, platf.replace(' ', '+')))
+        context['platforms'] = sorted(list(platform_set))
         return context
 
     def get_queryset(self):
         object_list = self.queryset
 
-        manufacturer_filter = self.request.GET.get('manufacturer')
-        platform_filter = self.request.GET.get('platform')
-        query = self.request.GET.get('search')
+        params = dict(self.request.GET.lists())
 
-        if manufacturer_filter is not None:
-            object_list = object_list.filter(Q(manufacturer__icontains=manufacturer_filter))
+        if 'manufacturer' in params:
+            manufacturer_filter = Q(manufacturer__iexact=params['manufacturer'][0])
 
-        if platform_filter is not None:
-            object_list = object_list.filter(Q(platform__icontains=platform_filter))
+            if len(params['manufacturer']) > 1:
+                for i in range(1, len(params['manufacturer'])):
+                    manufacturer_filter = manufacturer_filter | Q(manufacturer__iexact=params['manufacturer'][i])
 
-        if query is not None:
-            object_list = object_list.filter(Q(name__icontains=query) | Q(manufacturer__icontains=query) | Q(platform__icontains=query))
+            object_list = object_list.filter(manufacturer_filter)
 
-        order_by = self.request.GET.get('order')
+        if 'type' in params:
+            type_filter = Q(type__iexact=params['type'][0])
 
-        if order_by == 'year-asc':
-            object_list = object_list.order_by('year')
-        elif order_by == 'year-desc':
-            object_list = object_list.order_by('-year')
-        elif order_by == 'name-asc':
-            object_list = object_list.order_by('name')
-        elif order_by == 'name-desc':
-            object_list = object_list.order_by('-name')
+            if len(params['type']) > 1:
+                for i in range(1, len(params['type'])):
+                    type_filter = type_filter | Q(type__iexact=params['type'][i])
+
+            object_list = object_list.filter(type_filter)
+
+        if 'platform' in params:
+            platform_filter = Q(platform__iexact=params['platform'][0])
+
+            if len(params['platform']) > 1:
+                for i in range(1, len(params['platform'])):
+                    platform_filter = platform_filter | Q(platform__iexact=params['platform'][i])
+
+            object_list = object_list.filter(platform_filter)
+
+
+        if 'query' in params:
+            query = params['query']
+            object_list = object_list.filter(
+                Q(name__icontains=query)
+                | Q(manufacturer__icontains=query)
+                | Q(platform__icontains=query)
+            )
+
+        if 'order' in params:
+            order_by = params["order"][0]
+
+            if order_by == "year-asc":
+                object_list = object_list.order_by("year")
+            elif order_by == "year-desc":
+                object_list = object_list.order_by("-year")
+            elif order_by == "price-asc":
+                object_list = object_list.order_by("price")
+            elif order_by == "price-desc":
+                object_list = object_list.order_by("-price")
+            elif order_by == "name-asc":
+                object_list = object_list.order_by("-name")
+            elif order_by == "name-desc":
+                object_list = object_list.order_by("name")
 
         return object_list
 
@@ -77,8 +119,6 @@ class ProductDetail(DetailView):
         images = [img.image.name for img in image_objects]
         context["images"] = images
         return context
-
-
 
 
 # class CheckOut(View):
@@ -145,7 +185,7 @@ def check_out(request):
             #      and expiryDate == True:
             post = form.save(commit=False)
             # post.save()
-            post.deliveryCountry = 'Iceland'
+            post.deliveryCountry = "Iceland"
             post.processed = True
             post.profile = request.user
             post.orderDiscount = 0
@@ -166,24 +206,26 @@ def check_out(request):
     else:
         form = CheckOutForm()
 
-    return render(request, 'store_app/checkouts.html', {'form': form})
+    return render(request, "store_app/checkouts.html", {"form": form})
 
 
 def add_to_cart(request, *args, **kwargs):
     data = {}
 
-    product_id = request.POST.get('product_id')
-    quantity = request.POST.get('quantity')
+    product_id = request.POST.get("product_id")
+    quantity = request.POST.get("quantity")
     shopping_cart_id = request.user.shoppingCart.id
 
-    in_cart_item = ShoppingCartItem.objects.filter(shoppingCart=shopping_cart_id, item=product_id)
+    in_cart_item = ShoppingCartItem.objects.filter(
+        shoppingCart=shopping_cart_id, item=product_id
+    )
 
     if len(in_cart_item) > 0:
         if in_cart_item[0].quantity + quantity <= 32767:
             in_cart_item[0].quantity += quantity
             in_cart_item[0].save()
 
-            data['message'] = 'Item quantity updated.'
+            data["message"] = "Item quantity updated."
             return JsonResponse(data)
     else:
         cart_item = ShoppingCartItem()
@@ -192,8 +234,8 @@ def add_to_cart(request, *args, **kwargs):
         cart_item.quantity = int(quantity)
 
         cart_item.save()
-        data['message'] = 'Item successfully added to cart.'
+        data["message"] = "Item successfully added to cart."
         return JsonResponse(data)
 
-    data['message'] = 'Something went wrong.'
+    data["message"] = "Something went wrong."
     return JsonResponse(data)

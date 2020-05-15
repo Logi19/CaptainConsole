@@ -32,7 +32,7 @@ def login_view(request, *args, **kwargs):
             print(f"Failed login attempt with email: {email}")
             return HttpResponse("Invalid login details given")
     else:
-        return render(request, 'registration/login.html')
+        return render(request, 'profile_app/log_in.html')
 
 
 @login_required
@@ -98,6 +98,6 @@ def sign_up_view(request, *args, **kwargs):
 
     else:
         form = SignUpForm()
-    return render(request, 'registration/sign_up.html', {'form': form})
+    return render(request, 'profile_app/sign_up.html', {'form': form})
 
 

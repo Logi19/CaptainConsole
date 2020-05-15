@@ -14,82 +14,145 @@
     <div class="product_list_header">
         <h3 id="all_products">All Products</h3>
         <div class="pagination">
-                {% if page_obj.has_previous %}
-                <span class="waves-effect"><a href="?page={{ page_obj.previous_page_number }}">
-                    <i class="material-icons">chevron_left</i></a>
-                </span>
-                {% else %}
-                <span class="filler"></span>
-                {% endif %}
-                <h6>
-                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-                </h6>
-                {% if page_obj.has_next %}
-                <span class="waves-effect"><a href="?page={{ page_obj.next_page_number }}">
-                    <i class="material-icons">chevron_right</i></a>
-                </span>
-                {% else %}
-                <span class="filler"></span>
-                {% endif %}
+            <!-- TODO: add color, show arrows better -->
+            {% if page_obj.has_previous %}
+            <span class="waves-effect">
+                <i
+                    onclick="change_page('page={{ page_obj.previous_page_number }}')"
+                    class="material-icons"
+                    >chevron_left</i
+                >
+            </span>
+            {% else %}
+            <span class="filler"></span>
+            {% endif %}
+            <h6>
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </h6>
+            {% if page_obj.has_next %}
+            <span class="waves-effect">
+                <i
+                    onclick="change_page('page={{ page_obj.next_page_number }}')"
+                    class="material-icons"
+                    >chevron_right</i
+                >
+            </span>
+            {% else %}
+            <span class="filler"></span>
+            {% endif %}
         </div>
-        <div id="sort_search_div">
-            <div id="sort_div">
-                <h5 id="sort-by">Sort-by:</h5>
-                <button class="btn">None</button>
+        <div class="flex_center">
+            <div id="flex_center">
+                <a class='dropdown-trigger btn-large' data-target='dropdown1'>Sort by:</a>
+                <ul id='dropdown1' class='dropdown-content'>
+                    <li><a onclick="change_order('order=name-desc')">Name - descending</a></li>
+                    <li class="divider" tabindex="-1"></li>
+                    <li><a onclick="change_order('order=name-asc')">Name - ascending</a></li>
+                    <li class="divider" tabindex="-1"></li>
+                    <li><a onclick="change_order('order=price-desc')">Price - descending</a></li>
+                    <li class="divider" tabindex="-1"></li>
+                    <li><a onclick="change_order('order=price-asc')">Price - ascending</a></li>
+                    <li class="divider" tabindex="-1"></li>
+                    <li><a onclick="change_order('order=year-desc')">Year - descending</a></li>
+                    <li class="divider" tabindex="-1"></li>
+                    <li><a onclick="change_order('order=year-asc')">Year - ascending</a></li>
+                </ul>
             </div>
-            <form class="form-inline">
-                <input name="search" type="text" placeholder="Search" value='{{ request.GET.search }}'>
+            <form id="search_form" class="form-inline z-depth-1 hoverable flex_center">
+                <input
+                    name="search"
+                    id="search_bar"
+                    type="text"
+                    placeholder="Search"
+                    value="{{ request.GET.search }}"
+                />
                 <button class="btn" type="submit">Search</button>
             </form>
         </div>
     </div>
     <div class="row">
         <div id="filters" class="col z-depth-1">
+            <button id="filter_btn" class="btn" onclick="go_to_url()">Apply filters</button>
             <h5>Type:</h5>
             <form action="">
                 <p>
-                    <label for="video_games">
-                        <input id="video_games" type="checkbox" class="filled-in" checked="checked" />
+                    <label for="Game">
+                        <input
+                            id="Game"
+                            type="checkbox"
+                            class="filled-in"
+                            onclick="change_url('type=Game')"
+                        />
                         <span>Video Games</span>
                     </label>
                 </p>
             </form>
             <form action="">
                 <p>
-                    <label for="console">
-                        <input id="console" type="checkbox" class="filled-in" />
+                    <label for="Console">
+                        <input
+                            id="Console"
+                            type="checkbox"
+                            class="filled-in"
+                            onclick="change_url('type=Console')"
+                        />
                         <span>Consoles</span>
                     </label>
                 </p>
             </form>
             <form action="">
                 <p>
-                    <label for="misc">
-                        <input id="misc" type="checkbox" class="filled-in" />
+                    <label for="Misc">
+                        <input
+                            id="Misc"
+                            type="checkbox"
+                            class="filled-in"
+                            onclick="change_url('type=Misc')"
+                        />
                         <span>Miscellaneous</span>
                     </label>
                 </p>
             </form>
 
+            <h5>Platform:</h5>
+            {% for platf, platf_url in platforms %}
+            <form action="">
+                <p>
+                    <label for="{{ platf_url }}">
+                        <input id="{{ platf_url }}" type="checkbox" class="filled-in"
+                            onclick="change_url('platform={{ platf_url }}')" />
+                        <span>{{ platf }}</span>
+                    </label>
+                </p>
+            </form>
+            {% endfor %}
 
             <h5>Manufacturer:</h5>
-            <div class="filter_item">
-                <label>Atari</label>
-                <input type="checkbox">
-                <span class="checkmark"></span>
-            </div>
-            <div class="filter_item">
-                <label>Sega</label>
-                <input type="checkbox">
-                <span class="checkmark"></span>
-            </div>
+            {% for manuf, manuf_url in manufacturers %}
+            <form action="">
+                <p>
+                    <label for="{{ manuf_url }}">
+                        <input
+                            id="{{ manuf_url }}"
+                            type="checkbox"
+                            class="filled-in"
+                            onclick="change_url('manufacturer={{ manuf_url }}')"
+                        />
+                        <span>{{ manuf }}</span>
+                    </label>
+                </p>
+            </form>
+            {% endfor %}
         </div>
         <div class="col s10">
             <div id="product_list" class="row">
                 {% for product in product_list %}
                 <div class="col s3 card waves-effect">
                     <a href="/store/products/{{ product.id }}" class="waves-effect">
-                        <div class="card_img" style="background-image: url('/{{ product.get_thumbnail }}');"></div>
+                        <div
+                            class="card_img"
+                            style="background-image: url('/{{ product.get_thumbnail }}');"
+                        ></div>
                         <div class="card-content black-text">
                             <h5>{{ product.name|truncatechars:18 }}</h5>
                             <p>${{ product.price }}</p>
@@ -103,16 +166,20 @@
     </div>
     <div id="lower_pagination" class="pagination">
         {% if page_obj.has_previous %}
-        <span class="waves-affect"><a href="?page={{ page_obj.previous_page_number }}">
-            <i class="material-icons">chevron_left</i></a>
+        <span class="waves-affect"
+            ><a href="?page={{ page_obj.previous_page_number }}">
+                <i class="material-icons">chevron_left</i></a
+            >
         </span>
         {% endif %}
         <h6>
             Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
         </h6>
         {% if page_obj.has_next %}
-        <span class="waves-effect"><a href="?page={{ page_obj.next_page_number }}">
-            <i class="material-icons">chevron_right</i></a>
+        <span class="waves-effect"
+            ><a href="?page={{ page_obj.next_page_number }}">
+                <i class="material-icons">chevron_right</i></a
+            >
         </span>
         {% endif %}
     </div>
@@ -124,5 +191,5 @@
 {% endblock %}
 
 {% block javascript %}
-<script src="{% static 'store_app/all-products.js' %}"></script>
+<script src="{% static 'store_app/product_list.js' %}"></script>
 {% endblock %}
