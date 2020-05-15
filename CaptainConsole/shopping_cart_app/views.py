@@ -44,49 +44,21 @@ def remove_from_cart(request, *args, **kwargs):
     return JsonResponse(data)
 
 
-class ReceiptView(DetailView):
-    model = Order
-    template_name = "shopping_cart_app/receipt_view.html"
-
-    def get_object(self):
-        profile_id = self.request.session["_auth_user_id"]
-        return get_object_or_404(self.model, pk=7)
-
-
 def receipt_view(request, *args, **kwargs):
+    """
+        View that will be displayed after the order has been place.
+        The function clears out the shopping cart for the user
+        and marks the order as processed.
+    """
+    shopping_cart = request.user.shoppingCart
+    for item in ShoppingCartItem.objects.filter(shoppingCart=shopping_cart):
+        item.delete()
+    request.user.order_set.filter(processed=False).update(processed=True)
     return render(request, "shopping_cart_app/receipt_view.html", context={})
 
 
 def my_order_detail(request, *args, **kwargs):
-    context = {}
-    shopping_cart = request.user.shoppingCart
-    context["cart_key"] = shopping_cart.id
-    context["cart_items"] = ShoppingCartItem.objects.filter(shoppingCart=shopping_cart)
-    context["subtotal"] = shopping_cart.get_total_price()
-    context['post'] = {
-        'tax': 12,
-        'items': ShoppingCartItem.objects.filter(shoppingCart=shopping_cart.id)
-    }
-    return render(request, "shopping_cart_app/order_detail.html", context)
-
-
-class OrderDetail(DetailView):
-    model = Order
-    template_name = "shopping_cart_app/order_detail.html"
-
-    def get(self, request, *args, **kwargs):
-        context = {"pk": 0, "name": "Test"}
-        return render(
-            request, "shopping_cart_app/order_detail.html", {"context": context}
-        )
-
-    # def get_object(self):
-    #    pk = self.kwargs.get('pk')
-    #    return get_object_or_404(Order, pk=pk)
-
-    # def get(self, request, *args, **kwargs):
-    #    return render(request, "shopping_cart_app/order_detail.html", {"pk": self.kwargs['pk']})
-
+    return render(request, "shopping_cart_app/order_detail.html", {})
 
 def add_to_cart(request, *args, **kwargs):
     data = {}
