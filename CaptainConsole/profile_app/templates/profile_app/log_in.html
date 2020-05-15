@@ -12,11 +12,13 @@ Captain console - Log in
 {% block content %}
 
 <div id="logo_div" class="z-depth-5 indigo lighten-2">
-    <img id="logo" src="{% static 'media/console-logo.png' %}" />
-    <div id="logo_text_div">
-        <h2>Captain</h2>
-        <h2>Console</h2>
-    </div>
+    <a href="/store/"><img id="logo" src="{% static 'media/console-logo.png' %}" /></a>
+    <a href="/store/" class="black-text">
+        <div id="logo_text_div">
+            <h2>Captain</h2>
+            <h2>Console</h2>
+        </div>
+    </a>
 </div>
 
 <div class="login-form">

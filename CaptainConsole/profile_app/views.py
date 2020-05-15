@@ -1,11 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
-from django.views.generic.detail import DetailView
-from django.views.generic.edit import UpdateView
-from django.views.generic.edit import CreateView
 
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.messages import get_messages
@@ -26,13 +22,13 @@ def login_view(request, *args, **kwargs):
             if user.is_active:
                 login(request, user)
                 return HttpResponseRedirect("/store/")
-            else:
-                return HttpResponse("Your account is inactive.")
-        else:
-            print(f"Failed login attempt with email: {email}")
-            return HttpResponse("Invalid login details given")
-    else:
-        return render(request, "profile_app/log_in.html")
+
+            return HttpResponse("Your account is inactive.")
+
+        print(f"Failed login attempt with email: {email}")
+        return HttpResponse("Invalid login details given")
+
+    return render(request, "profile_app/log_in.html")
 
 
 @login_required
@@ -128,7 +124,9 @@ def add_to_search_history(request, *args, **kwargs):
     if profile_id is not None and product_id is not None:
         product = Product.objects.get(id=product_id)
         profile = Profile.objects.get(id=profile_id)
-        last_search = SearchHistory.objects.filter(searchProfile=profile).order_by("-time")[0]
+        last_search = SearchHistory.objects.filter(searchProfile=profile).order_by(
+            "-time"
+        )[0]
 
         if last_search.searchProduct != product:
             search = SearchHistory()

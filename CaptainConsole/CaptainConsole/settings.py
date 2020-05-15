@@ -20,76 +20,76 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'b_0v@g5%9!%fn3*8&bok_09ko%j46n$o8d!ai1q%vf5j6yfu75'
+SECRET_KEY = "b_0v@g5%9!%fn3*8&bok_09ko%j46n$o8d!ai1q%vf5j6yfu75"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'profile_app.apps.ProfileAppConfig',
-    'shopping_cart_app',
-    'store_app',
-    'django_countries',
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "profile_app.apps.ProfileAppConfig",
+    "shopping_cart_app",
+    "store_app",
+    "django_countries",
 ]
 
-AUTH_USER_MODEL = 'profile_app.Profile'
+AUTH_USER_MODEL = "profile_app.Profile"
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = 'CaptainConsole.urls'
+ROOT_URLCONF = "CaptainConsole.urls"
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            os.path.join(BASE_DIR, 'templates'),
-            r'C:\Haskoli\Verklegt2\CaptainConsole\CaptainConsole\store_app\templates\store_app',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [
+            os.path.join(BASE_DIR, "templates"),
+            r"C:\Haskoli\Verklegt2\CaptainConsole\CaptainConsole\store_app\templates\store_app",
         ],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-                'django.template.context_processors.media',
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
+                "django.template.context_processors.media",
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'CaptainConsole.wsgi.application'
+WSGI_APPLICATION = "CaptainConsole.wsgi.application"
 
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'fijhkoww',
-        'USER': 'fijhkoww',
-        'PASSWORD': 'esRag4zl6gzgr5B25YQiD9gbcJoXtyjL',
-        'HOST': 'balarama.db.elephantsql.com',
-        'PORT': '5432'
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "fijhkoww",
+        "USER": "fijhkoww",
+        "PASSWORD": "esRag4zl6gzgr5B25YQiD9gbcJoXtyjL",
+        "HOST": "balarama.db.elephantsql.com",
+        "PORT": "5432",
     }
 }
 
@@ -99,28 +99,22 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",},
+    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",},
+    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
 ]
-LOGIN_URL = '/profile/login/'
-LOGIN_REDIRECT_URL = '/store/'
-LOGOUT_REDIRECT_URL = '/store/'
+LOGIN_URL = "/profile/login/"
+LOGIN_REDIRECT_URL = "/store/"
+LOGOUT_REDIRECT_URL = "/store/"
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = "UTC"
 
 USE_I18N = True
 
@@ -132,13 +126,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = "/static/"
 
-MEDIA_URL = '/media/'
+MEDIA_URL = "/media/"
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-    os.path.join(BASE_DIR, 'profile_app', 'static'),
-    os.path.join(BASE_DIR, 'store_app', 'static'),
-    os.path.join(BASE_DIR, 'shopping_cart_app', 'static'),
+    os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, "profile_app", "static"),
+    os.path.join(BASE_DIR, "store_app", "static"),
+    os.path.join(BASE_DIR, "shopping_cart_app", "static"),
 ]
