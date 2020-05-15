@@ -128,27 +128,21 @@ class ProductDetail(DetailView):
 
 
 def check_number(theinput):
-    number = str(theinput)
+    number = str(theinput.replace(' ', '').replace('-',''))
     if len(number) == 16:
         return True
     elif len(number) == 3:
         return True
     else:
-        raise ValidationError(
-            ('%(number) is not a valid input'),
-            params={'number': number},
-        )
+        raise ValidationError('Invalid card number or CVV')
 
 
 def check_String(theinput):
-    x = theinput.isalpha()
+    x = theinput.replace(' ', '').isalpha()
     if x is True:
         return True
     else:
-        raise ValidationError(
-            '%(theinput)is not valid',
-                                params={'theinput': theinput},
-                             )
+        raise ValidationError('Invalid string')
 
 def combine(month, year):
     expiry_date = str(month) + "-" + str(year)
@@ -157,9 +151,11 @@ def combine(month, year):
 
 @login_required
 def check_out(request):
-    """The view function for the checkout process, receives the input from the user
-    and validates it before inserting into the database and rendering the next page"""
-    print(request.POST)
+    """
+    The view function for the checkout process, receives the input from the user
+    and validates it before inserting into the database and rendering the next page.
+    """
+
     if request.method == "POST":
         cardNumber = request.POST.get("cardNumber")
         cardName = request.POST.get("cardName")
