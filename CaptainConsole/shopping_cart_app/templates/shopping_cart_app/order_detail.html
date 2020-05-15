@@ -50,12 +50,12 @@
         </div>
 
         <div class="grid-item items">
-            {% if post.items.objects %}
+            {% if post.items %}
                 <h5>Shopping Cart ({{ post.items|length }} Items)</h5>
             {% else %}
                 <h5>No Orders</h5>
             {% endif %}
-            {% for item in order_obj.items %}
+            {% for item in items %}
                 <div class="cart-items item-{{ forloop.counter0 }}">
                     <strong>&dollar;{{item.product.productPrice}}</strong>
                     <h5>{{item.product.productName}}</h5>
@@ -94,10 +94,10 @@
             </div>
         </div>
         <div class="grid-item go-back">
-            <button type="button" id="go-back">Edit Information</button>
+            <a href="{% url 'checkout' %}"><button type="button" id="go-back">Edit Information</button></a>
         </div>
         <div class="grid-item place-order">
-            <button type="button" id="place-order">Place Order</button>
+            <a href="{% url 'receipt_view' %}"><button type="button" id="place-order">Place Order</button></div>
         </div>
     </div>
 </div>

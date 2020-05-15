@@ -20,6 +20,7 @@ def my_cart(request, *args, **kwargs):
     context = {}
     shopping_cart = request.user.shoppingCart
     context['cart_key'] = shopping_cart.id
+    print(ShoppingCartItem.objects.filter(shoppingCart=shopping_cart.id))
     context['shopping_cart_items'] = ShoppingCartItem.objects.filter(shoppingCart=shopping_cart.id)
     context['subtotal'] = shopping_cart.get_total_price()
     return render(request, 'shopping_cart_app/shopping_cart_detail.html', context)
@@ -44,10 +45,26 @@ def receipt_view(request, *args, **kwargs):
 def my_order_detail(request, *args, **kwargs):
     context = {}
     shopping_cart = request.user.shoppingCart
-    context['cart_key'] = shopping_cart.id
-    context['cart_items'] = ShoppingCartItem.objects.filter(shopping_cart=shopping_cart.id)
-    context['subtotal'] = shopping_cart.get_total_price()
+    key = shopping_cart.id
+    print(key)
+    context['post'] = {
+        'deliveryLastName': 'test',
+        'deliveryCountry': 'country',
+        'deliveryStreet': 'street',
+        'deliveryCity': 'city',
+        'deliveryPostal': 'postal',
+        'deliveryMethod': 'method',
+        'billingStreet': 'billingStreet',
+        'billingStreetNum': 'billingStreetNum',
+        'billingPostal': 'billingPostal',
+        'billingCountry': 'billingCountry',
+        'tax': 'tax',
+        'items': ShoppingCartItem.objects.filter(shoppingCart=key)
+    }
+    for item in context['post']['items']:
+        print(item['items'])
     return render(request, 'shopping_cart_app/order_detail.html', context)
+
 
 
 class OrderDetail(DetailView):

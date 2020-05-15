@@ -92,6 +92,10 @@ h6 {
     grid-template-rows: 0.2fr 1fr 0.2fr;
 }
 
+a {
+    color: inherit;
+}
+
 button {
   background-color: #3370CB;
   border: none;

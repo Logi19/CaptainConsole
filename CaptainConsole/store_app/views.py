@@ -193,8 +193,9 @@ def check_out(request):
             post.deliveryPrice = 10
             # cardName = request.POST.get('cardName')
             # cardNumber = request.POST.get('cardNumber')
-            # expirydate = request.POST.get('expiryDate')
+            expirydate = request.POST.get('expiryDate')
             # cvc = cvc
+            print(type(post))
             post.save()
             return render(request, 'shopping_cart_app/order_detail.html', {'post': post,
                                                                                 'cardno': cardNumber,
