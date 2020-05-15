@@ -106,6 +106,7 @@ $(document).ready(function () {
     $(".dropdown-trigger").dropdown();
 });
 
+// Displays select
 $(document).ready(function(){
     $('select').formSelect();
 });

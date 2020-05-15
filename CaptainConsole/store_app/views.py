@@ -193,7 +193,7 @@ def check_out(request):
                     {"post": post, "cardno": cardNumber, "cardname": cardName, "cvc": cvc, 'expiry_date': expiry_date}
                 )
             else:
-                raise ValidationError(cardno, cardname, cvc_card + "are worng")
+                raise ValidationError(cardno, cardname, cvc_card + "are not valid, please write valid inputs")
         else:
             print("not valid")
             raise ValidationError("WRONG!")

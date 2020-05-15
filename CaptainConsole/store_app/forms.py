@@ -73,7 +73,7 @@ class CheckOutForm(forms.ModelForm):
 
 	}))
 	deliveryMethod = forms.ChoiceField(
-		widget=forms.RadioSelect, choices=DELIVERY_METHODS, required=False
+		widget=forms.RadioSelect, choices=DELIVERY_METHODS, required=False,
 	)
 	deliveryStreet = forms.CharField(widget=forms.TextInput(attrs={
 		'placeholder': 'Street name',
