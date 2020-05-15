@@ -8,7 +8,7 @@ from .models import Profile
 @receiver(pre_save, sender=Profile)
 def create_shopping_cart(sender, instance, **kwargs):
     """
-    Function creates a new shopping cart for a user
+    Function creates a new shopping cart for a user,
     before the user is saved to the database,
     if they don't already have one.
     """
