@@ -1,29 +1,18 @@
 
-.sign_up_form{
-    width: 700px;
-    box-shadow: 0 0 3px 0 rgba(0,0,0,0.3);
-    background: midnightblue;
-    padding: 80px;
-    position: absolute;
-    top: 80%;
-    left: 50%;
-    transform: translate(-50%,-50%);
+main {
+    background: url("/static/media/games-pile.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.sign_up_form {
+    width: 600px;
+    margin: 0px auto 150px auto;
+    padding: 0px 25px 0px 25px;
     border: 5px solid black;
-}
-
-.signup_button{
-    background-color: cornflowerblue;
-    border: none;
-    color: white;
-    padding: 12px 30px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 23px;
-
-}
-.button-div{
-    text-align: center;
+    border-radius: 5px
 }
 
 .sign{
@@ -32,17 +21,32 @@
     font-family: cursive;
 }
 
+.form_header {
+    font-family: cursive;
+}
+
+.signup_button {
+    margin-bottom: 20px;
+}
+
+#logo_div {
+    margin: 2rem 0rem 0rem 2rem;
+    padding: 15px;
+    display: flex;
+    width: min-content;
+    border-radius: 5px;
+}
+
+#logo_text_div {
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+#logo_text_div h2 {
+    margin: 0px;
+}
+
 #logo {
     width: 100px;
     height: 90px;
-    float: left;
-}
-
-.haveone{
-    color: white;
-}
-
-.click-me{
-    color: white;
-    text-decoration: underline;
 }

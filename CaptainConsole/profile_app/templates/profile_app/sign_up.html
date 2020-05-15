@@ -10,38 +10,43 @@ Captain console - Sign up
 {% endblock %}
 
 {% block content %}
-<h2>
+<div id="logo_div" class="z-depth-5 indigo lighten-2">
     <img id="logo" src="{% static 'media/console-logo.png' %}" />
-    Captain <br />console
-</h2>
-<div class="sign_up_form">
+    <div id="logo_text_div">
+        <h2>Captain</h2>
+        <h2>Console</h2>
+    </div>
+</div>
+<div class="sign_up_form indigo darken-4 white-text">
     <form method="POST" enctype="multipart/form-data">
-        <h3 class="sign">Create an Account</h3>
+        <h3 class="form_header center-align">Create an Account</h3>
         <div class="forms">
             {% csrf_token %}
-
-            {% for field in form %}
-            <p>
-                {{ field.label_tag }}
-                {{ field }}
-                {% if field.help_text %}
-                <small style="color: grey;">{{ field.help_text }}</small>
-                {% endif %}
-            </p>
-            {% for error in field.errors %}
-            <p style="color: red;">{{ error }}</p>
-            {% endfor %}
+                {% for field in form %}
+                <p>
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {% if field.help_text %}
+                    <small style="color: grey;">{{ field.help_text }}</small>
+                    {% endif %}
+                </p>
+                {% for error in field.errors %}
+                    <p style="color: red;">{{ error }}</p>
+                {% endfor %}
             {% endfor %}
         </div>
-        <div class="button-div">
-            <button class="signup_button" type="submit">Sign up</button>
-            <p class="haveone">Already Have one?</p>
-            <a href="/profile/login" class="click-me">Click me to log in!</a><br /><br />
+        <div class="center-align">
+            <button class="signup_button btn-large" type="submit">Sign up</button>
         </div>
+    <div class="button-div center-align">
+        <p>Already have an account?</p>
+        <a href="/profile/login" class="btn">Click me to log in!</a><br /><br />
+    </div>
     </form>
 </div>
-{% endblock %} {% block javascript %}
+{% endblock %}
 
+{% block javascript %}
 <script>
     let inputs = document.getElementsByTagName("input");
     for (let i=0; i< inputs.length; i++) {
