@@ -166,11 +166,7 @@ def check_out(request):
         cardname = check_String(cardName)
         cvc_card = check_number(cvc)
         expiry_date = combine(month, year)
-        print(request.POST.get("cardNumber"))
-        print(request.POST.get("cardName"))
-        print(request.POST.get("month"))
-        print(request.POST.get("year"))
-        print(request.POST.get("cvc"))
+        print(request.POST)
 
         form = CheckOutForm(request.POST)
 
@@ -181,7 +177,8 @@ def check_out(request):
                 post.orderDiscount = 0
                 post.tax = 12
                 post.deliveryPrice = 10
-                print(type(post))
+                post.deliveryCountry = request.POST.get('deliveryCountry')
+                print(post.deliveryCountry)
                 post.save()
                 return render(
                     request,
