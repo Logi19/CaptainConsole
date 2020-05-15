@@ -18,9 +18,9 @@
 
 #page_content {
     width: 100%;
-    margin: auto;
     display: flex;
     flex-flow: row wrap;
+    justify-content: center;
 }
 
 #top_sellers {
