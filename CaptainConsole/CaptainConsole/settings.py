@@ -24,8 +24,7 @@ SECRET_KEY = 'b_0v@g5%9!%fn3*8&bok_09ko%j46n$o8d!ai1q%vf5j6yfu75'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', '127.0.0.1:8000']
 
 
 # Application definition
@@ -62,7 +61,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(BASE_DIR, 'templates'),
-            r'C:\Haskoli\Verklegt2\CaptainConsole\CaptainConsole\store_app\templates\store_app'
+            r'C:\Haskoli\Verklegt2\CaptainConsole\CaptainConsole\store_app\templates\store_app',
         ],
         'APP_DIRS': True,
         'OPTIONS': {

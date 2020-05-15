@@ -25,3 +25,7 @@ urlpatterns = [
     path('profile/', include('profile_app.urls')),
     path('store/', include('store_app.urls')),
 ]
+handler404 = 'store_app.views.error_404'
+handler500 = 'store_app.views.error_500'
+handler403 = 'store_app.views.error_403'
+handler400 = 'store_app.views.error_400'
