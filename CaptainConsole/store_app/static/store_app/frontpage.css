@@ -17,7 +17,7 @@
 }
 
 #page_content {
-    width: max-content;
+    width: 100%;
     margin: auto;
     display: flex;
     flex-flow: row wrap;
