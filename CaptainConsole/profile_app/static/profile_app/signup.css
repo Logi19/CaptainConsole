@@ -1,6 +1,6 @@
 
 main {
-    background: url("/static/media/games-pile.jpg") no-repeat center center fixed;
+    background: url("/static/media/videogames.jpg") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -33,13 +33,14 @@ main {
     margin: 2rem 0rem 0rem 2rem;
     padding: 15px;
     display: flex;
-    width: min-content;
     border-radius: 5px;
+    text-align: center;
 }
 
 #logo_text_div {
     display: flex;
     flex-flow: column nowrap;
+    padding: 10px;
 }
 
 #logo_text_div h2 {
@@ -49,4 +50,12 @@ main {
 #logo {
     width: 100px;
     height: 90px;
+}
+
+.black-text{
+    text-align: center;
+}
+
+#name{
+    font-weight: bolder;
 }
