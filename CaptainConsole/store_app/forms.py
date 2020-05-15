@@ -26,7 +26,7 @@ class CheckOutForm(forms.ModelForm):
 	email = forms.EmailField(max_length=256, widget=forms.EmailInput(attrs={
 		'placeholder': 'bobby@johnson.com',
 		'class': 'input-field col s6',
-		'style': 'height: 20px; ' 
+		'style': 'height: 20px; '
 				 'width: 250px;'
 				 'padding: 7px; '
 				 'margin-top: 10px;'

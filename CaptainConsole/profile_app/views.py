@@ -45,7 +45,7 @@ def my_profile_view(request, *args, **kwargs):
     context = {"user": request.user}
 
     # Fetch user's orders and sort newest first
-    order_list = list(Order.objects.filter(profile_id=request.user.id))
+    order_list = list(Order.objects.filter(profile_id=request.user.id, processed=True))
     order_list.sort(key=lambda x: x.date, reverse=True)
 
     # Fetch items for each order

@@ -10,9 +10,9 @@ class ProductAdmin(admin.ModelAdmin):
     list_editable = ['price', 'active']
     list_filter = ['type', 'manufacturer', 'active']
     readonly_fields = ['timestamp']
+
     class Meta:
         model = Product
 
 admin.site.register(Product, ProductAdmin)
-
 admin.site.register(ProductImage)

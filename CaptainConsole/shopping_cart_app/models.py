@@ -9,9 +9,11 @@ class ShoppingCart(models.Model):
     items = models.ManyToManyField("store_app.Product", through="ShoppingCartItem")
 
     def get_total_price(self):
+        """ Calculates total price of order. """
         total = 0
         for item in ShoppingCartItem.objects.filter(shoppingCart=self.id):
             total += item.get_price()
+
         return round(total, 2)
 
     def __str__(self):
@@ -28,6 +30,7 @@ class ShoppingCartItem(models.Model):
     quantity = models.SmallIntegerField()
 
     def get_price(self):
+        """ Returns price for item instance. """
         return round(self.quantity * self.item.price, 2)
 
     def __str__(self):
