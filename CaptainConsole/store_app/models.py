@@ -1,9 +1,6 @@
 from django.core.validators import MaxValueValidator, MinValueValidator, RegexValidator
 from django.db import models
 
-import django_countries
-from django_countries.fields import CountryField
-
 
 class Product(models.Model):
     """

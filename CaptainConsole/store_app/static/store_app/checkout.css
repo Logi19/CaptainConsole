@@ -24,3 +24,39 @@
 /*    height: 20%;*/
 /*    margin: 10px;*/
 /*}*/
+
+.container{
+    border: solid blue;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background-color: blue;
+    color: white;
+
+}
+
+.billing-info{
+    padding: 3px;
+    margin: 3px;
+    color: white;
+}
+
+.delivery-info{
+    padding: 3px;
+    margin: 3px;
+    color: white;
+}
+
+.card-info{
+    padding: 3px;
+    margin: 3px;
+    color: white;
+}
+
+.everything{
+    background: url("/static/media/games-pile.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}

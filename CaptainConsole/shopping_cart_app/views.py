@@ -62,10 +62,12 @@ def my_order_detail(request, *args, **kwargs):
     context = {}
     shopping_cart = request.user.shoppingCart
     context["cart_key"] = shopping_cart.id
-    context["cart_items"] = ShoppingCartItem.objects.filter(
-        shopping_cart=shopping_cart.id
-    )
+    context["cart_items"] = ShoppingCartItem.objects.filter(shoppingCart=shopping_cart)
     context["subtotal"] = shopping_cart.get_total_price()
+    context['post'] = {
+        'tax': 12,
+        'items': ShoppingCartItem.objects.filter(shoppingCart=shopping_cart.id)
+    }
     return render(request, "shopping_cart_app/order_detail.html", context)
 
 
