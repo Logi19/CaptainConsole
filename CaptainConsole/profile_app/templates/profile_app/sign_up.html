@@ -10,12 +10,11 @@ Captain console - Sign up
 {% endblock %}
 
 {% block content %}
-<div id="logo_div" class="z-depth-5 indigo lighten-2">
+<div id="logo_div" >
     <a href="/store/"><img id="logo" src="{% static 'media/console-logo.png' %}" /></a>
     <a href="/store/" class="black-text">
         <div id="logo_text_div">
-            <h2>Captain</h2>
-            <h2>Console</h2>
+            <h2 id="name">Captain Console</h2>
         </div>
     </a>
 </div>
@@ -38,11 +37,11 @@ Captain console - Sign up
             {% endfor %}
         </div>
         <div class="center-align">
-            <button class="signup_button btn-large" type="submit">Sign up</button>
+            <button class="signup_button btn-large blue darken-3" type="submit">Sign up</button>
         </div>
     <div class="button-div center-align">
         <p>Already have an account?</p>
-        <a href="/profile/login" class="btn">Click me to log in!</a><br /><br />
+        <a href="/profile/login" class="btn blue darken-3">Click me to log in!</a><br /><br />
     </div>
     </form>
 </div>

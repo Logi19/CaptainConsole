@@ -1,36 +1,9 @@
-/*.container-items{*/
-/*    display: grid;*/
-/*    grid*/
-
-
-/*}*/
-
-/*.grid-item3{*/
-/*    border: solid Blue;*/
-/*    margin: 10px;*/
-/*}*/
-
-/*.grid-item1{*/
-/*    border: solid black;*/
-/*    width: 50%;*/
-/*    height: 70%;*/
-/*    margin: 10px;*/
-
-/*}*/
-
-/*.grid-item2{*/
-/*    border: solid black;*/
-/*    width: 20%;*/
-/*    height: 20%;*/
-/*    margin: 10px;*/
-/*}*/
-
 .container{
-    border: solid blue;
+    border: solid black;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    background-color: blue;
+    background-color: darkblue;
     color: white;
 
 }
@@ -39,18 +12,21 @@
     padding: 3px;
     margin: 3px;
     color: white;
+    width: 40%;
 }
 
 .delivery-info{
     padding: 3px;
     margin: 3px;
     color: white;
+    width: 40%
 }
 
 .card-info{
     padding: 3px;
-    margin: 3px;
     color: white;
+    width: 60%;
+    margin: 0 auto;
 }
 
 .everything{
@@ -59,4 +35,22 @@
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+}
+
+.row{
+    color: white;
+}
+
+input[type='text']{
+    color: white;
+}
+
+input[type='number']{
+    color: white;
+}
+
+.proceed-button{
+    position: absolute;
+     bottom: 0;
+     right: 0;
 }
