@@ -57,6 +57,9 @@ def receipt_view(request, *args, **kwargs):
     return render(request, "shopping_cart_app/receipt_view.html", context={})
 
 
+def my_order_detail(request, *args, **kwargs):
+    return render(request, "shopping_cart_app/order_detail.html", {})
+
 def add_to_cart(request, *args, **kwargs):
     data = {}
 
