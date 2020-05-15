@@ -108,12 +108,8 @@ class ProductDetail(DetailView):
 #         return redirect("/cart")
 
 def check_number(number):
-    theNumber = str(number)
-    lennumber = len(theNumber)
-    x = theNumber.isdigit()
-    if lennumber == 16 and x is True:
-        return True
-    elif lennumber == 3 and x is True:
+    x = number.isdigit()
+    if x is True:
         return True
     else:
         return False
@@ -131,23 +127,22 @@ def check_String(strings):
 
 @login_required
 def check_out(request):
-    print(request.POST.get("cardNumber"))
-
-    # cardno = check_number(request.POST.get('cardNumber', None))
-    # cardname = check_String(request.POST.get('cardName', None))
-    # cvc_card = check_number(request.GET.get('cvc', None))
-    # expiryDate = check_date(request.POST.get('expiryDate'))
-
+    """The view function for the checkout process, receives the input from the user
+    and validates it before inserting into the database and rendering the next page"""
+    print(request.POST)
     if request.method == "POST":
+        cardNumber = request.POST.get('cardNumber')
+        cardName = request.POST.get('cardNumber')
+        cvc = request.POST.get('cvc')
+        cardno = check_number(cardNumber)
+        cardname = check_String(cardName)
+        cvc_card = check_number(cvc)
+
         form = CheckOutForm(request.POST)
 
         if form.is_valid():
-            # cardno = check_number(request.POST.get('cardNumber'))
-            # cardname = check_String(request.POST.get('cardName'))
-            # cvc_card = check_number(request.POST.get('cvc'))
-            # # expiryDate = check_date(request.POST.get('expiryDate'))
-            # # if cardno == True and cardname == True
-            # #     and cvc_card is True and expiryDate == True:
+            # expiryDate = check_date(request.POST.get('expiryDate'))
+            #      and expiryDate == True:
             post = form.save(commit=False)
             # post.save()
             post.deliveryCountry = 'Iceland'
@@ -156,20 +151,18 @@ def check_out(request):
             post.orderDiscount = 0
             post.tax = 12
             post.deliveryPrice = 10
-            cardName = request.POST.get('cardName')
-            cardNumber = request.POST.get('cardNumber')
-            expirydate = request.POST.get('expiryDate')
-            cvc = request.POST.get('cvc')
+            # cardName = request.POST.get('cardName')
+            # cardNumber = request.POST.get('cardNumber')
+            # expirydate = request.POST.get('expiryDate')
+            # cvc = cvc
             post.save()
-
             return render(request, 'shopping_cart_app/order_detail.html', {'post': post,
-                                                                            'cardno': cardNumber,
-                                                                            'cardname': cardName,
-                                                                            'cvc': cvc,
-                                                                            'expirydate': expirydate
-                                                                           })
+                                                                                'cardno': cardNumber,
+                                                                                'cardname': cardName,
+                                                                                'cvc': cvc,
+                                                                               })
         else:
-            form = CheckOutForm
+            return redirect('/store/checkout')
     else:
         form = CheckOutForm()
 
