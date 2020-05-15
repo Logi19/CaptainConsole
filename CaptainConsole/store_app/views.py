@@ -85,8 +85,8 @@ class ProductList(ListView):
 
             object_list = object_list.filter(platform_filter)
 
-        if "query" in params:
-            query = params["query"]
+        if "search" in params:
+            query = params["search"][0]
             object_list = object_list.filter(
                 Q(name__icontains=query)
                 | Q(manufacturer__icontains=query)
